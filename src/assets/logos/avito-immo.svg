@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="118" height="48" viewBox="0 0 118 48" role="img" aria-label="Avito Immo">
+  <path d="M15 9.5 27.5 15 15 20.5 2.5 15z" fill="#2ECC71"/>
+  <path d="M13.2 23 13.2 38.5 3.4 33.6a2.6 2.6 0 0 1-1.4-2.3V19.6a1.6 1.6 0 0 1 2.3-1.4z" fill="#FF4B55"/>
+  <path d="M16.8 23v15.5l9.8-4.9a2.6 2.6 0 0 0 1.4-2.3V19.6a1.6 1.6 0 0 0-2.3-1.4z" fill="#3F9FF5"/>
+  <text x="38" y="31" textLength="76" lengthAdjust="spacingAndGlyphs" font-family="Arial,Helvetica,sans-serif" font-size="20" font-weight="700" fill="#12233A">avito</text>
+</svg>

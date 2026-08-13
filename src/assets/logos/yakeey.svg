@@ -1,0 +1,5 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="120" height="48" viewBox="0 0 120 48" role="img" aria-label="Yakeey">
+  <rect x="0" y="8" width="32" height="32" rx="16" fill="#0EA5A0"/>
+  <path d="M9 16h4.6l2.6 5.4 2.6-5.4H23l-5 9.6V32h-3.9v-6.4z" fill="#fff"/>
+  <text x="40" y="31" textLength="74" lengthAdjust="spacingAndGlyphs" font-family="Arial,Helvetica,sans-serif" font-size="20" font-weight="700" fill="#12233A">yakeey</text>
+</svg>

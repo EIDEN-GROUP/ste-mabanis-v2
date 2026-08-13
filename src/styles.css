@@ -1,0 +1,547 @@
+@import "tailwindcss" source(none);
+@source "../src";
+@import "tw-animate-css";
+
+@custom-variant dark (&:is(.dark *));
+
+/*
+ * STE MABANIS design system
+ * Navy #071A2F · Real-estate blue #0D3154 · Champagne gold #C9A45C
+ * Warm white #F7F5F0 · White #FFFFFF
+ *
+ * Public site: Playfair Display (display) + Sarabun Light (UI/body).
+ * Playfair Display stands in for Safira March, which is not on any web-font CDN —
+ * to use the real thing, self-host it and swap the --font-display stack below.
+ * Back office: Roboto only, scoped via the `font-admin` utility.
+ */
+
+@theme inline {
+  /* The house corner is barely there. The scale is capped so no component —
+     ours or shadcn's — can round further than 6px; change --radius to move
+     the whole app at once. */
+  --radius-sm: calc(var(--radius) - 2px);
+  --radius-md: var(--radius);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 2px);
+  --radius-2xl: calc(var(--radius) + 2px);
+
+  --font-sans: "Sarabun", ui-sans-serif, system-ui, sans-serif;
+  --font-display: "Playfair Display", ui-serif, Georgia, serif;
+  --font-admin: "Roboto", ui-sans-serif, system-ui, sans-serif;
+
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+
+  --color-navy: var(--navy);
+  --color-navy-soft: var(--navy-soft);
+  --color-ink: var(--ink);
+  --color-blue: var(--blue);
+  --color-gold: var(--gold);
+  --color-gold-soft: var(--gold-soft);
+  --color-sand: var(--sand);
+  --color-line: var(--line);
+
+  --color-admin-bg: var(--admin-bg);
+  --color-admin-surface: var(--admin-surface);
+  --color-admin-sidebar: var(--admin-sidebar);
+  --color-admin-sidebar-hover: var(--admin-sidebar-hover);
+  --color-admin-sidebar-fg: var(--admin-sidebar-fg);
+  --color-admin-sidebar-muted: var(--admin-sidebar-muted);
+
+  --color-status-draft: var(--status-draft);
+  --color-status-available: var(--status-available);
+  --color-status-reserved: var(--status-reserved);
+  --color-status-offer: var(--status-offer);
+  --color-status-sold: var(--status-sold);
+  --color-status-rented: var(--status-rented);
+  --color-status-archived: var(--status-archived);
+
+  --color-temp-cold: var(--temp-cold);
+  --color-temp-warm: var(--temp-warm);
+  --color-temp-hot: var(--temp-hot);
+
+  --color-chart-1: var(--chart-1);
+  --color-chart-2: var(--chart-2);
+  --color-chart-3: var(--chart-3);
+  --color-chart-4: var(--chart-4);
+  --color-chart-5: var(--chart-5);
+
+  --color-positive: var(--positive);
+  --color-negative: var(--negative);
+
+  --shadow-elegant: 0 24px 60px -30px oklch(0.2 0.045 250 / 0.45);
+  --shadow-card: 0 10px 40px -24px oklch(0.2 0.045 250 / 0.35);
+  --shadow-panel:
+    0 1px 2px oklch(0.2 0.045 250 / 0.06), 0 8px 24px -16px oklch(0.2 0.045 250 / 0.18);
+}
+
+:root {
+  --radius: 0.25rem;
+
+  --navy: oklch(0.204 0.045 253);
+  --navy-soft: oklch(0.27 0.055 253);
+  /* Near-black for the cinematic editorial sections — a whisper of navy, not pure black. */
+  --ink: oklch(0.165 0.02 253);
+  --blue: oklch(0.318 0.073 251);
+  --gold: oklch(0.735 0.088 79);
+  --gold-soft: oklch(0.86 0.05 82);
+  --sand: oklch(0.968 0.008 91);
+  --line: oklch(0.9 0.008 91);
+
+  --background: oklch(0.984 0.005 91);
+  --foreground: oklch(0.204 0.045 253);
+  --card: oklch(1 0 0);
+  --card-foreground: oklch(0.204 0.045 253);
+  --popover: oklch(1 0 0);
+  --popover-foreground: oklch(0.204 0.045 253);
+  --primary: oklch(0.204 0.045 253);
+  --primary-foreground: oklch(0.984 0.005 91);
+  --secondary: oklch(0.968 0.008 91);
+  --secondary-foreground: oklch(0.204 0.045 253);
+  --muted: oklch(0.968 0.008 91);
+  --muted-foreground: oklch(0.5 0.02 253);
+  --accent: oklch(0.735 0.088 79);
+  --accent-foreground: oklch(0.204 0.045 253);
+  --destructive: oklch(0.55 0.19 27);
+  --destructive-foreground: oklch(0.99 0 0);
+  --border: oklch(0.9 0.008 91);
+  --input: oklch(0.9 0.008 91);
+  --ring: oklch(0.735 0.088 79);
+
+  /* ---------- Admin surfaces ---------- */
+  --admin-bg: oklch(0.973 0.004 91);
+  --admin-surface: oklch(1 0 0);
+  --admin-sidebar: oklch(0.204 0.045 253);
+  --admin-sidebar-hover: oklch(0.27 0.055 253);
+  --admin-sidebar-fg: oklch(0.97 0.005 91);
+  --admin-sidebar-muted: oklch(0.72 0.022 253);
+
+  /* ---------- Property statuses ---------- */
+  --status-draft: oklch(0.6 0.014 253);
+  --status-available: oklch(0.6 0.125 155);
+  --status-reserved: oklch(0.735 0.088 79);
+  --status-offer: oklch(0.66 0.13 55);
+  --status-sold: oklch(0.318 0.073 251);
+  --status-rented: oklch(0.55 0.1 230);
+  --status-archived: oklch(0.7 0.008 253);
+
+  /* ---------- Lead temperature ---------- */
+  --temp-cold: oklch(0.64 0.09 235);
+  --temp-warm: oklch(0.73 0.11 70);
+  --temp-hot: oklch(0.6 0.17 30);
+
+  /* ---------- Chart series ---------- */
+  --chart-1: oklch(0.318 0.073 251);
+  --chart-2: oklch(0.735 0.088 79);
+  --chart-3: oklch(0.55 0.09 210);
+  --chart-4: oklch(0.66 0.1 150);
+  --chart-5: oklch(0.52 0.11 300);
+
+  --positive: oklch(0.6 0.125 155);
+  --negative: oklch(0.58 0.18 27);
+}
+
+@layer base {
+  * {
+    border-color: var(--color-border);
+  }
+
+  html {
+    scroll-behavior: smooth;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  body {
+    background-color: var(--color-background);
+    color: var(--color-foreground);
+    font-family: var(--font-sans);
+    /* Sarabun Light is the specified body voice; components opt up with font-medium/semibold. */
+    font-weight: 300;
+  }
+
+  ::selection {
+    background: var(--gold);
+    color: var(--navy);
+  }
+}
+
+/* ---------- Lenis smooth scrolling ----------
+   Required by the library: it drives window.scrollTo itself, so the native
+   smooth behaviour has to step aside while it is running. Scrollable panels
+   inside the page opt out with `data-lenis-prevent`. */
+
+html.lenis,
+html.lenis body {
+  height: auto;
+}
+
+.lenis.lenis-smooth {
+  scroll-behavior: auto !important;
+}
+
+.lenis.lenis-smooth [data-lenis-prevent] {
+  overscroll-behavior: contain;
+}
+
+.lenis.lenis-stopped {
+  overflow: hidden;
+}
+
+.lenis.lenis-smooth iframe {
+  pointer-events: none;
+}
+
+/* ---------- Typography utilities ---------- */
+
+/* Every title on the site: bold sans, capitals, tight leading. Line height
+   stays at 1.05 here because the utility also dresses small two-line titles
+   (cards, panels); the big headings tighten it further themselves. */
+@utility display {
+  font-family: var(--font-sans);
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: -0.02em;
+  line-height: 1.05;
+}
+
+/* Playfair survives for editorial voice — pulled quotes and ledes, never titles. */
+@utility quote {
+  font-family: var(--font-display);
+  font-weight: 400;
+  letter-spacing: -0.01em;
+}
+
+/* Back office runs on Roboto alone. Re-declaring font-family here (not just the vars)
+   is required: descendants inherit body's *computed* family, they don't re-resolve it. */
+@utility font-admin {
+  --font-sans: var(--font-admin);
+  --font-display: var(--font-admin);
+  font-family: var(--font-admin);
+  font-weight: 400;
+
+  /* The back office keeps its quieter titles: shouting every panel header in
+     capitals would drown a screen that is mostly dense data. */
+  & .display {
+    text-transform: none;
+    font-weight: 500;
+    letter-spacing: -0.01em;
+    line-height: 1.2;
+  }
+}
+
+@utility eyebrow {
+  font-size: 0.6875rem;
+  font-weight: 500;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--gold);
+}
+
+@utility rule-gold {
+  &::before {
+    content: "";
+    display: block;
+    width: 2.5rem;
+    height: 1px;
+    background: var(--gold);
+    margin-bottom: 1.25rem;
+  }
+}
+
+/* ---------- Motion ---------- */
+
+@utility reveal {
+  opacity: 0;
+  transform: translateY(24px);
+  transition:
+    opacity 0.9s cubic-bezier(0.16, 1, 0.3, 1),
+    transform 0.9s cubic-bezier(0.16, 1, 0.3, 1);
+  &[data-visible="true"] {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@utility zoom-frame {
+  overflow: hidden;
+  & img {
+    transition: transform 1.2s cubic-bezier(0.16, 1, 0.3, 1);
+    will-change: transform;
+  }
+  &:hover img {
+    transform: scale(1.06);
+  }
+}
+
+@utility link-underline {
+  position: relative;
+  &::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: -2px;
+    height: 1px;
+    width: 100%;
+    background: currentColor;
+    transform: scaleX(0);
+    transform-origin: right;
+    transition: transform 0.45s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+  &:hover::after {
+    transform: scaleX(1);
+    transform-origin: left;
+  }
+}
+
+@keyframes mabanis-rise {
+  from {
+    opacity: 0;
+    transform: translateY(14px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@keyframes mabanis-sweep {
+  0% {
+    transform: translateX(-100%);
+  }
+  100% {
+    transform: translateX(100%);
+  }
+}
+
+@keyframes mabanis-fadeout {
+  to {
+    opacity: 0;
+    visibility: hidden;
+  }
+}
+
+@keyframes mabanis-kenburns {
+  from {
+    transform: scale(1.02);
+  }
+  to {
+    transform: scale(1.12);
+  }
+}
+
+@utility animate-rise {
+  animation: mabanis-rise 1s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+/* Slow drift on the overlay-menu photo panel. */
+@utility menu-kenburns {
+  animation: mabanis-kenburns 14s ease-out both;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .menu-kenburns {
+    animation: none;
+  }
+}
+
+@utility loader-sweep {
+  animation: mabanis-sweep 1.6s cubic-bezier(0.65, 0, 0.35, 1) infinite;
+}
+
+/* ---------- Home page motion ---------- */
+
+/* Slow drift on the hero slideshow — each slide keeps zooming while it is on screen. */
+@keyframes mabanis-hero-drift {
+  from {
+    transform: scale(1.04);
+  }
+  to {
+    transform: scale(1.18);
+  }
+}
+
+/* Headline lines climb out of their own overflow mask. */
+@keyframes mabanis-line-rise {
+  from {
+    transform: translateY(105%);
+  }
+  to {
+    transform: none;
+  }
+}
+
+@keyframes mabanis-fade-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes mabanis-marquee {
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+@keyframes mabanis-float {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-8px);
+  }
+}
+
+@keyframes mabanis-scroll-cue {
+  0% {
+    transform: translateY(-100%);
+  }
+  60%,
+  100% {
+    transform: translateY(100%);
+  }
+}
+
+@utility hero-drift {
+  animation: mabanis-hero-drift 14s ease-out both;
+}
+
+/* Wrap the text in `.line-mask > span` — the span is what rises. */
+@utility animate-line {
+  animation: mabanis-line-rise 1.15s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+@utility animate-fade {
+  animation: mabanis-fade-in 1.2s ease-out both;
+}
+
+@utility animate-float {
+  animation: mabanis-float 4.5s ease-in-out infinite;
+}
+
+@utility scroll-cue {
+  animation: mabanis-scroll-cue 2.2s cubic-bezier(0.65, 0, 0.35, 1) infinite;
+}
+
+/* Duplicate the track inside for a seamless loop. */
+@utility animate-marquee {
+  animation: mabanis-marquee var(--marquee-duration, 38s) linear infinite;
+}
+
+/* Gold sweep across a button on hover. */
+@utility btn-sheen {
+  position: relative;
+  overflow: hidden;
+  isolation: isolate;
+  &::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    transform: translateX(-101%);
+    background: linear-gradient(100deg, transparent, oklch(1 0 0 / 0.28), transparent);
+    transition: transform 0.9s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+  &:hover::after {
+    transform: translateX(101%);
+  }
+}
+
+/* Image wipes open from the bottom as it enters the viewport. */
+@utility mask-reveal {
+  clip-path: inset(0 0 100% 0);
+  transition: clip-path 1.15s cubic-bezier(0.16, 1, 0.3, 1);
+  &[data-visible="true"] {
+    clip-path: inset(0 0 0 0);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero-drift,
+  .animate-line,
+  .animate-fade,
+  .animate-float,
+  .scroll-cue,
+  .animate-marquee,
+  .animate-rise {
+    animation: none;
+  }
+  .mask-reveal {
+    clip-path: none;
+    transition: none;
+  }
+}
+
+/* ---------- Admin motion ---------- */
+
+@keyframes mabanis-slide-up {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@keyframes mabanis-shimmer {
+  100% {
+    transform: translateX(100%);
+  }
+}
+
+/* Staggered entrance for dashboard tiles, table rows and pipeline cards. */
+@utility stagger-in {
+  animation: mabanis-slide-up 0.5s cubic-bezier(0.16, 1, 0.3, 1) both;
+  animation-delay: calc(var(--i, 0) * 45ms);
+}
+
+@utility skeleton {
+  position: relative;
+  overflow: hidden;
+  background: var(--muted);
+  &::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    transform: translateX(-100%);
+    background: linear-gradient(90deg, transparent, oklch(1 0 0 / 0.55), transparent);
+    animation: mabanis-shimmer 1.6s infinite;
+  }
+}
+
+/* Sidebar rail: width is the only animated box property, so it stays cheap. */
+@utility rail-transition {
+  transition: width 0.42s cubic-bezier(0.76, 0, 0.24, 1);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .stagger-in,
+  .skeleton::after {
+    animation: none;
+  }
+  .rail-transition {
+    transition: none;
+  }
+}

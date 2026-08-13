@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="166" height="48" viewBox="0 0 166 48" role="img" aria-label="Al Omrane">
+  <path d="M15 7 2 19v22h8V27.5a5 5 0 0 1 10 0V41h8V19z" fill="#0B2038"/>
+  <path d="M15 14.5a9.4 9.4 0 0 0-5.6 1.8L15 11l5.6 5.3A9.4 9.4 0 0 0 15 14.5z" fill="#E8A33D"/>
+  <text x="36" y="28" textLength="126" lengthAdjust="spacingAndGlyphs" font-family="Arial,Helvetica,sans-serif" font-size="20" font-weight="700" fill="#0B2038">AL OMRANE</text>
+  <text x="36" y="39" textLength="126" lengthAdjust="spacingAndGlyphs" font-family="Arial,Helvetica,sans-serif" font-size="7" font-weight="500" fill="#0B2038" opacity=".6">AMENAGEUR DEVELOPPEUR</text>
+</svg>
