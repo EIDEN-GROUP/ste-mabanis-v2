@@ -216,7 +216,7 @@ function AboutPage() {
       <AgencyServices />
 
       {/* 05 — Équipe. Le rail déborde à droite, donc le titre garde le conteneur. */}
-      <section id="equipe" className="scroll-mt-[5.5rem] py-16 sm:py-24 lg:py-32">
+      {/* <section id="equipe" className="scroll-mt-[5.5rem] py-16 sm:py-24 lg:py-32">
         <div className="mx-auto max-w-[100rem] px-5 sm:px-8 lg:px-12">
           <SectionHeading
             eyebrow="L'équipe"
@@ -233,7 +233,7 @@ function AboutPage() {
           />
         </div>
         <AgencyTeam className="mt-12 sm:mt-14" />
-      </section>
+      </section> */}
     </>
   );
 }

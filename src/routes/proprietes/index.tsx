@@ -1,9 +1,10 @@
-import { useMemo, useState } from "react";
+import { useMemo, useRef, useState } from "react";
 import { createFileRoute, Link, useNavigate } from "@tanstack/react-router";
 import { SlidersHorizontal, X } from "lucide-react";
 import { PageHero } from "@/components/layout-bits";
 import { PropertyCard } from "@/components/property-card";
 import { Reveal } from "@/components/motion";
+import { getLenis } from "@/components/smooth-scroll";
 import { useFavorites } from "@/hooks/use-favorites";
 import { images, locations, properties, propertyTypes, type Transaction } from "@/lib/site-data";
 import { cn } from "@/lib/utils";
@@ -52,9 +53,24 @@ function PropertiesPage() {
   const [filtersOpen, setFiltersOpen] = useState(false);
   const [onlyFavorites, setOnlyFavorites] = useState(false);
   const { favorites } = useFavorites();
+  const resultsRef = useRef<HTMLElement>(null);
 
-  const update = (patch: Partial<PropertySearch>) =>
-    navigate({ search: (prev: PropertySearch) => ({ ...prev, ...patch }) });
+  const scrollToResults = () => {
+    const el = resultsRef.current;
+    if (!el) return;
+    const lenis = getLenis();
+    if (lenis) lenis.scrollTo(el, { offset: -88 });
+    else el.scrollIntoView({ behavior: "smooth", block: "start" });
+  };
+
+  const update = (patch: Partial<PropertySearch>) => {
+    navigate({
+      search: (prev: PropertySearch) => ({ ...prev, ...patch }),
+      resetScroll: false,
+    });
+    // A filter change lands on the results section top, not the top of the page.
+    if (!filtersOpen) scrollToResults();
+  };
 
   const results = useMemo(() => {
     let list = properties.filter((p) => p.transaction === search.transaction);
@@ -184,7 +200,7 @@ function PropertiesPage() {
         image={images.property2}
       />
 
-      <section className="px-5 py-12 sm:px-8 sm:py-16 lg:px-12">
+      <section ref={resultsRef} className="px-5 py-12 sm:px-8 sm:py-16 lg:px-12">
         <div className="mx-auto max-w-[100rem]">
           {/* Tabs */}
           <div className="flex flex-wrap items-center gap-6 border-b border-line">
@@ -309,7 +325,10 @@ function PropertiesPage() {
           {filters}
           <button
             type="button"
-            onClick={() => setFiltersOpen(false)}
+            onClick={() => {
+              setFiltersOpen(false);
+              scrollToResults();
+            }}
             className="mt-8 w-full bg-navy py-4 text-[0.7rem] tracking-[0.18em] text-white uppercase"
           >
             Voir les {results.length} résultats
