@@ -1,6 +1,6 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { PageHero, Section } from "@/components/layout-bits";
-import { Reveal } from "@/components/motion";
+import { MaskReveal, Reveal } from "@/components/motion";
 import { images, locations, propertiesByLocation } from "@/lib/site-data";
 
 export const Route = createFileRoute("/quartiers/")({
@@ -27,8 +27,9 @@ function LocationsPage() {
     <>
       <PageHero
         eyebrow="Quartiers"
-        title="Le bon quartier vaut mieux que le beau salon."
-        intro="Nos repères de prix viennent de transactions réellement signées sur le Grand Agadir, pas d'annonces en vitrine."
+        lead="Les"
+        trail="quartiers"
+        intro="Le bon quartier vaut mieux que le beau salon. Nos repères de prix viennent de transactions réellement signées sur le Grand Agadir, pas d'annonces en vitrine."
         image={images.locationAgadir}
       />
 
@@ -39,9 +40,9 @@ function LocationsPage() {
               <Link
                 to="/quartiers/$slug"
                 params={{ slug: l.slug }}
-                className="zoom-frame group block bg-card shadow-card"
+                className="zoom-frame group block rounded-md bg-card shadow-card"
               >
-                <div className="overflow-hidden">
+                <MaskReveal delay={i * 70 + 60} className="overflow-hidden rounded-t-md">
                   <img
                     src={l.image}
                     alt={l.name}
@@ -50,7 +51,7 @@ function LocationsPage() {
                     height={960}
                     className="aspect-4/3 w-full object-cover"
                   />
-                </div>
+                </MaskReveal>
                 <div className="p-6">
                   <p className="text-[0.6rem] tracking-[0.2em] text-gold uppercase">{l.city}</p>
                   <h2 className="display mt-2 text-2xl">{l.name}</h2>

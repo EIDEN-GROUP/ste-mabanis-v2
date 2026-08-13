@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { Link, useRouterState } from "@tanstack/react-router";
-import { Phone, Mail, AtSign, Instagram, LayoutDashboard } from "lucide-react";
+import { Phone, Mail, Facebook, AtSign, Instagram, LayoutDashboard } from "lucide-react";
 import logo from "@/assets/mabanis-logo.png";
 import { setScrollLocked } from "@/components/smooth-scroll";
 import { agency, images, socials } from "@/lib/site-data";
@@ -10,18 +10,19 @@ import { cn } from "@/lib/utils";
 const SOCIAL_ICONS = {
   Instagram,
   Threads: AtSign,
+  Facebook,
 } as const;
 
 /** Slim inline nav — the full site map lives in the overlay menu. */
 const nav = [
+  { to: "/agence", label: "L'agence" },
   { to: "/proprietes", label: "Propriétés" },
   { to: "/quartiers", label: "Quartiers" },
-  { to: "/services", label: "Services" },
   { to: "/vendre", label: "Vendre" },
-  { to: "/agence", label: "L'agence" },
 ] as const;
 
-type MenuLink = { to: string; label: string; search?: Record<string, string> };
+/** `hash` targets a band of the agency page, which now carries services and team. */
+type MenuLink = { to: string; label: string; search?: Record<string, string>; hash?: string };
 
 const menuGroups: { title: string; links: MenuLink[] }[] = [
   {
@@ -29,14 +30,14 @@ const menuGroups: { title: string; links: MenuLink[] }[] = [
     links: [
       { to: "/proprietes", label: "Biens à vendre", search: { transaction: "vente" } },
       { to: "/quartiers", label: "Quartiers d'Agadir" },
-      { to: "/services", label: "Accompagnement achat" },
+      { to: "/agence", label: "Accompagnement achat", hash: "services" },
     ],
   },
   {
     title: "Vous souhaitez vendre ?",
     links: [
       { to: "/vendre", label: "Vendre" },
-      { to: "/vendre", label: "Estimer" },
+      // { to: "/vendre", label: "Estimer" },
       { to: "/temoignages", label: "Ils nous ont fait confiance" },
     ],
   },
@@ -44,14 +45,13 @@ const menuGroups: { title: string; links: MenuLink[] }[] = [
     title: "Location à Agadir",
     links: [
       { to: "/proprietes", label: "Biens à louer", search: { transaction: "location" } },
-      { to: "/services", label: "Gestion locative" },
+      { to: "/agence", label: "Gestion locative", hash: "services" },
     ],
   },
   {
     title: "À propos",
     links: [
       { to: "/agence", label: "Notre agence" },
-      { to: "/equipe", label: "Équipe" },
       { to: "/actualites", label: "Actualités" },
       { to: "/contact", label: "Contact" },
     ],
@@ -92,7 +92,6 @@ export function SiteHeader() {
   const [slide, setSlide] = useState(0);
   const pathname = useRouterState({ select: (s) => s.location.pathname });
   const reduced = useReducedMotion();
-  const overHero = pathname === "/";
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 40);
@@ -129,7 +128,9 @@ export function SiteHeader() {
     return () => clearInterval(id);
   }, [open, reduced]);
 
-  const solid = scrolled || !overHero;
+  // Every public page opens on a dark full-bleed hero, so the bar rides over it
+  // transparent and only takes its white ground once the visitor scrolls away.
+  const solid = scrolled;
   const ms = (n: number) => (reduced ? 0 : n);
 
   // Open: the logo sits on the photo half at lg+, but on the pale panel below it.
@@ -161,7 +162,7 @@ export function SiteHeader() {
         )}
       >
         <div className="mx-auto flex max-w-[100rem] items-center justify-between gap-6 px-5 sm:px-8 lg:px-12">
-           <Link to="/" className="shrink-0" ml-2 aria-label="STE MABANIS — accueil">
+          <Link to="/" className="ml-2 shrink-0" aria-label="STE MABANIS accueil">
             <img
               src={logo}
               alt="STE MABANIS"
@@ -238,7 +239,8 @@ export function SiteHeader() {
               aria-expanded={open}
               aria-label={open ? "Fermer le menu" : "Ouvrir le menu"}
               className={cn(
-                "flex size-10 shrink-0 items-center justify-center transition-colors duration-500 motion-reduce:transition-none",
+                // The border colours below never showed without a width to draw.
+                "flex size-11 shrink-0 items-center justify-center transition-colors duration-500 motion-reduce:transition-none sm:size-10",
                 open
                   ? "border-gold text-navy"
                   : solid
@@ -341,6 +343,7 @@ export function SiteHeader() {
                       <Link
                         to={link.to}
                         search={link.search as never}
+                        {...(link.hash ? { hash: link.hash } : {})}
                         onClick={() => setOpen(false)}
                         className="display inline-block text-2xl text-navy transition-[color,transform] duration-400 hover:translate-x-1.5 hover:text-gold sm:text-[1.75rem]"
                       >

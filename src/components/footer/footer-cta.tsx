@@ -33,14 +33,14 @@ export function FooterCTA() {
       className="sticky top-0 flex h-[100svh] items-center justify-center overflow-hidden"
     >
       <motion.img
-        src={images.locationMarina}
+        src={images.CtaMarina}
         alt=""
         aria-hidden
         loading="lazy"
         width={2400}
         height={1350}
-        className="absolute inset-0 size-full object-cover"
-        style={{ scale: animated ? imageScale : 1 }}
+        className="absolute inset-0 size-full object-cover blur-xs"
+        style={{ scale: animated ? imageScale : 1  }}
       />
       <motion.div
         className="absolute inset-0 bg-ink"
@@ -53,19 +53,19 @@ export function FooterCTA() {
       />
 
       <motion.div
-        className="relative mx-auto max-w-3xl px-5 text-center sm:px-8"
+        className="relative mx-auto max-w-4xl px-5 text-center sm:px-8"
         style={{ y: animated ? contentY : 0, opacity: animated ? contentOpacity : 1 }}
       >
-        <h2 className="text-[clamp(1.9rem,4.4vw,3.9rem)] leading-[1.06] font-medium tracking-[-0.035em] text-white">
+        <h2 className="text-[clamp(2rem,4.4vw,4rem)] uppercase leading-[1.06] font-medium tracking-[-0.035em] text-white">
           Votre prochaine adresse
-          <span className="block text-white/55">commence ici.</span>
+          <span className="block text-white/60">commence ici.</span>
         </h2>
-        <p className="mx-auto mt-6 max-w-md text-[0.95rem] leading-[1.75] text-white/60">
-          Agadir, le Souss-Massa et le littoral atlantique — nous vous accompagnons jusqu'au bout.
+        <p className="mx-auto mt-6 text-[0.95rem] leading-[1.75] text-white/70">
+          Agadir, le Souss-Massa et le littoral atlantique nous vous accompagnons jusqu'au bout.
         </p>
         <Link
           to="/contact"
-          className="group mt-9 inline-flex items-center gap-3 rounded-full bg-white px-7 py-3.5 text-[0.74rem] font-medium tracking-[0.05em] text-ink transition-[background-color,scale] duration-500 hover:scale-[1.03] hover:bg-gold"
+          className="group mt-9 inline-flex items-center gap-3 rounded-md bg-white px-7 py-3.5 text-[0.74rem] font-medium tracking-[0.05em] text-ink transition-[background-color,scale] duration-500 hover:scale-[1.03] hover:bg-gold"
         >
           Parlons de votre projet
           <ArrowRight className="size-4 transition-transform duration-500 group-hover:translate-x-1.5" />

@@ -18,13 +18,7 @@ import { Section, SectionHeading } from "@/components/layout-bits";
 import { PropertyCard } from "@/components/property-card";
 import { LeadForm } from "@/components/lead-form";
 import { useFavorites } from "@/hooks/use-favorites";
-import {
-  agency,
-  formatMAD,
-  getAgent,
-  getProperty,
-  properties,
-} from "@/lib/site-data";
+import { agency, formatMAD, getAgent, getProperty, properties } from "@/lib/site-data";
 import { cn } from "@/lib/utils";
 
 export const Route = createFileRoute("/proprietes/$slug")({
@@ -36,7 +30,10 @@ export const Route = createFileRoute("/proprietes/$slug")({
   head: ({ loaderData }) => {
     if (!loaderData) {
       return {
-        meta: [{ title: "Bien indisponible — STE MABANIS" }, { name: "robots", content: "noindex" }],
+        meta: [
+          { title: "Bien indisponible — STE MABANIS" },
+          { name: "robots", content: "noindex" },
+        ],
       };
     }
     const p = loaderData.property;
@@ -88,7 +85,9 @@ function PropertyDetail() {
           <button
             type="button"
             aria-label="Photo précédente"
-            onClick={() => setActive((a) => (a - 1 + property.images.length) % property.images.length)}
+            onClick={() =>
+              setActive((a) => (a - 1 + property.images.length) % property.images.length)
+            }
             className="absolute top-1/2 left-3 grid size-11 -translate-y-1/2 place-items-center bg-white/85 text-navy transition-colors hover:bg-gold sm:left-6"
           >
             <ChevronLeft className="size-5" />
@@ -157,7 +156,7 @@ function PropertyDetail() {
                 <button
                   type="button"
                   onClick={() => toggle(property.slug)}
-                  className="ml-auto inline-flex items-center gap-2 border border-line px-4 py-2 text-xs tracking-[0.14em] uppercase transition-colors hover:border-gold"
+                  className="ml-auto inline-flex items-center gap-2 rounded-md border border-line px-4 py-2 text-xs tracking-[0.14em] uppercase transition-colors hover:border-gold"
                 >
                   <Heart className={cn("size-3.5", fav ? "fill-gold text-gold" : "text-navy/60")} />
                   {fav ? "Enregistré" : "Enregistrer"}
@@ -180,10 +179,26 @@ function PropertyDetail() {
             </Reveal>
 
             <Reveal className="mt-10 grid grid-cols-2 gap-px border border-line bg-line sm:grid-cols-4">
-              <Spec icon={<Maximize className="size-4 text-gold" />} value={`${property.surface} m²`} label="Surface habitable" />
-              <Spec icon={<BedDouble className="size-4 text-gold" />} value={`${property.bedrooms}`} label="Chambres" />
-              <Spec icon={<Bath className="size-4 text-gold" />} value={`${property.bathrooms}`} label="Salles de bain" />
-              <Spec icon={<CalendarClock className="size-4 text-gold" />} value={`${property.year}`} label="Année" />
+              <Spec
+                icon={<Maximize className="size-4 text-gold" />}
+                value={`${property.surface} m²`}
+                label="Surface habitable"
+              />
+              <Spec
+                icon={<BedDouble className="size-4 text-gold" />}
+                value={`${property.bedrooms}`}
+                label="Chambres"
+              />
+              <Spec
+                icon={<Bath className="size-4 text-gold" />}
+                value={`${property.bathrooms}`}
+                label="Salles de bain"
+              />
+              <Spec
+                icon={<CalendarClock className="size-4 text-gold" />}
+                value={`${property.year}`}
+                label="Année"
+              />
             </Reveal>
 
             <Reveal className="mt-12">
@@ -209,7 +224,7 @@ function PropertyDetail() {
 
             <Reveal className="mt-12">
               <h2 className="display rule-gold text-3xl">Situation</h2>
-              <div className="mt-5 aspect-16/9 w-full overflow-hidden border border-line">
+              <div className="mt-5 aspect-16/9 w-full overflow-hidden rounded-md border border-line">
                 <iframe
                   title={`Carte — ${property.neighborhood}`}
                   src={`https://www.google.com/maps?q=${encodeURIComponent(property.mapQuery)}&output=embed`}
@@ -223,7 +238,7 @@ function PropertyDetail() {
           {/* Sidebar */}
           <aside className="lg:sticky lg:top-28 lg:self-start">
             {agent ? (
-              <div className="border border-line bg-card p-6 shadow-card">
+              <div className="rounded-md border border-line bg-card p-6 shadow-card">
                 <p className="eyebrow">Votre interlocuteur</p>
                 <div className="mt-4 flex items-center gap-4">
                   <span className="display grid size-14 place-items-center bg-navy text-xl text-gold">
@@ -241,7 +256,10 @@ function PropertyDetail() {
                   >
                     <Phone className="size-3.5 text-gold" /> {agent.phone}
                   </a>
-                  <a href={`mailto:${agent.email}`} className="flex items-center gap-2 hover:text-gold">
+                  <a
+                    href={`mailto:${agent.email}`}
+                    className="flex items-center gap-2 hover:text-gold"
+                  >
                     <Mail className="size-3.5 text-gold" /> {agent.email}
                   </a>
                 </div>
@@ -268,7 +286,12 @@ function PropertyDetail() {
                     name: "creneau",
                     label: "Créneau souhaité",
                     type: "select",
-                    options: ["En semaine, matin", "En semaine, après-midi", "Samedi matin", "Visite en visioconférence"],
+                    options: [
+                      "En semaine, matin",
+                      "En semaine, après-midi",
+                      "Samedi matin",
+                      "Visite en visioconférence",
+                    ],
                     required: true,
                     full: true,
                   },
@@ -288,7 +311,7 @@ function PropertyDetail() {
               )}`}
               target="_blank"
               rel="noreferrer noopener"
-              className="mt-4 block border border-navy px-6 py-3.5 text-center text-[0.7rem] tracking-[0.18em] uppercase transition-colors hover:bg-navy hover:text-white"
+              className="mt-4 block rounded-md border border-navy px-6 py-3.5 text-center text-[0.7rem] tracking-[0.18em] uppercase transition-colors hover:bg-navy hover:text-white"
             >
               Échanger sur WhatsApp
             </a>
@@ -310,15 +333,7 @@ function PropertyDetail() {
   );
 }
 
-function Spec({
-  icon,
-  value,
-  label,
-}: {
-  icon: React.ReactNode;
-  value: string;
-  label: string;
-}) {
+function Spec({ icon, value, label }: { icon: React.ReactNode; value: string; label: string }) {
   return (
     <div className="bg-background p-5">
       {icon}

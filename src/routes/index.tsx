@@ -18,7 +18,7 @@ export const Route = createFileRoute("/")({
       {
         name: "description",
         content:
-          "Villas, appartements et investissements sélectionnés à Agadir, Founty, la Marina et Taghazout. Vente, location, estimation et gestion locative depuis 2008.",
+          "Villas, appartements et investissements sélectionnés à Agadir, Founty, la Marina et Taghazout. Vente, location, estimation et gestion locative depuis 2024.",
       },
       {
         property: "og:title",
@@ -101,7 +101,7 @@ function Home() {
               </p>
               <Link
                 to="/quartiers"
-                className="btn-sheen group mt-6 inline-flex items-center justify-center gap-3 rounded-full bg-gold px-7 py-3.5 text-[0.68rem] tracking-[0.18em] font-medium uppercase text-navy transition-colors duration-500 hover:bg-white"
+                className="btn-sheen group mt-6 inline-flex items-center justify-center gap-3 rounded-md bg-gold px-7 py-3.5 text-[0.68rem] tracking-[0.18em] font-medium uppercase text-navy transition-colors duration-500 hover:bg-white"
               >
                 Tous les quartiers
                 <ArrowRight className="size-4 transition-transform duration-500 group-hover:translate-x-1" />

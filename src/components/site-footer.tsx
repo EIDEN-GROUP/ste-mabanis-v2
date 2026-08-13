@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { useRouterState } from "@tanstack/react-router";
 import { motion } from "framer-motion";
 import { ArrowUp } from "lucide-react";
 import { EASE } from "@/components/motion";
@@ -30,9 +31,15 @@ const legal = [
  * buttons: once the closing scene starts, it owns the screen edge to edge.
  */
 export function SiteFooter() {
+  // On /contact the page is already the invitation, so the CTA would ask twice.
+  // Dropping it leaves the curtain intact: the dark block simply has nothing to
+  // travel over, and the closing scene plays exactly as elsewhere.
+  const pathname = useRouterState({ select: (s) => s.location.pathname });
+  const showCTA = pathname !== "/contact";
+
   return (
     <footer className="relative z-[80] bg-ink text-white">
-      <FooterCTA />
+      {showCTA ? <FooterCTA /> : null}
 
       {/* One screen exactly: the coordinates block takes whatever room the
           wordmark and the legal bar leave. `min-h` rather than `h` so a short

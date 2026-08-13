@@ -46,7 +46,9 @@ const SPRING = { stiffness: 110, damping: 30, mass: 0.4 };
 export function CinematicServices() {
   return (
     <section className="bg-ink text-white">
-      <div className={`mx-auto max-w-[100rem] px-5 pt-20 sm:px-8 pb-16 sm:pt-24 lg:items-start lg:px-12 lg:pt-20 ${GRID}`}>
+      <div
+        className={`mx-auto max-w-[100rem] px-5 pt-20 sm:px-8 pb-16 sm:pt-24 lg:items-start lg:px-12 lg:pt-20 ${GRID}`}
+      >
         <Reveal>
           <p className="eyebrow flex items-center gap-4">
             <span className="h-px w-8 bg-gold" />
@@ -80,7 +82,10 @@ export function CinematicServices() {
           </span>
         </p>
         <Reveal delay={260}>
-          <Link to="/contact" className="btn-sheen group mt-10 inline-flex items-center justify-center gap-3 rounded-full border border-white px-7! py-3.5 text-[0.68rem] tracking-[0.18em] font-medium uppercase text-white transition-colors duration-500 hover:bg-gold hover:border-gold hover:text-navy">
+          <Link
+            to="/contact"
+            className="btn-sheen group mt-10 inline-flex items-center justify-center gap-3 rounded-md border border-white px-7! py-3.5 text-[0.68rem] tracking-[0.18em] font-medium uppercase text-white transition-colors duration-500 hover:bg-gold hover:border-gold hover:text-navy"
+          >
             Commencer avec MABANIS
             <ArrowRight className="size-4 transition-transform duration-500 group-hover:translate-x-1" />
           </Link>
@@ -127,7 +132,9 @@ function ServiceRow({ service }: { service: (typeof services)[number] }) {
           <div className="absolute inset-0 bg-gradient-to-r from-ink/85 via-ink/30 to-ink/70" />
         </div>
 
-        <div className={`relative mx-auto flex max-w-[100rem] flex-col gap-y-10 px-5 py-16 sm:px-8 sm:py-20 lg:min-h-[15vh] lg:items-center lg:px-12 lg:py-16 ${GRID}`}>
+        <div
+          className={`relative mx-auto flex max-w-[100rem] flex-col gap-y-10 px-5 py-16 sm:px-8 sm:py-20 lg:min-h-[15vh] lg:items-center lg:px-12 lg:py-16 ${GRID}`}
+        >
           <div className="flex items-start gap-5 sm:gap-7">
             <Reveal className="shrink-0">
               <span className="grid size-9 place-items-center rounded-full border border-white/30 text-[0.62rem] text-white/80 transition-colors duration-500 group-hover:border-gold group-hover:text-gold">
@@ -163,8 +170,14 @@ function ServiceRow({ service }: { service: (typeof services)[number] }) {
               <span className="absolute bottom-0 left-[0.03em] h-[5px] w-full origin-left scale-x-0 bg-white transition-[scale] duration-[800ms] ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:scale-x-100 group-focus-visible:scale-x-100 [@media(hover:none)]:scale-x-100" />
             </motion.span>
           </motion.div>
-          <motion.div className="self-end lg:self-center lg:justify-self-end" style={{ x: animated ? arrowX : 0 }}>
-            <ArrowRight className="size-12 text-white transition-transform duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:translate-x-3 sm:size-16 lg:size-20 xl:size-24" strokeWidth={1} />
+          <motion.div
+            className="self-end lg:self-center lg:justify-self-end"
+            style={{ x: animated ? arrowX : 0 }}
+          >
+            <ArrowRight
+              className="size-12 text-white transition-transform duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:translate-x-3 sm:size-16 lg:size-20 xl:size-24"
+              strokeWidth={1}
+            />
           </motion.div>
         </div>
       </Link>

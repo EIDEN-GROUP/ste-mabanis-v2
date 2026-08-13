@@ -19,7 +19,7 @@ const ways = [
   },
   {
     word: "Gérer",
-    to: "/services" as const,
+    to: "/agence" as const,
     image: images.locationMarina,
     text: "Gestion locative complète pour propriétaires résidents et MRE : loyers, entretien, fiscalité locale et reporting trimestriel.",
   },

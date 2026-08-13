@@ -1,7 +1,7 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { Check } from "lucide-react";
 import { PageHero, Section, SectionHeading } from "@/components/layout-bits";
-import { Reveal, Counter } from "@/components/motion";
+import { Reveal, Counter, TextReveal } from "@/components/motion";
 import { LeadForm } from "@/components/lead-form";
 import { images, locations, propertyTypes } from "@/lib/site-data";
 
@@ -17,7 +17,8 @@ export const Route = createFileRoute("/vendre")({
       { property: "og:title", content: "Vendre son bien à Agadir avec STE MABANIS" },
       {
         property: "og:description",
-        content: "Une estimation argumentée, une commercialisation préparée, un suivi hebdomadaire.",
+        content:
+          "Une estimation argumentée, une commercialisation préparée, un suivi hebdomadaire.",
       },
     ],
   }),
@@ -25,12 +26,30 @@ export const Route = createFileRoute("/vendre")({
 });
 
 const steps = [
-  { title: "Estimation", text: "Visite du bien, analyse des comparables signés, rapport écrit remis sous 72 heures." },
-  { title: "Préparation", text: "Conseils de mise en valeur, reportage photo professionnel, plan coté et descriptif rédigé." },
-  { title: "Diffusion", text: "Mise en ligne simultanée, activation de notre fichier acquéreurs et des partenaires." },
-  { title: "Visites", text: "Visites accompagnées et qualifiées, compte rendu hebdomadaire, retours d'acheteurs transmis bruts." },
-  { title: "Négociation", text: "Défense de votre prix, vérification de la solvabilité, rédaction du compromis avec le notaire." },
-  { title: "Signature", text: "Coordination notaire et banque jusqu'à la remise des clés, puis suivi après-vente." },
+  {
+    title: "Estimation",
+    text: "Visite du bien, analyse des comparables signés, rapport écrit remis sous 72 heures.",
+  },
+  {
+    title: "Préparation",
+    text: "Conseils de mise en valeur, reportage photo professionnel, plan coté et descriptif rédigé.",
+  },
+  {
+    title: "Diffusion",
+    text: "Mise en ligne simultanée, activation de notre fichier acquéreurs et des partenaires.",
+  },
+  {
+    title: "Visites",
+    text: "Visites accompagnées et qualifiées, compte rendu hebdomadaire, retours d'acheteurs transmis bruts.",
+  },
+  {
+    title: "Négociation",
+    text: "Défense de votre prix, vérification de la solvabilité, rédaction du compromis avec le notaire.",
+  },
+  {
+    title: "Signature",
+    text: "Coordination notaire et banque jusqu'à la remise des clés, puis suivi après-vente.",
+  },
 ];
 
 function SellPage() {
@@ -38,8 +57,9 @@ function SellPage() {
     <>
       <PageHero
         eyebrow="Vendre"
-        title="Le bon prix, dès le premier jour."
-        intro="Un bien mal positionné perd en moyenne 9 % de sa valeur finale. Notre travail commence donc par une estimation que nous savons défendre."
+        lead="Vendre"
+        trail="un bien"
+        intro="Le bon prix, dès le premier jour. Un bien mal positionné perd en moyenne 9 % de sa valeur finale : notre travail commence donc par une estimation que nous savons défendre."
         image={images.property1}
       />
 
@@ -66,9 +86,15 @@ function SellPage() {
           title="Six étapes, aucune improvisation"
           intro="Chaque mandat suit le même protocole, du studio de 45 m² à la villa front d'océan."
         />
-        <div className="mt-12 grid gap-px bg-line sm:grid-cols-2 xl:grid-cols-3">
+        {/* Spaced cards rather than a hairline grid: rounded corners inside a
+            1px-gap grid leave notches at every intersection. */}
+        <div className="mt-12 grid gap-4 sm:grid-cols-2 xl:grid-cols-3">
           {steps.map((s, i) => (
-            <Reveal key={s.title} delay={i * 60} className="bg-sand p-7">
+            <Reveal
+              key={s.title}
+              delay={i * 60}
+              className="rounded-md border border-line bg-background p-7 transition-colors duration-700 hover:border-gold/40"
+            >
               <p className="text-[0.6rem] tracking-[0.2em] text-gold">
                 Étape {String(i + 1).padStart(2, "0")}
               </p>
@@ -84,7 +110,7 @@ function SellPage() {
           <Reveal>
             <p className="eyebrow">Pourquoi nous confier votre bien</p>
             <h2 className="display mt-4 text-[clamp(2rem,4vw,3.25rem)]">
-              Un vendeur informé négocie mieux
+              <TextReveal text="Un vendeur informé négocie mieux" delay={80} />
             </h2>
             <ul className="mt-8 space-y-3.5">
               {[

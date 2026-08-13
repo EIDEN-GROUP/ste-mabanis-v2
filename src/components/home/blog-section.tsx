@@ -131,7 +131,7 @@ function BlogArticle({ article, index }: { article: Article; index: number }) {
             {article.excerpt}
           </motion.p>
           <motion.span
-            className="mt-8 inline-flex items-center gap-2.5 rounded-full border border-foreground/20 px-5 py-2.5 text-[0.72rem] tracking-[0.04em] text-foreground transition-colors duration-500 group-hover:border-foreground/70"
+            className="mt-8 inline-flex items-center gap-2.5 rounded-md border border-foreground/20 px-5 py-2.5 text-[0.72rem] tracking-[0.04em] text-foreground transition-colors duration-500 group-hover:border-foreground/70"
             variants={RISE}
           >
             Lire l'article

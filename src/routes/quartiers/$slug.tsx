@@ -1,7 +1,7 @@
 import { createFileRoute, notFound } from "@tanstack/react-router";
 import { Check } from "lucide-react";
 import { PageHero, Section, SectionHeading } from "@/components/layout-bits";
-import { Reveal } from "@/components/motion";
+import { Reveal, TextReveal } from "@/components/motion";
 import { PropertyCard } from "@/components/property-card";
 import { getLocation, propertiesByLocation } from "@/lib/site-data";
 
@@ -14,7 +14,10 @@ export const Route = createFileRoute("/quartiers/$slug")({
   head: ({ loaderData }) => {
     if (!loaderData) {
       return {
-        meta: [{ title: "Quartier introuvable — STE MABANIS" }, { name: "robots", content: "noindex" }],
+        meta: [
+          { title: "Quartier introuvable — STE MABANIS" },
+          { name: "robots", content: "noindex" },
+        ],
       };
     }
     const l = loaderData.location;
@@ -46,7 +49,9 @@ function LocationPage() {
       <Section>
         <div className="grid gap-14 lg:grid-cols-[1.3fr_1fr]">
           <Reveal>
-            <h2 className="display rule-gold text-3xl">Le quartier</h2>
+            <h2 className="display rule-gold text-3xl">
+              <TextReveal text="Le quartier" delay={60} />
+            </h2>
             <div className="mt-5 space-y-4 text-[0.98rem] leading-relaxed text-foreground/85">
               {location.editorial.map((p: string, i: number) => (
                 <p key={i}>{p}</p>
@@ -55,7 +60,7 @@ function LocationPage() {
           </Reveal>
 
           <Reveal delay={100} className="space-y-8">
-            <div className="border border-line bg-card p-7">
+            <div className="rounded-md border border-line bg-card p-7">
               <p className="eyebrow">Art de vivre</p>
               <ul className="mt-4 space-y-2.5">
                 {location.lifestyle.map((l: string) => (

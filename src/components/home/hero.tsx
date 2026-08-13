@@ -1,6 +1,6 @@
 import { Link } from "@tanstack/react-router";
 import { motion } from "framer-motion";
-import { ArrowRight, AtSign, Instagram } from "lucide-react";
+import { ArrowRight, Facebook, AtSign, Instagram } from "lucide-react";
 import { Counter, EASE } from "@/components/motion";
 import { socials } from "@/lib/site-data";
 
@@ -8,6 +8,7 @@ import { socials } from "@/lib/site-data";
 const SOCIAL_ICONS = {
   Instagram,
   Threads: AtSign,
+  Facebook,
 } as const;
 
 const heroStats = [
@@ -94,7 +95,7 @@ export function HomeHero() {
             className="mt-7 max-w-xl text-[0.95rem] leading-relaxed text-white/65 sm:text-base"
             {...step(2)}
           >
-            Des propriétés d’exception au cœur d’Agadir et du Souss-Massa. Depuis 2008, STE MABANIS
+            Des propriétés d’exception au cœur d’Agadir et du Souss-Massa. Depuis 2024, STE MABANIS
             sélectionne et accompagne des projets immobiliers où emplacement, architecture et
             qualité de vie se rencontrent.
           </motion.p>

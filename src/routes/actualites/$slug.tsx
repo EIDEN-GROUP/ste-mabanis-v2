@@ -1,6 +1,6 @@
 import { createFileRoute, Link, notFound } from "@tanstack/react-router";
 import { Section } from "@/components/layout-bits";
-import { Reveal } from "@/components/motion";
+import { MaskReveal, Reveal } from "@/components/motion";
 import { articles, getArticle } from "@/lib/site-data";
 
 export const Route = createFileRoute("/actualites/$slug")({
@@ -12,7 +12,10 @@ export const Route = createFileRoute("/actualites/$slug")({
   head: ({ loaderData }) => {
     if (!loaderData) {
       return {
-        meta: [{ title: "Article introuvable — STE MABANIS" }, { name: "robots", content: "noindex" }],
+        meta: [
+          { title: "Article introuvable — STE MABANIS" },
+          { name: "robots", content: "noindex" },
+        ],
       };
     }
     const a = loaderData.article;
@@ -65,12 +68,11 @@ function ArticlePage() {
           <div className="mt-12 border-t border-line pt-8">
             <p className="eyebrow">Un projet en tête ?</p>
             <p className="mt-3 text-sm text-muted-foreground">
-              Nos conseillers répondent à vos questions sans engagement, par téléphone ou en
-              agence.
+              Nos conseillers répondent à vos questions sans engagement, par téléphone ou en agence.
             </p>
             <Link
               to="/contact"
-              className="mt-5 inline-block bg-navy px-6 py-3.5 text-[0.7rem] tracking-[0.18em] text-white uppercase hover:bg-gold hover:text-navy"
+              className="mt-5 inline-block rounded-md bg-navy px-6 py-3.5 text-[0.7rem] tracking-[0.18em] text-white uppercase hover:bg-gold hover:text-navy"
             >
               Nous écrire
             </Link>
@@ -84,7 +86,7 @@ function ArticlePage() {
           {others.map((a, i) => (
             <Reveal key={a.slug} delay={i * 70}>
               <Link to="/actualites/$slug" params={{ slug: a.slug }} className="zoom-frame block">
-                <div className="overflow-hidden">
+                <MaskReveal delay={i * 70 + 60} className="overflow-hidden rounded-md">
                   <img
                     src={a.image}
                     alt={a.title}
@@ -93,7 +95,7 @@ function ArticlePage() {
                     height={960}
                     className="aspect-16/10 w-full object-cover"
                   />
-                </div>
+                </MaskReveal>
                 <h3 className="display mt-4 text-2xl">{a.title}</h3>
               </Link>
             </Reveal>

@@ -5,13 +5,13 @@ import { EASE } from "@/components/motion";
 import { socials } from "@/lib/site-data";
 
 const primary = [
-  { to: "/proprietes", search: undefined, label: "Propriétés" },
-  { to: "/proprietes", search: { transaction: "vente" }, label: "Acheter" },
-  { to: "/vendre", search: undefined, label: "Vendre" },
-  { to: "/proprietes", search: { transaction: "location" }, label: "Louer" },
-  { to: "/services", search: undefined, label: "Investir" },
-  { to: "/agence", search: undefined, label: "À propos" },
-  { to: "/contact", search: undefined, label: "Contact" },
+  { to: "/proprietes", search: undefined, hash: undefined, label: "Propriétés" },
+  { to: "/proprietes", search: { transaction: "vente" }, hash: undefined, label: "Acheter" },
+  { to: "/vendre", search: undefined, hash: undefined, label: "Vendre" },
+  { to: "/proprietes", search: { transaction: "location" }, hash: undefined, label: "Louer" },
+  { to: "/agence", search: undefined, hash: undefined, label: "À propos" },
+  { to: "/agence", search: undefined, hash: "services", label: "Nos services" },
+  { to: "/contact", search: undefined, hash: undefined, label: "Contact" },
 ] as const;
 
 const RISE = {
@@ -19,7 +19,6 @@ const RISE = {
   show: { opacity: 1, y: 0, transition: { duration: 0.8, ease: EASE } },
 };
 
-/** Large navigation on the left, a quiet social column beside it. */
 export function FooterNavigation() {
   return (
     <motion.div
@@ -36,6 +35,7 @@ export function FooterNavigation() {
               <Link
                 to={item.to}
                 search={item.search as never}
+                {...(item.hash ? { hash: item.hash } : {})}
                 className="group inline-flex items-center gap-3 text-[clamp(1.05rem,2.3vw,2.05rem)] leading-[1.3] font-normal tracking-[-0.03em] text-white/45 transition-[color,transform] duration-500 hover:translate-x-2 hover:text-white"
               >
                 {item.label}

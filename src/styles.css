@@ -290,6 +290,15 @@ html.lenis body {
   }
 }
 
+/**
+ * Google's embed has no dark skin, so the tile layer is inverted and its hue
+ * rotated back — the standard recipe. Saturation is pulled down so the result
+ * sits in the site's ink range instead of turning neon.
+ */
+@utility map-dark {
+  filter: invert(0.92) hue-rotate(180deg) saturate(0.5) brightness(0.95) contrast(1.05);
+}
+
 @utility link-underline {
   position: relative;
   &::after {
