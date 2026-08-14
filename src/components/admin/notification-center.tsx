@@ -59,7 +59,8 @@ export function NotificationCenter({ open, onClose }: { open: boolean; onClose: 
         aria-label="Centre de notifications"
         aria-hidden={!open}
         className={cn(
-          "fixed inset-y-0 right-0 z-[90] flex w-full max-w-[26rem] flex-col bg-admin-surface shadow-elegant transition-transform duration-500 ease-[cubic-bezier(0.76,0,0.24,1)] motion-reduce:transition-none",
+          // Only the edge facing the page is rounded; the right edge is flush with the viewport.
+          "fixed inset-y-0 right-0 z-[90] flex w-full max-w-[26rem] flex-col rounded-l-md bg-admin-surface shadow-elegant transition-transform duration-500 ease-[cubic-bezier(0.76,0,0.24,1)] motion-reduce:transition-none",
           open ? "translate-x-0" : "translate-x-full",
         )}
       >
@@ -84,17 +85,17 @@ export function NotificationCenter({ open, onClose }: { open: boolean; onClose: 
             type="button"
             onClick={onClose}
             aria-label="Fermer les notifications"
-            className="grid size-11 shrink-0 place-items-center border border-line text-navy transition-colors hover:border-gold"
+            className="grid size-11 shrink-0 place-items-center rounded-md border border-line text-navy transition-colors hover:border-gold"
           >
             <X className="size-4" />
           </button>
         </header>
 
-        <div className="flex-1 overflow-y-auto">
+        <div className="scrollbar-gold flex-1 overflow-y-auto [--scroll-track:var(--admin-surface)]">
           {isPending ? (
             <div className="space-y-px">
               {Array.from({ length: 5 }, (_, i) => (
-                <div key={i} className="skeleton h-[4.75rem]" />
+                <div key={i} className="skeleton h-[4.75rem] rounded-md" />
               ))}
             </div>
           ) : data.length === 0 ? (
@@ -107,7 +108,7 @@ export function NotificationCenter({ open, onClose }: { open: boolean; onClose: 
                   <>
                     <span
                       className={cn(
-                        "mt-0.5 grid size-9 shrink-0 place-items-center border border-line bg-sand",
+                        "mt-0.5 grid size-9 shrink-0 place-items-center rounded-md border border-line bg-sand",
                         TONES[n.kind],
                       )}
                     >
@@ -119,7 +120,10 @@ export function NotificationCenter({ open, onClose }: { open: boolean; onClose: 
                           {n.title}
                         </span>
                         {!n.read ? (
-                          <span aria-label="Non lue" className="mt-1.5 size-2 shrink-0 bg-gold" />
+                          <span
+                            aria-label="Non lue"
+                            className="mt-1.5 size-2 shrink-0 rounded-full bg-gold"
+                          />
                         ) : null}
                       </span>
                       <span className="mt-1 block text-xs leading-relaxed text-muted-foreground">

@@ -45,7 +45,7 @@ import {
 } from "@/lib/admin/format";
 import { DataTable, type Column } from "@/components/admin/data-table";
 import { RoleBadge, TemperatureBadge } from "@/components/admin/status-badge";
-import { Drawer, Modal, AdminButton, EmptyState, toast } from "@/components/admin/primitives";
+import { Modal, AdminButton, EmptyState, toast } from "@/components/admin/primitives";
 import { useAgentScope } from "@/lib/admin/session";
 import type { Activity, Appointment, Lead } from "@/lib/admin/types";
 import { cn } from "@/lib/utils";
@@ -109,7 +109,7 @@ function ClientsPage() {
       sortValue: (c) => `${c.lastName} ${c.firstName}`,
       cell: (c) => (
         <div className="flex items-center gap-3">
-          <span className="display grid size-10 shrink-0 place-items-center border border-line bg-sand text-sm text-navy">
+          <span className="display grid size-10 shrink-0 place-items-center rounded-md border border-line bg-sand text-sm text-navy">
             {c.firstName[0]}
             {c.lastName[0]}
           </span>
@@ -202,7 +202,7 @@ function ClientsPage() {
             onChange={(e) => setQuery((q) => ({ ...q, search: e.target.value || undefined }))}
             placeholder="Nom, email, téléphone…"
             aria-label="Rechercher un client"
-            className="h-11 w-full border border-line bg-admin-surface pr-3 pl-9 text-sm outline-none placeholder:text-muted-foreground focus:border-gold"
+            className="h-11 w-full rounded-md border border-line bg-admin-surface pr-3 pl-9 text-sm outline-none placeholder:text-muted-foreground focus:border-gold"
           />
         </label>
 
@@ -277,7 +277,7 @@ function ClientsPage() {
         }}
       />
 
-      <ClientDrawer
+      <ClientModal
         client={selected ?? null}
         agents={agents}
         agentName={agentName}
@@ -298,9 +298,9 @@ function ClientsPage() {
   );
 }
 
-/* ------------------------------------------------------------- client drawer */
+/* -------------------------------------------------------------- client modal */
 
-function ClientDrawer({
+function ClientModal({
   client,
   agents,
   agentName,
@@ -326,10 +326,11 @@ function ClientDrawer({
     updateClient.mutate({ id: client.id, patch: { temperature: t } });
 
   return (
-    <Drawer
+    <Modal
       open={Boolean(client)}
       onClose={onClose}
       title={`${client.firstName} ${client.lastName}`}
+      size="lg"
       footer={
         <>
           <AdminButton variant="outline" onClick={() => setTab("edit")}>
@@ -351,7 +352,7 @@ function ClientDrawer({
       ) : (
         <div className="space-y-5">
           <div className="flex items-start gap-4">
-            <span className="display grid size-14 shrink-0 place-items-center border border-line bg-sand text-xl text-navy">
+            <span className="display grid size-14 shrink-0 place-items-center rounded-md border border-line bg-sand text-xl text-navy">
               {client.firstName[0]}
               {client.lastName[0]}
             </span>
@@ -383,7 +384,7 @@ function ClientDrawer({
             ].map(({ icon: Icon, value }) => (
               <div
                 key={value}
-                className="flex items-center gap-2.5 border border-line bg-admin-bg/50 px-3 py-2.5 text-sm text-navy/80"
+                className="flex items-center gap-2.5 rounded-md border border-line bg-admin-bg/50 px-3 py-2.5 text-sm text-navy/80"
               >
                 <Icon className="size-3.5 shrink-0 text-gold" />
                 <span className="min-w-0 truncate">{value}</span>
@@ -414,7 +415,7 @@ function ClientDrawer({
           </section>
 
           {client.notes ? (
-            <p className="border border-line bg-admin-bg/50 px-3.5 py-3 text-sm text-navy/80">
+            <p className="rounded-md border border-line bg-admin-bg/50 px-3.5 py-3 text-sm text-navy/80">
               {client.notes}
             </p>
           ) : null}
@@ -453,7 +454,7 @@ function ClientDrawer({
                 {leads.map((lead) => (
                   <li
                     key={lead.id}
-                    className="flex items-center gap-3 border border-line bg-admin-bg/50 px-3.5 py-3 text-sm"
+                    className="flex items-center gap-3 rounded-md border border-line bg-admin-bg/50 px-3.5 py-3 text-sm"
                   >
                     <Building2 className="size-4 shrink-0 text-gold" />
                     <span className="min-w-0 flex-1 truncate text-navy/80">
@@ -474,7 +475,7 @@ function ClientDrawer({
               {appointments.map((a) => (
                 <li
                   key={a.id}
-                  className="flex items-center gap-3 border border-line bg-admin-bg/50 px-3.5 py-3 text-sm"
+                  className="flex items-center gap-3 rounded-md border border-line bg-admin-bg/50 px-3.5 py-3 text-sm"
                 >
                   <CalendarDays className="size-4 shrink-0 text-gold" />
                   <span className="min-w-0 flex-1 truncate text-navy/80">{a.title}</span>
@@ -495,7 +496,7 @@ function ClientDrawer({
           )}
         </div>
       )}
-    </Drawer>
+    </Modal>
   );
 }
 
@@ -514,7 +515,7 @@ export function ActivityTimeline({ activities }: { activities: Activity[] }) {
         const Icon = ACTIVITY_ICONS[a.kind as keyof typeof ACTIVITY_ICONS] ?? StickyNote;
         return (
           <li key={a.id} className="relative">
-            <span className="absolute top-0.5 -left-[1.62rem] grid size-6 place-items-center border border-line bg-admin-surface text-gold">
+            <span className="absolute top-0.5 -left-[1.62rem] grid size-6 place-items-center rounded-md border border-line bg-admin-surface text-gold">
               <Icon className="size-3" />
             </span>
             <p className="text-sm font-medium text-navy">{a.subject}</p>
@@ -643,7 +644,7 @@ function ClientFormModal({
         onChange={(e) => onChange(e.target.value)}
         required={opts.required}
         placeholder={opts.placeholder}
-        className="h-11 border border-line bg-admin-bg/40 px-3 text-sm outline-none focus:border-gold"
+        className="h-11 rounded-md border border-line bg-admin-bg/40 px-3 text-sm outline-none focus:border-gold"
       />
     </label>
   );
@@ -690,7 +691,7 @@ function ClientFormModal({
           <select
             value={form.source}
             onChange={(e) => set("source", e.target.value)}
-            className="h-11 border border-line bg-admin-bg/40 px-3 text-sm outline-none focus:border-gold"
+            className="h-11 rounded-md border border-line bg-admin-bg/40 px-3 text-sm outline-none focus:border-gold"
           >
             {Object.entries(SOURCE_LABELS).map(([key, value]) => (
               <option key={key} value={key}>
@@ -707,7 +708,7 @@ function ClientFormModal({
           <select
             value={form.temperature}
             onChange={(e) => set("temperature", e.target.value as LeadTemperature)}
-            className="h-11 border border-line bg-admin-bg/40 px-3 text-sm outline-none focus:border-gold"
+            className="h-11 rounded-md border border-line bg-admin-bg/40 px-3 text-sm outline-none focus:border-gold"
           >
             {TEMPS.map((t) => (
               <option key={t} value={t}>
@@ -724,7 +725,7 @@ function ClientFormModal({
           <select
             value={form.agentId}
             onChange={(e) => set("agentId", e.target.value)}
-            className="h-11 border border-line bg-admin-bg/40 px-3 text-sm outline-none focus:border-gold"
+            className="h-11 rounded-md border border-line bg-admin-bg/40 px-3 text-sm outline-none focus:border-gold"
           >
             {agents.map((a) => (
               <option key={a.id} value={a.id}>
@@ -770,7 +771,7 @@ function ClientFormModal({
             onChange={(e) => set("notes", e.target.value)}
             rows={3}
             placeholder="Financement, contraintes, préférences…"
-            className="border border-line bg-admin-bg/40 px-3 py-2.5 text-sm outline-none focus:border-gold"
+            className="rounded-md border border-line bg-admin-bg/40 px-3 py-2.5 text-sm outline-none focus:border-gold"
           />
         </label>
       </div>

@@ -14,7 +14,7 @@ import {
 } from "@/lib/admin/queries";
 import { TRANSACTION_STAGES, type Transaction, type TransactionStage } from "@/lib/admin/types";
 import { formatDate, formatMoney, label, TRANSACTION_STAGE_LABELS } from "@/lib/admin/format";
-import { StatCard, Drawer, Modal, AdminButton, EmptyState } from "@/components/admin/primitives";
+import { StatCard, Modal, AdminButton, EmptyState } from "@/components/admin/primitives";
 import { useCan } from "@/lib/admin/session";
 import { cn } from "@/lib/utils";
 
@@ -126,7 +126,7 @@ function TransactionsPage() {
                           key={t.id}
                           type="button"
                           onClick={() => setSelectedId(t.id)}
-                          className="group border border-line bg-admin-surface p-3.5 text-left transition-colors hover:border-gold/60"
+                          className="group rounded-md border border-line bg-admin-surface p-3.5 text-left transition-colors hover:border-gold/60"
                         >
                           <p className="text-[0.6rem] tracking-[0.14em] text-muted-foreground uppercase">
                             {t.reference}
@@ -151,7 +151,7 @@ function TransactionsPage() {
         </div>
       </div>
 
-      <TransactionDrawer
+      <TransactionModal
         transaction={selected}
         property={selected ? (propertiesById.get(selected.propertyId) ?? null) : null}
         buyer={selected ? (clientsById.get(selected.buyerClientId) ?? null) : null}
@@ -176,7 +176,7 @@ function TransactionsPage() {
 
 /* --------------------------------------------------------- transaction drawer */
 
-function TransactionDrawer({
+function TransactionModal({
   transaction,
   property,
   buyer,
@@ -212,7 +212,7 @@ function TransactionDrawer({
   };
 
   return (
-    <Drawer
+    <Modal
       open
       onClose={onClose}
       title={transaction.reference}
@@ -242,9 +242,9 @@ function TransactionDrawer({
             </span>
             <span className="tabular-nums">{progress} %</span>
           </div>
-          <div className="mt-2 h-1.5 bg-line">
+          <div className="mt-2 h-1.5 rounded-sm bg-line">
             <div
-              className="h-full bg-gold transition-[width] duration-500"
+              className="h-full rounded-sm bg-gold transition-[width] duration-500"
               style={{ width: `${progress}%` }}
             />
           </div>
@@ -313,7 +313,7 @@ function TransactionDrawer({
                 <li
                   key={p.id}
                   className={cn(
-                    "flex items-center gap-3 border border-line px-3 py-2.5",
+                    "flex items-center gap-3 rounded-md border border-line px-3 py-2.5",
                     paid && "bg-sand/60 opacity-80",
                   )}
                 >
@@ -340,7 +340,7 @@ function TransactionDrawer({
                       onClick={() =>
                         markPaid.mutate({ transactionId: transaction.id, paymentId: p.id })
                       }
-                      className="border border-line px-2.5 py-1.5 text-[0.6rem] tracking-[0.12em] text-navy uppercase transition-colors hover:border-gold"
+                      className="rounded-md border border-line px-2.5 py-1.5 text-[0.6rem] tracking-[0.12em] text-navy uppercase transition-colors hover:border-gold"
                     >
                       Encaisser
                     </button>
@@ -353,7 +353,7 @@ function TransactionDrawer({
 
         {addingPayment ? (
           <form
-            className="space-y-3 border border-line p-4"
+            className="space-y-3 rounded-md border border-line p-4"
             onSubmit={(e) => {
               e.preventDefault();
               const amt = Number(amount);
@@ -375,7 +375,7 @@ function TransactionDrawer({
               <input
                 value={labelPay}
                 onChange={(e) => setLabelPay(e.target.value)}
-                className="h-11 border border-line bg-admin-bg/40 px-3 text-sm outline-none focus:border-gold"
+                className="h-11 rounded-md border border-line bg-admin-bg/40 px-3 text-sm outline-none focus:border-gold"
               />
             </label>
             <div className="grid grid-cols-2 gap-3">
@@ -385,7 +385,7 @@ function TransactionDrawer({
                   type="number"
                   value={amount}
                   onChange={(e) => setAmount(e.target.value)}
-                  className="h-11 border border-line bg-admin-bg/40 px-3 text-sm outline-none focus:border-gold"
+                  className="h-11 rounded-md border border-line bg-admin-bg/40 px-3 text-sm outline-none focus:border-gold"
                 />
               </label>
               <label className="flex flex-col gap-1.5">
@@ -394,7 +394,7 @@ function TransactionDrawer({
                   type="date"
                   value={dueAt}
                   onChange={(e) => setDueAt(e.target.value)}
-                  className="h-11 border border-line bg-admin-bg/40 px-3 text-sm outline-none focus:border-gold"
+                  className="h-11 rounded-md border border-line bg-admin-bg/40 px-3 text-sm outline-none focus:border-gold"
                 />
               </label>
             </div>
@@ -406,7 +406,7 @@ function TransactionDrawer({
           </AdminButton>
         )}
       </div>
-    </Drawer>
+    </Modal>
   );
 }
 
@@ -446,7 +446,7 @@ function TransactionFormModal({
   };
 
   const fieldCls =
-    "h-11 border border-line bg-admin-bg/40 px-3 text-sm outline-none focus:border-gold";
+    "h-11 rounded-md border border-line bg-admin-bg/40 px-3 text-sm outline-none focus:border-gold";
 
   return (
     <Modal

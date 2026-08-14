@@ -89,7 +89,7 @@ function MatchingPage() {
             Envoyez les meilleurs biens au client en un clic.
           </p>
         </div>
-        <div className="flex border border-line">
+        <div className="flex rounded-md border border-line">
           {(
             [
               ["client", "Par client"],
@@ -209,7 +209,7 @@ function ClientTab({
               value={search}
               onChange={(e) => onSearch(e.target.value)}
               placeholder="Nom, e-mail, ville…"
-              className="h-10 w-full border border-line bg-admin-bg/40 pl-9 pr-3 text-sm outline-none focus:border-gold"
+              className="h-10 w-full rounded-md border border-line bg-admin-bg/40 pl-9 pr-3 text-sm outline-none focus:border-gold"
             />
           </label>
         </header>
@@ -230,7 +230,7 @@ function ClientTab({
                     selectedId === c.id ? "bg-gold/10" : "hover:bg-sand/60",
                   )}
                 >
-                  <span className="display grid size-9 shrink-0 place-items-center border border-line bg-admin-surface text-xs text-navy">
+                  <span className="display grid size-9 shrink-0 place-items-center rounded-md border border-line bg-admin-surface text-xs text-navy">
                     {c.firstName[0] ?? ""}
                     {c.lastName[0] ?? ""}
                   </span>
@@ -290,7 +290,7 @@ function ClientTab({
                 if (!property) return null;
                 return (
                   <li key={m.propertyId}>
-                    <label className="flex cursor-pointer items-start gap-4 border border-line bg-admin-surface p-4 transition-colors hover:border-gold/60">
+                    <label className="flex cursor-pointer items-start gap-4 rounded-md border border-line bg-admin-surface p-4 transition-colors hover:border-gold/60">
                       <input
                         type="checkbox"
                         checked={picked.has(m.propertyId)}
@@ -308,8 +308,11 @@ function ClientTab({
                           </span>
                         </div>
                         <div className="mt-2.5 flex items-center gap-3">
-                          <div className="h-1.5 flex-1 bg-line">
-                            <div className="h-full bg-gold" style={{ width: `${m.score}%` }} />
+                          <div className="h-1.5 flex-1 rounded-sm bg-line">
+                            <div
+                              className="h-full rounded-sm bg-gold"
+                              style={{ width: `${m.score}%` }}
+                            />
                           </div>
                           <span className="text-sm font-medium text-gold tabular-nums">
                             {m.score} %
@@ -319,7 +322,7 @@ function ClientTab({
                           {m.reasons.map((r) => (
                             <span
                               key={r}
-                              className="border border-line px-2 py-0.5 text-[0.58rem] tracking-[0.1em] text-muted-foreground uppercase"
+                              className="rounded-md border border-line px-2 py-0.5 text-[0.58rem] tracking-[0.1em] text-muted-foreground uppercase"
                             >
                               {r}
                             </span>
@@ -413,8 +416,8 @@ function PropertyTab({
               if (!client) return null;
               return (
                 <li key={m.clientId}>
-                  <div className="flex items-start gap-4 border border-line bg-admin-surface p-4">
-                    <span className="display grid size-10 shrink-0 place-items-center border border-line bg-sand text-xs text-navy">
+                  <div className="flex items-start gap-4 rounded-md border border-line bg-admin-surface p-4">
+                    <span className="display grid size-10 shrink-0 place-items-center rounded-md border border-line bg-sand text-xs text-navy">
                       {client.firstName[0] ?? ""}
                       {client.lastName[0] ?? ""}
                     </span>
@@ -431,8 +434,11 @@ function PropertyTab({
                         </span>
                       </div>
                       <div className="mt-2.5 flex items-center gap-3">
-                        <div className="h-1.5 flex-1 bg-line">
-                          <div className="h-full bg-gold" style={{ width: `${m.score}%` }} />
+                        <div className="h-1.5 flex-1 rounded-sm bg-line">
+                          <div
+                            className="h-full rounded-sm bg-gold"
+                            style={{ width: `${m.score}%` }}
+                          />
                         </div>
                         <span className="text-sm font-medium text-gold tabular-nums">
                           {m.score} %
@@ -442,14 +448,14 @@ function PropertyTab({
                         {m.reasons.map((r) => (
                           <span
                             key={r}
-                            className="border border-line px-2 py-0.5 text-[0.58rem] tracking-[0.1em] text-muted-foreground uppercase"
+                            className="rounded-md border border-line px-2 py-0.5 text-[0.58rem] tracking-[0.1em] text-muted-foreground uppercase"
                           >
                             {r}
                           </span>
                         ))}
                       </div>
                     </div>
-                    <span className="hidden shrink-0 items-center gap-1 border border-line px-2.5 py-1 text-[0.58rem] tracking-[0.12em] text-muted-foreground uppercase sm:inline-flex">
+                    <span className="hidden shrink-0 items-center gap-1 rounded-md border border-line px-2.5 py-1 text-[0.58rem] tracking-[0.12em] text-muted-foreground uppercase sm:inline-flex">
                       <CheckCheck className="size-3.5 text-gold" /> {m.reasons.length} critères
                     </span>
                   </div>

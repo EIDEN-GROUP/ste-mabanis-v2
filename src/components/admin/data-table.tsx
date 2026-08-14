@@ -175,7 +175,7 @@ export function DataTable<T>({
                   : undefined
               }
               className={cn(
-                "stagger-in border border-line bg-admin-surface p-4",
+                "stagger-in rounded-md border border-line bg-admin-surface p-4",
                 onRowClick && "cursor-pointer transition-colors active:bg-sand",
               )}
             >

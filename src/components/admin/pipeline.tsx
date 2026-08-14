@@ -57,7 +57,7 @@ export function Pipeline({
               setOver(null);
             }}
             className={cn(
-              "flex w-[17rem] shrink-0 snap-start flex-col border bg-admin-bg/60 transition-colors duration-300 sm:w-[19rem] lg:w-auto lg:flex-1 lg:min-w-[15rem]",
+              "flex w-[17rem] shrink-0 snap-start flex-col rounded-md border bg-admin-bg/60 transition-colors duration-300 sm:w-[19rem] lg:w-auto lg:flex-1 lg:min-w-[15rem]",
               isOver ? "border-gold bg-gold/5" : "border-line",
             )}
           >
@@ -65,7 +65,7 @@ export function Pipeline({
               <h3 className="min-w-0 flex-1 truncate text-[0.65rem] tracking-[0.16em] text-navy uppercase">
                 {label(STAGE_LABELS, stage)}
               </h3>
-              <span className="shrink-0 bg-sand px-1.5 py-0.5 text-[0.62rem] font-medium text-navy tabular-nums">
+              <span className="shrink-0 rounded-md bg-sand px-1.5 py-0.5 text-[0.62rem] font-medium text-navy tabular-nums">
                 {items.length}
               </span>
             </header>
@@ -98,7 +98,7 @@ export function Pipeline({
                         aria-label="Déplacer vers une autre étape"
                         value={stage}
                         onChange={(e) => onMove(lead.id, e.target.value as PipelineStage)}
-                        className="min-h-9 w-full border border-line bg-admin-surface px-2 py-1 text-[0.68rem] text-muted-foreground outline-none focus:border-gold"
+                        className="min-h-9 w-full rounded-md border border-line bg-admin-surface px-2 py-1 text-[0.68rem] text-muted-foreground outline-none focus:border-gold"
                       >
                         {PIPELINE_STAGES.map((s) => (
                           <option key={s} value={s}>

@@ -56,15 +56,15 @@ function PortailClientPage() {
           {MODULES.map((m) => (
             <div
               key={m.title}
-              className="flex items-start gap-4 border border-line bg-admin-bg/40 p-5"
+              className="flex items-start gap-4 rounded-md border border-line bg-admin-bg/40 p-5"
             >
-              <span className="grid size-10 shrink-0 place-items-center border border-line bg-sand text-gold">
+              <span className="grid size-10 shrink-0 place-items-center rounded-md border border-line bg-sand text-gold">
                 <m.icon className="size-4.5" />
               </span>
               <div className="min-w-0">
                 <div className="flex items-center gap-2">
                   <h3 className="text-sm font-medium text-navy">{m.title}</h3>
-                  <span className="border border-gold/50 px-2 py-0.5 text-[0.55rem] tracking-[0.14em] text-gold uppercase">
+                  <span className="rounded-md border border-gold/50 px-2 py-0.5 text-[0.55rem] tracking-[0.14em] text-gold uppercase">
                     {m.status}
                   </span>
                 </div>
@@ -79,7 +79,7 @@ function PortailClientPage() {
         <header className="border-b border-line px-5 py-4">
           <h2 className="display text-xl">Prochaines étapes</h2>
         </header>
-        <ul className="divide-y divide-line text-sm">
+        <ul className="divide-y divide-line overflow-hidden text-sm">
           <li className="flex items-center gap-3 px-5 py-3.5">
             <span className="size-1.5 shrink-0 rounded-full bg-gold" />
             <span className="text-navy">Table clients enrichi</span>
@@ -115,7 +115,7 @@ function PortailClientPage() {
           </p>
           <a
             href="/admin/clients"
-            className="inline-flex shrink-0 items-center gap-1.5 border border-line px-3 py-2 text-xs tracking-[0.12em] text-navy uppercase transition-colors hover:border-gold hover:text-gold"
+            className="inline-flex shrink-0 items-center gap-1.5 rounded-md border border-line px-3 py-2 text-xs tracking-[0.12em] text-navy uppercase transition-colors hover:border-gold hover:text-gold"
           >
             <ExternalLink className="size-3.5" /> Voir les clients
           </a>

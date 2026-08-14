@@ -62,7 +62,13 @@ export function Calendar({
   return (
     // min-w-0: as a grid/flex child it must be allowed to shrink below the
     // min-content width of its header row.
-    <div className={cn("min-w-0 border border-line bg-admin-surface", className)}>
+    // overflow-hidden keeps the day grid's cell borders inside the rounded corner.
+    <div
+      className={cn(
+        "min-w-0 overflow-hidden rounded-md border border-line bg-admin-surface",
+        className,
+      )}
+    >
       <header className="flex items-center gap-3 border-b border-line px-4 py-3">
         <h3 className="display min-w-0 flex-1 truncate text-lg capitalize">
           {cursor.toLocaleDateString("fr-FR", { month: "long", year: "numeric" })}
@@ -71,7 +77,7 @@ export function Calendar({
           type="button"
           onClick={() => shift(-1)}
           aria-label="Mois précédent"
-          className="grid size-9 place-items-center border border-line text-navy transition-colors hover:border-gold"
+          className="grid size-9 place-items-center rounded-md border border-line text-navy transition-colors hover:border-gold"
         >
           <ChevronLeft className="size-4" />
         </button>
@@ -79,7 +85,7 @@ export function Calendar({
           type="button"
           onClick={() => shift(1)}
           aria-label="Mois suivant"
-          className="grid size-9 place-items-center border border-line text-navy transition-colors hover:border-gold"
+          className="grid size-9 place-items-center rounded-md border border-line text-navy transition-colors hover:border-gold"
         >
           <ChevronRight className="size-4" />
         </button>
@@ -122,7 +128,7 @@ export function Calendar({
             >
               <span
                 className={cn(
-                  "grid size-7 place-items-center text-sm tabular-nums",
+                  "grid size-7 place-items-center rounded-md text-sm tabular-nums",
                   isToday && "bg-navy text-white",
                   isSelected && !isToday && "text-navy",
                 )}
@@ -153,7 +159,7 @@ export function Calendar({
               <li
                 key={a.id}
                 style={{ ["--i" as string]: i }}
-                className="stagger-in flex items-center gap-3 border border-line px-3 py-2.5"
+                className="stagger-in flex items-center gap-3 rounded-md border border-line px-3 py-2.5"
               >
                 <span className="text-xs font-medium text-navy tabular-nums">
                   {formatTime(a.startsAt)}

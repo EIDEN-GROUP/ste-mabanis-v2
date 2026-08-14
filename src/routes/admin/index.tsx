@@ -179,7 +179,7 @@ function DashboardPage() {
 
       {/* ------------------------------------------ priorities + pipeline */}
       <section className="grid gap-4 xl:grid-cols-3">
-        <Panel className="xl:col-span-1">
+        <Panel className="overflow-hidden xl:col-span-1">
           <PanelHeader eyebrow="À traiter" title="Priorités du jour" />
           {prioritiesPending ? (
             <LoadingState rows={4} className="p-4" />
@@ -198,7 +198,7 @@ function DashboardPage() {
                     >
                       <span
                         className={cn(
-                          "mt-0.5 grid size-8 shrink-0 place-items-center border",
+                          "mt-0.5 grid size-8 shrink-0 place-items-center rounded-md border",
                           u.tone,
                         )}
                       >

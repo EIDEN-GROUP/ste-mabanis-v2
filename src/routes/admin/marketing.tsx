@@ -123,7 +123,7 @@ function MarketingPage() {
         />
       </div>
 
-      <Panel>
+      <Panel className="overflow-hidden">
         <header className="flex flex-wrap items-center justify-between gap-3 border-b border-line px-5 py-4">
           <div>
             <h2 className="display text-xl">Biens à la une</h2>
@@ -166,7 +166,7 @@ function MarketingPage() {
                         {formatMoney(p.price, true)}
                       </td>
                       <td className="px-5 py-3">
-                        <span className="border border-line px-2 py-0.5 text-[0.58rem] tracking-[0.12em] text-muted-foreground uppercase">
+                        <span className="rounded-md border border-line px-2 py-0.5 text-[0.58rem] tracking-[0.12em] text-muted-foreground uppercase">
                           {p.status.replace(/_/g, " ")}
                         </span>
                       </td>
@@ -220,7 +220,7 @@ function MarketingPage() {
                 return (
                   <li key={c.id} className="px-5 py-4">
                     <div className="flex items-start gap-3">
-                      <span className="grid size-9 shrink-0 place-items-center border border-line bg-sand text-gold">
+                      <span className="grid size-9 shrink-0 place-items-center rounded-md border border-line bg-sand text-gold">
                         <Icon className="size-4" />
                       </span>
                       <div className="min-w-0 flex-1">
@@ -270,7 +270,7 @@ function MarketingPage() {
                             type="button"
                             onClick={() => send(c)}
                             aria-label={`Envoyer ${c.name}`}
-                            className="grid size-9 place-items-center border border-line text-navy transition-colors hover:border-gold"
+                            className="grid size-9 place-items-center rounded-md border border-line text-navy transition-colors hover:border-gold"
                           >
                             <Send className="size-4" />
                           </button>
@@ -279,7 +279,7 @@ function MarketingPage() {
                           type="button"
                           onClick={() => remove(c)}
                           aria-label={`Supprimer ${c.name}`}
-                          className="grid size-9 place-items-center border border-line text-muted-foreground transition-colors hover:border-negative hover:text-negative"
+                          className="grid size-9 place-items-center rounded-md border border-line text-muted-foreground transition-colors hover:border-negative hover:text-negative"
                         >
                           <Trash2 className="size-4" />
                         </button>
@@ -396,7 +396,7 @@ function CampaignModal({ onClose }: { onClose: () => void }) {
   };
 
   const fieldCls =
-    "h-11 border border-line bg-admin-bg/40 px-3 text-sm outline-none focus:border-gold";
+    "h-11 rounded-md border border-line bg-admin-bg/40 px-3 text-sm outline-none focus:border-gold";
 
   return (
     <Modal

@@ -106,7 +106,7 @@ function DocumentsPage() {
               type="button"
               onClick={() => setCategory(c)}
               className={cn(
-                "border px-3 py-1.5 text-[0.62rem] tracking-[0.12em] uppercase transition-colors",
+                "rounded-md border px-3 py-1.5 text-[0.62rem] tracking-[0.12em] uppercase transition-colors",
                 category === c
                   ? "border-gold bg-gold/10 text-gold"
                   : "border-line text-muted-foreground hover:border-gold hover:text-navy",
@@ -123,7 +123,7 @@ function DocumentsPage() {
               value={search}
               onChange={(e) => setSearch(e.target.value)}
               placeholder="Rechercher…"
-              className="h-10 w-44 border border-line bg-admin-surface pl-9 pr-3 text-sm outline-none focus:border-gold sm:w-56"
+              className="h-10 w-44 rounded-md border border-line bg-admin-surface pl-9 pr-3 text-sm outline-none focus:border-gold sm:w-56"
             />
           </label>
           {canManage ? (
@@ -147,7 +147,7 @@ function DocumentsPage() {
           }
         />
       ) : (
-        <ul className="divide-y divide-line border border-line bg-admin-surface">
+        <ul className="divide-y divide-line overflow-hidden rounded-md border border-line bg-admin-surface">
           {filtered.map((doc, i) => {
             const uploader = agentsById.get(doc.uploadedById);
             return (
@@ -159,7 +159,7 @@ function DocumentsPage() {
                 <button
                   type="button"
                   onClick={() => setPreview(doc)}
-                  className="grid size-10 shrink-0 place-items-center border border-line bg-sand text-gold"
+                  className="grid size-10 shrink-0 place-items-center rounded-md border border-line bg-sand text-gold"
                   aria-label={`Aperçu de ${doc.name}`}
                 >
                   <FileText className="size-4" />
@@ -173,7 +173,7 @@ function DocumentsPage() {
                     {doc.name}
                   </button>
                   <p className="mt-0.5 flex flex-wrap items-center gap-x-2 text-xs text-muted-foreground">
-                    <span className="border border-line px-1.5 py-0.5 text-[0.55rem] tracking-[0.12em] uppercase">
+                    <span className="rounded-md border border-line px-1.5 py-0.5 text-[0.55rem] tracking-[0.12em] uppercase">
                       {label(DOCUMENT_LABELS, doc.category)}
                     </span>
                     <span className="tabular-nums">{formatBytes(doc.sizeBytes)}</span>
@@ -194,7 +194,7 @@ function DocumentsPage() {
                   target="_blank"
                   rel="noreferrer"
                   aria-label={`Télécharger ${doc.name}`}
-                  className="grid size-9 shrink-0 place-items-center border border-line text-navy transition-colors hover:border-gold"
+                  className="grid size-9 shrink-0 place-items-center rounded-md border border-line text-navy transition-colors hover:border-gold"
                 >
                   <Download className="size-4" />
                 </a>
@@ -233,7 +233,7 @@ function DeleteDocumentButton({ doc }: { doc: StoredDocument }) {
             onSuccess: () => setConfirming(false),
           })
         }
-        className="border border-negative/50 px-2.5 py-2 text-[0.6rem] tracking-[0.12em] text-negative uppercase transition-colors hover:bg-negative hover:text-white"
+        className="rounded-md border border-negative/50 px-2.5 py-2 text-[0.6rem] tracking-[0.12em] text-negative uppercase transition-colors hover:bg-negative hover:text-white"
       >
         Confirmer
       </button>
@@ -245,7 +245,7 @@ function DeleteDocumentButton({ doc }: { doc: StoredDocument }) {
       type="button"
       onClick={() => setConfirming(true)}
       aria-label={`Supprimer ${doc.name}`}
-      className="grid size-9 shrink-0 place-items-center border border-line text-muted-foreground transition-colors hover:border-negative hover:text-negative"
+      className="grid size-9 shrink-0 place-items-center rounded-md border border-line text-muted-foreground transition-colors hover:border-negative hover:text-negative"
     >
       <Trash2 className="size-4" />
     </button>
@@ -287,12 +287,12 @@ function DocumentPreviewModal({
           </div>
         </dl>
 
-        <div className="flex min-h-[420px] items-center justify-center border border-line bg-sand/50 p-6">
+        <div className="flex min-h-[420px] items-center justify-center rounded-md border border-line bg-sand/50 p-6">
           {doc.mimeType === "application/pdf" && doc.url !== "#" ? (
             <iframe title={doc.name} src={doc.url} className="h-[420px] w-full" />
           ) : (
             <div className="flex flex-col items-center gap-3 text-center">
-              <span className="grid size-14 place-items-center border border-line bg-admin-surface text-gold">
+              <span className="grid size-14 place-items-center rounded-md border border-line bg-admin-surface text-gold">
                 <FileText className="size-6" />
               </span>
               <p className="text-sm text-muted-foreground">
@@ -402,7 +402,7 @@ function UploadModal({
           <select
             value={category}
             onChange={(e) => setCategory(e.target.value as DocumentCategory)}
-            className="h-11 border border-line bg-admin-bg/40 px-3 text-sm outline-none focus:border-gold"
+            className="h-11 rounded-md border border-line bg-admin-bg/40 px-3 text-sm outline-none focus:border-gold"
           >
             {CATEGORIES.map((c) => (
               <option key={c} value={c}>
@@ -418,7 +418,7 @@ function UploadModal({
             <select
               value={propertyId}
               onChange={(e) => setPropertyId(e.target.value)}
-              className="h-11 border border-line bg-admin-bg/40 px-3 text-sm outline-none focus:border-gold"
+              className="h-11 rounded-md border border-line bg-admin-bg/40 px-3 text-sm outline-none focus:border-gold"
             >
               <option value="">—</option>
               {properties.map((p) => (
@@ -433,7 +433,7 @@ function UploadModal({
             <select
               value={clientId}
               onChange={(e) => setClientId(e.target.value)}
-              className="h-11 border border-line bg-admin-bg/40 px-3 text-sm outline-none focus:border-gold"
+              className="h-11 rounded-md border border-line bg-admin-bg/40 px-3 text-sm outline-none focus:border-gold"
             >
               <option value="">—</option>
               {clients.map((c) => (

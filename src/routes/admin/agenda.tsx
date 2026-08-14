@@ -16,7 +16,7 @@ import type { Appointment, AppointmentKind, AppointmentStatus } from "@/lib/admi
 import { APPOINTMENT_LABELS, formatDate, formatTime, label } from "@/lib/admin/format";
 import { SEED_NOW } from "@/lib/admin/seed";
 import { Calendar } from "@/components/admin/calendar";
-import { StatCard, Drawer, Modal, AdminButton } from "@/components/admin/primitives";
+import { StatCard, Modal, AdminButton } from "@/components/admin/primitives";
 import { useAgentScope } from "@/lib/admin/session";
 import { cn } from "@/lib/utils";
 
@@ -149,7 +149,7 @@ function AgendaPage() {
       </div>
 
       <div className="flex flex-wrap items-center justify-between gap-3">
-        <div className="flex border border-line">
+        <div className="flex overflow-hidden rounded-md border border-line">
           {(["jour", "semaine", "mois"] as const).map((v) => (
             <button
               key={v}
@@ -175,7 +175,7 @@ function AgendaPage() {
         <Timeline view={view} appointments={visibleAppointments} onSelect={setSelectedId} />
       )}
 
-      <AppointmentDrawer
+      <AppointmentModal
         appointment={selected}
         client={selected ? (clientsById.get(selected.clientId ?? "") ?? null) : null}
         property={selected ? (propertiesById.get(selected.propertyId ?? "") ?? null) : null}
@@ -216,7 +216,7 @@ function Timeline({
   const hours = Array.from({ length: DAY_SPAN_MIN / 60 }, (_, i) => DAY_START_MIN / 60 + i);
 
   return (
-    <div className="border border-line bg-admin-surface">
+    <div className="overflow-hidden rounded-md border border-line bg-admin-surface">
       <div
         className={cn("grid border-b border-line", view === "jour" ? "grid-cols-1" : "grid-cols-7")}
       >
@@ -275,7 +275,7 @@ function Timeline({
                         type="button"
                         onClick={() => onSelect(a.id)}
                         className={cn(
-                          "absolute inset-x-1 flex flex-col gap-0.5 overflow-hidden border-l-2 bg-sand px-2 py-1 text-left transition-colors hover:border-gold hover:bg-gold/10",
+                          "absolute inset-x-1 flex flex-col gap-0.5 overflow-hidden rounded-md border-l-2 bg-sand px-2 py-1 text-left transition-colors hover:border-gold hover:bg-gold/10",
                           cancelled && "opacity-60",
                         )}
                         style={{ top: `${top}%`, height: `max(${height}%, 1.75rem)` }}
@@ -298,7 +298,7 @@ function Timeline({
 
 /* --------------------------------------------------------- appointment drawer */
 
-function AppointmentDrawer({
+function AppointmentModal({
   appointment,
   client,
   property,
@@ -325,7 +325,7 @@ function AppointmentDrawer({
   const actions = ["confirmed", "done", "cancelled", "no_show"] as const;
 
   return (
-    <Drawer
+    <Modal
       open
       onClose={onClose}
       title={appointment.title}
@@ -445,7 +445,7 @@ function AppointmentDrawer({
         </div>
 
         {appointment.report ? (
-          <div className="border border-line bg-sand/60 p-4">
+          <div className="rounded-md border border-line bg-sand/60 p-4">
             <p className="eyebrow">Débrief de visite</p>
             <div className="mt-2 flex items-center gap-2">
               <span className="flex gap-1">
@@ -472,7 +472,7 @@ function AppointmentDrawer({
 
         {reporting ? (
           <form
-            className="space-y-4 border border-line p-4"
+            className="space-y-4 rounded-md border border-line p-4"
             onSubmit={(e) => {
               e.preventDefault();
               saveReport.mutate(
@@ -517,7 +517,7 @@ function AppointmentDrawer({
                 value={outcome}
                 onChange={(e) => setOutcome(e.target.value)}
                 rows={3}
-                className="border border-line bg-admin-bg/40 px-3 py-2 text-sm outline-none focus:border-gold"
+                className="rounded-md border border-line bg-admin-bg/40 px-3 py-2 text-sm outline-none focus:border-gold"
               />
             </label>
             <label className="flex flex-col gap-1.5">
@@ -525,7 +525,7 @@ function AppointmentDrawer({
               <input
                 value={nextAction}
                 onChange={(e) => setNextAction(e.target.value)}
-                className="h-11 border border-line bg-admin-bg/40 px-3 text-sm outline-none focus:border-gold"
+                className="h-11 rounded-md border border-line bg-admin-bg/40 px-3 text-sm outline-none focus:border-gold"
               />
             </label>
             <AdminButton type="submit">Enregistrer le débrief</AdminButton>
@@ -542,7 +542,7 @@ function AppointmentDrawer({
           onClose={() => setEditing(false)}
         />
       ) : null}
-    </Drawer>
+    </Modal>
   );
 }
 
@@ -613,7 +613,7 @@ function AppointmentFormModal({
   };
 
   const fieldCls =
-    "h-11 border border-line bg-admin-bg/40 px-3 text-sm outline-none focus:border-gold";
+    "h-11 rounded-md border border-line bg-admin-bg/40 px-3 text-sm outline-none focus:border-gold";
 
   return (
     <Modal

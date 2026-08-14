@@ -22,6 +22,7 @@ import {
   Panel,
   PanelHeader,
   StatCard,
+  Switch,
   toast,
 } from "@/components/admin/primitives";
 import {
@@ -73,6 +74,7 @@ function DesignSystemPage() {
   const [filters, setFilters] = useState<PQ>({});
   const [modalOpen, setModalOpen] = useState(false);
   const [drawerOpen, setDrawerOpen] = useState(false);
+  const [switchOn, setSwitchOn] = useState(true);
 
   const { data: properties = [], isPending: propsPending } = useQuery(propertiesQuery(filters));
   const { data: clients = [] } = useQuery(clientsQuery());
@@ -136,8 +138,8 @@ function DesignSystemPage() {
         <h2 className="display mt-2 text-3xl">Bibliothèque de composants</h2>
         <p className="mt-3 max-w-2xl text-sm leading-relaxed text-muted-foreground">
           Chaque composant utilise les tokens sémantiques de{" "}
-          <code className="bg-sand px-1.5 py-0.5 text-xs">src/styles.css</code> — aucune couleur
-          n'est codée en dur. Tous sont responsives de 375 à 1440 px.
+          <code className="rounded-sm bg-sand px-1.5 py-0.5 text-xs">src/styles.css</code> — aucune
+          couleur n'est codée en dur. Tous sont responsives de 375 à 1440 px.
         </p>
       </Panel>
 
@@ -191,7 +193,10 @@ function DesignSystemPage() {
         </div>
       </Block>
 
-      <Block title="Boutons, Modal, Drawer, Toast">
+      <Block
+        title="Boutons, Modal, Drawer, Switch, Toast"
+        note="Le drawer reste dans la bibliothèque, mais seul le centre de notifications l'utilise : les fiches détaillées passent par la modale."
+      >
         <div className="flex flex-wrap gap-3">
           <AdminButton onClick={() => setModalOpen(true)}>
             <Plus className="size-3.5" />
@@ -210,9 +215,16 @@ function DesignSystemPage() {
             Toast erreur
           </AdminButton>
         </div>
+
+        <div className="mt-5 flex items-center gap-3 border-t border-line pt-5">
+          <Switch checked={switchOn} onChange={setSwitchOn} label="Exemple d'interrupteur" />
+          <span className="text-sm text-muted-foreground">
+            Switch — {switchOn ? "activé" : "désactivé"}
+          </span>
+        </div>
       </Block>
 
-      <Block title="PropertyFilters" note="Inline à partir de lg, en drawer en dessous.">
+      <Block title="PropertyFilters" note="Inline à partir de lg, en modale en dessous.">
         <PropertyFilters value={filters} onChange={setFilters} />
       </Block>
 
@@ -289,14 +301,14 @@ function DesignSystemPage() {
 
       <Block title="EmptyState / LoadingState">
         <div className="grid gap-4 lg:grid-cols-2">
-          <div className="border border-line">
+          <div className="rounded-md border border-line">
             <EmptyState
               title="Aucun bien"
               description="Créez votre première fiche pour la publier sur le site."
               action={<AdminButton>Ajouter un bien</AdminButton>}
             />
           </div>
-          <div className="border border-line p-4">
+          <div className="rounded-md border border-line p-4">
             <LoadingState rows={4} />
           </div>
         </div>

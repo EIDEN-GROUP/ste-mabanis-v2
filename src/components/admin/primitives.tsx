@@ -6,7 +6,7 @@ import { cn } from "@/lib/utils";
 
 /* ------------------------------------------------------------------- Panel */
 
-/** The base surface every admin block sits on. Square, hairline, no shadow noise. */
+/** The base surface every admin block sits on. Hairline, rounded-md, no shadow noise. */
 export function Panel({
   children,
   className,
@@ -16,7 +16,11 @@ export function Panel({
   className?: string | undefined;
   as?: "section" | "div" | "article" | undefined;
 }) {
-  return <Tag className={cn("border border-line bg-admin-surface", className)}>{children}</Tag>;
+  return (
+    <Tag className={cn("rounded-md border border-line bg-admin-surface", className)}>
+      {children}
+    </Tag>
+  );
 }
 
 export function PanelHeader({
@@ -79,7 +83,7 @@ export function StatCard({
           <p className="display mt-3 text-[clamp(1.75rem,4vw,2.5rem)] tabular-nums">{value}</p>
         </div>
         {Icon ? (
-          <span className="grid size-10 shrink-0 place-items-center border border-line bg-sand text-gold transition-colors duration-400 group-hover:border-gold/50">
+          <span className="grid size-10 shrink-0 place-items-center rounded-md border border-line bg-sand text-gold transition-colors duration-400 group-hover:border-gold/50">
             <Icon className="size-4" />
           </span>
         ) : null}
@@ -122,7 +126,7 @@ export function EmptyState({
 }) {
   return (
     <div className={cn("flex flex-col items-center px-6 py-14 text-center", className)}>
-      <span className="grid size-14 place-items-center border border-line bg-sand text-gold">
+      <span className="grid size-14 place-items-center rounded-md border border-line bg-sand text-gold">
         <Icon className="size-6" />
       </span>
       <h3 className="display mt-5 text-2xl">{title}</h3>
@@ -146,13 +150,13 @@ export function LoadingState({
   variant?: "list" | "cards" | "chart" | undefined;
 }) {
   if (variant === "chart") {
-    return <div className={cn("skeleton h-64 w-full", className)} aria-hidden />;
+    return <div className={cn("skeleton h-64 w-full rounded-md", className)} aria-hidden />;
   }
   if (variant === "cards") {
     return (
       <div className={cn("grid gap-4 sm:grid-cols-2 xl:grid-cols-3", className)} aria-hidden>
         {Array.from({ length: rows }, (_, i) => (
-          <div key={i} className="skeleton h-52 w-full" />
+          <div key={i} className="skeleton h-52 w-full rounded-md" />
         ))}
       </div>
     );
@@ -160,7 +164,7 @@ export function LoadingState({
   return (
     <div className={cn("space-y-2", className)} aria-hidden>
       {Array.from({ length: rows }, (_, i) => (
-        <div key={i} className="skeleton h-14 w-full" />
+        <div key={i} className="skeleton h-14 w-full rounded-md" />
       ))}
     </div>
   );
@@ -223,7 +227,9 @@ export function Modal({
         aria-modal="true"
         aria-label={title}
         className={cn(
-          "relative flex max-h-[92vh] w-full flex-col bg-admin-surface shadow-elegant transition-[opacity,transform] duration-400 ease-[cubic-bezier(0.16,1,0.3,1)] motion-reduce:transition-none",
+          // Rounded on every edge from sm up; as a phone sheet only the top corners
+          // exist, the rest sits off-screen.
+          "relative flex max-h-[92vh] w-full flex-col rounded-t-md bg-admin-surface shadow-elegant transition-[opacity,transform] duration-400 ease-[cubic-bezier(0.16,1,0.3,1)] motion-reduce:transition-none sm:rounded-md",
           widths[size],
           // Sheet from the bottom on phones, scale-in on larger screens.
           open
@@ -242,12 +248,14 @@ export function Modal({
             type="button"
             onClick={onClose}
             aria-label="Fermer"
-            className="grid size-9 shrink-0 place-items-center border border-line text-navy transition-colors hover:border-gold"
+            className="grid size-9 shrink-0 place-items-center rounded-md border border-line text-navy transition-colors hover:border-gold"
           >
             <X className="size-4" />
           </button>
         </header>
-        <div className="min-h-0 flex-1 overflow-y-auto px-5 py-5">{children}</div>
+        <div className="scrollbar-gold min-h-0 flex-1 overflow-y-auto px-5 py-5 [--scroll-track:var(--admin-surface)]">
+          {children}
+        </div>
         {footer ? (
           <footer className="flex shrink-0 flex-wrap justify-end gap-3 border-t border-line px-5 py-4">
             {footer}
@@ -307,9 +315,12 @@ export function Drawer({
         aria-hidden={!open}
         className={cn(
           "fixed z-[96] flex flex-col bg-admin-surface shadow-elegant transition-transform duration-500 ease-[cubic-bezier(0.76,0,0.24,1)] motion-reduce:transition-none",
-          // Bottom sheet under sm, side sheet from sm up.
-          "inset-x-0 bottom-0 max-h-[85vh] rounded-t-lg sm:inset-y-0 sm:max-h-none sm:w-full sm:max-w-[24rem] sm:rounded-none",
-          side === "right" ? "sm:right-0 sm:left-auto" : "sm:left-0 sm:right-auto",
+          // Bottom sheet under sm, side sheet from sm up. Only the edges that face
+          // the page are rounded — the ones flush with the viewport stay square.
+          "inset-x-0 bottom-0 max-h-[85vh] rounded-t-md sm:inset-y-0 sm:max-h-none sm:w-full sm:max-w-[24rem] sm:rounded-t-none",
+          side === "right"
+            ? "sm:right-0 sm:left-auto sm:rounded-l-md"
+            : "sm:left-0 sm:right-auto sm:rounded-r-md",
           open
             ? "translate-y-0 sm:translate-x-0"
             : side === "right"
@@ -323,12 +334,14 @@ export function Drawer({
             type="button"
             onClick={onClose}
             aria-label="Fermer"
-            className="grid size-9 shrink-0 place-items-center border border-line text-navy transition-colors hover:border-gold"
+            className="grid size-9 shrink-0 place-items-center rounded-md border border-line text-navy transition-colors hover:border-gold"
           >
             <X className="size-4" />
           </button>
         </header>
-        <div className="min-h-0 flex-1 overflow-y-auto px-5 py-5">{children}</div>
+        <div className="scrollbar-gold min-h-0 flex-1 overflow-y-auto px-5 py-5 [--scroll-track:var(--admin-surface)]">
+          {children}
+        </div>
         {footer ? (
           <footer className="flex shrink-0 gap-3 border-t border-line px-5 py-4 pb-[max(1rem,env(safe-area-inset-bottom))]">
             {footer}
@@ -351,6 +364,53 @@ export const toast = {
     sonnerToast(message, description ? { description } : undefined),
 };
 
+/* ------------------------------------------------------------------ Switch */
+
+/**
+ * The one control in the back office that is a pill rather than a rounded-md
+ * box: a track that reads as a track only when the knob can travel the full
+ * length of it. Gold means live; off is a quiet grey so a disabled rule never
+ * looks like an error.
+ */
+export function Switch({
+  checked,
+  onChange,
+  label,
+  className,
+}: {
+  checked: boolean;
+  onChange: (v: boolean) => void;
+  label: string;
+  className?: string | undefined;
+}) {
+  return (
+    <button
+      type="button"
+      role="switch"
+      aria-checked={checked}
+      aria-label={label}
+      onClick={() => onChange(!checked)}
+      className={cn(
+        "relative h-6 w-11 shrink-0 cursor-pointer rounded-full border transition-colors duration-300 outline-none",
+        "focus-visible:ring-2 focus-visible:ring-gold/45 focus-visible:ring-offset-2 focus-visible:ring-offset-admin-surface",
+        checked
+          ? "border-gold bg-gold hover:bg-gold/85"
+          : "border-line bg-muted-foreground/20 hover:border-gold/50",
+        className,
+      )}
+    >
+      {/* 44px track − 2px border − 18px knob − 2px gutters = 20px of travel. */}
+      <span
+        aria-hidden
+        className={cn(
+          "absolute top-[2px] left-[2px] size-[18px] rounded-full bg-white shadow-panel transition-transform duration-400 ease-[cubic-bezier(0.16,1,0.3,1)] motion-reduce:transition-none",
+          checked ? "translate-x-5" : "translate-x-0",
+        )}
+      />
+    </button>
+  );
+}
+
 /* ----------------------------------------------------------------- Buttons */
 
 export function AdminButton({
@@ -370,7 +430,7 @@ export function AdminButton({
   return (
     <button
       className={cn(
-        "inline-flex min-h-10 items-center justify-center gap-2 px-4 py-2.5 text-[0.68rem] tracking-[0.14em] uppercase transition-colors duration-300",
+        "inline-flex min-h-10 items-center justify-center gap-2 rounded-md px-4 py-2.5 text-[0.68rem] tracking-[0.14em] uppercase transition-colors duration-300",
         styles[variant],
         className,
       )}

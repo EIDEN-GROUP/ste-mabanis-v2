@@ -42,16 +42,18 @@ function NavRow({
           active ? "text-gold" : "text-admin-sidebar-muted group-hover:text-admin-sidebar-fg",
         )}
       />
+      {/* Hidden rather than faded when collapsed: an opacity-0 label still holds
+          its flex width and would push the icon off the rail's centre. */}
       <span
         className={cn(
           "min-w-0 flex-1 truncate text-left text-[0.82rem] transition-[opacity,transform] duration-300",
-          collapsed ? "pointer-events-none -translate-x-1 opacity-0" : "translate-x-0 opacity-100",
+          collapsed ? "hidden" : "translate-x-0 opacity-100",
         )}
       >
         {item.label}
       </span>
       {!item.ready && !collapsed ? (
-        <span className="shrink-0 border border-admin-sidebar-muted/40 px-1.5 py-0.5 text-[0.55rem] tracking-[0.14em] text-admin-sidebar-muted uppercase">
+        <span className="shrink-0 rounded-md border border-admin-sidebar-muted/40 px-1.5 py-0.5 text-[0.55rem] tracking-[0.14em] text-admin-sidebar-muted uppercase">
           P{item.phase}
         </span>
       ) : null}
@@ -59,7 +61,10 @@ function NavRow({
   );
 
   const className = cn(
-    "group relative flex items-center gap-3 py-2.5 pr-3 pl-4 transition-colors duration-300",
+    "group relative flex items-center py-2.5 transition-colors duration-300",
+    // Collapsed, the icon is the entire row, so it sits on the rail's centre line
+    // instead of keeping the expanded row's left indent.
+    collapsed ? "justify-center px-0" : "gap-3 pr-3 pl-4",
     active
       ? "bg-admin-sidebar-hover text-admin-sidebar-fg"
       : "text-admin-sidebar-muted hover:bg-admin-sidebar-hover/60 hover:text-admin-sidebar-fg",
@@ -112,27 +117,39 @@ export function AdminSidebar({
       )}
       style={{ width: collapsed ? RAIL_COLLAPSED : RAIL_EXPANDED }}
     >
-      <div className="flex h-16 shrink-0 items-center gap-3 border-b border-white/10 px-4">
+      <div
+        className={cn(
+          "flex h-16 shrink-0 items-center gap-3 border-b border-white/10",
+          collapsed ? "justify-center px-2" : "px-4",
+        )}
+      >
         <Link to="/admin" className="flex min-w-0 items-center gap-3">
+          {/* Sized by width, because width is what the collapsed rail rations:
+              the lockup is 1254×717, so the old h-8 drew it 56px wide inside a
+              72px rail whose padding left 40px — hence the clipping. w-10 is
+              40px × 23px collapsed, w-12 is 48px × 27px expanded. */}
           <img
             src={logo}
             alt="STE MABANIS"
-            width={200}
-            height={200}
-            className="h-8 w-auto shrink-0 brightness-0 invert"
+            width={1254}
+            height={717}
+            className={cn(
+              "h-auto shrink-0 brightness-0 invert transition-[width] duration-400",
+              collapsed ? "w-10" : "w-12",
+            )}
           />
         </Link>
         <span
           className={cn(
             "min-w-0 flex-1 truncate text-[0.6rem] tracking-[0.2em] text-admin-sidebar-muted uppercase transition-opacity duration-300",
-            collapsed ? "opacity-0" : "opacity-100",
+            collapsed ? "hidden" : "opacity-100",
           )}
         >
           Admin
         </span>
       </div>
 
-      <nav className="flex-1 overflow-x-hidden overflow-y-auto py-4">
+      <nav className="scrollbar-gold flex-1 overflow-x-hidden overflow-y-auto py-4">
         {groups.map((group, gi) => (
           <div key={group.title} className={gi === 0 ? "" : "mt-5"}>
             <p

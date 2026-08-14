@@ -42,7 +42,7 @@ const PRIORITY_STYLES: Record<TaskPriority, string> = {
 };
 
 const base =
-  "inline-flex items-center gap-1.5 border px-2.5 py-1 text-[0.6rem] tracking-[0.12em] uppercase whitespace-nowrap";
+  "inline-flex items-center gap-1.5 rounded-md border px-2.5 py-1 text-[0.6rem] tracking-[0.12em] uppercase whitespace-nowrap";
 
 export function PropertyStatusBadge({
   status,

@@ -545,6 +545,60 @@ html.lenis body {
   transition: width 0.42s cubic-bezier(0.76, 0, 0.24, 1);
 }
 
+/* ---------- Scrollbars ----------
+   The native bar in house dress: the track melts into the panel it sits on, the
+   thumb is a gold stroke carrying the same rounded-md corner as everything else.
+   `--scroll-track` is the only knob — light panels repoint it with
+   `[--scroll-track:var(--admin-surface)]` and inherit the rest.
+
+   WebKit/Chromium takes the pseudo-elements, where `background-color` (never the
+   `background` shorthand) keeps `background-clip` alive between states. Firefox has
+   no pseudo-elements and gets the standard two-value shorthand instead — fenced
+   behind @supports because Chromium drops every ::-webkit-scrollbar rule the moment
+   `scrollbar-width`/`scrollbar-color` are declared, corner radius included. */
+@utility scrollbar-gold {
+  --scroll-track: var(--admin-sidebar);
+
+  @supports not selector(::-webkit-scrollbar) {
+    scrollbar-width: thin;
+    scrollbar-color: var(--gold) var(--scroll-track);
+  }
+
+  &::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+  }
+
+  &::-webkit-scrollbar-track {
+    background-color: var(--scroll-track);
+  }
+
+  &::-webkit-scrollbar-thumb {
+    /* 2px of track colour down each side leaves the gold reading as a 4px stroke;
+       var(--radius) is the rounded-md step of the scale. */
+    border: 2px solid var(--scroll-track);
+    border-radius: var(--radius);
+    background-color: var(--gold);
+    background-clip: padding-box;
+  }
+
+  /* WebKit ignores transitions on scrollbar pseudo-elements, so the feedback is a
+     straight state swap — the thumb warms to the soft gold while the panel is hovered. */
+  &:hover::-webkit-scrollbar-thumb {
+    background-color: var(--gold-soft);
+  }
+
+  &::-webkit-scrollbar-thumb:active {
+    background-color: var(--gold-soft);
+  }
+
+  /* Windows draws stepper arrows by default; the rail wants one clean line. */
+  &::-webkit-scrollbar-button,
+  &::-webkit-scrollbar-corner {
+    display: none;
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
   .stagger-in,
   .skeleton::after {

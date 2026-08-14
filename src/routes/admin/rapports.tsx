@@ -81,7 +81,7 @@ function ReportsPage() {
               type="date"
               value={from}
               onChange={(e) => setFrom(e.target.value || defaultFrom)}
-              className="h-11 border border-line bg-admin-bg/40 px-3 text-sm outline-none focus:border-gold"
+              className="h-11 rounded-md border border-line bg-admin-bg/40 px-3 text-sm outline-none focus:border-gold"
             />
           </label>
           <label className="flex flex-col gap-1.5">
@@ -90,7 +90,7 @@ function ReportsPage() {
               type="date"
               value={to}
               onChange={(e) => setTo(e.target.value || defaultTo)}
-              className="h-11 border border-line bg-admin-bg/40 px-3 text-sm outline-none focus:border-gold"
+              className="h-11 rounded-md border border-line bg-admin-bg/40 px-3 text-sm outline-none focus:border-gold"
             />
           </label>
           <button
@@ -99,7 +99,7 @@ function ReportsPage() {
               setFrom(defaultFrom);
               setTo(defaultTo);
             }}
-            className="grid h-11 place-items-center border border-line px-3 text-muted-foreground transition-colors hover:border-gold hover:text-gold"
+            className="grid h-11 place-items-center rounded-md border border-line px-3 text-muted-foreground transition-colors hover:border-gold hover:text-gold"
             aria-label="Réinitialiser les dates"
           >
             <RotateCcw className="size-4" />
@@ -173,7 +173,7 @@ function ReportsPage() {
             )}
           </Panel>
 
-          <Panel>
+          <Panel className="overflow-hidden">
             <header className="border-b border-line px-5 py-4">
               <h2 className="display text-xl">Détail</h2>
               <p className="mt-1 text-sm text-muted-foreground">
@@ -213,7 +213,7 @@ function ReportsPage() {
           </Panel>
         </>
       ) : (
-        <div className="border border-line bg-admin-surface px-6 py-16 text-center text-sm text-muted-foreground">
+        <div className="rounded-md border border-line bg-admin-surface px-6 py-16 text-center text-sm text-muted-foreground">
           Chargement du rapport…
         </div>
       )}

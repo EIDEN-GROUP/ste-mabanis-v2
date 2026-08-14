@@ -30,7 +30,7 @@ import { cn } from "@/lib/utils";
 // min-w-0 so a card never widens the grid column it sits in: without it a
 // card's min-content becomes the column's floor and the page overflows.
 const cardBase =
-  "group min-w-0 border border-line bg-admin-surface transition-[border-color,box-shadow] duration-400 hover:border-gold/60 hover:shadow-panel";
+  "group min-w-0 rounded-md border border-line bg-admin-surface transition-[border-color,box-shadow] duration-400 hover:border-gold/60 hover:shadow-panel";
 
 /* ---------------------------------------------------------- PropertyCard */
 
@@ -53,7 +53,8 @@ export function PropertyCard({
       style={{ ["--i" as string]: index }}
       className={cn(cardBase, "stagger-in flex flex-col", onClick && "cursor-pointer", className)}
     >
-      <div className="zoom-frame relative aspect-[4/3] overflow-hidden bg-sand">
+      {/* rounded-t-md so the cover follows the card's corner instead of squaring it off. */}
+      <div className="zoom-frame relative aspect-[4/3] overflow-hidden rounded-t-md bg-sand">
         {cover ? (
           <img
             src={cover.url}
@@ -131,7 +132,7 @@ export function ClientCard({
       className={cn(cardBase, "stagger-in p-4", onClick && "cursor-pointer", className)}
     >
       <div className="flex items-start gap-3">
-        <span className="display grid size-11 shrink-0 place-items-center border border-line bg-sand text-base text-navy">
+        <span className="display grid size-11 shrink-0 place-items-center rounded-md border border-line bg-sand text-base text-navy">
           {initials}
         </span>
         <div className="min-w-0 flex-1">
@@ -278,7 +279,7 @@ export function AppointmentCard({
           <h3 className="min-w-0 flex-1 truncate text-sm font-medium text-navy">
             {appointment.title}
           </h3>
-          <span className="shrink-0 border border-line px-2 py-0.5 text-[0.58rem] tracking-[0.12em] text-muted-foreground uppercase">
+          <span className="shrink-0 rounded-md border border-line px-2 py-0.5 text-[0.58rem] tracking-[0.12em] text-muted-foreground uppercase">
             {label(APPOINTMENT_LABELS, appointment.kind)}
           </span>
         </div>
@@ -306,7 +307,7 @@ export function AppointmentCard({
                   <span
                     key={i}
                     className={cn(
-                      "size-1.5",
+                      "size-1.5 rounded-sm",
                       i < appointment.report!.interest ? "bg-gold" : "bg-line",
                     )}
                   />
@@ -339,7 +340,7 @@ export function DocumentCard({
       style={{ ["--i" as string]: index }}
       className={cn(cardBase, "stagger-in flex items-center gap-3 p-4", className)}
     >
-      <span className="grid size-10 shrink-0 place-items-center border border-line bg-sand text-gold">
+      <span className="grid size-10 shrink-0 place-items-center rounded-md border border-line bg-sand text-gold">
         <FileText className="size-4" />
       </span>
       <div className="min-w-0 flex-1">
@@ -357,7 +358,7 @@ export function DocumentCard({
       <button
         type="button"
         aria-label={`Télécharger ${doc.name}`}
-        className="grid size-9 shrink-0 place-items-center border border-line text-navy transition-colors hover:border-gold"
+        className="grid size-9 shrink-0 place-items-center rounded-md border border-line text-navy transition-colors hover:border-gold"
       >
         <Download className="size-4" />
       </button>

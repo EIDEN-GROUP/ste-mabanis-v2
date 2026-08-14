@@ -11,7 +11,14 @@ import {
 } from "@/lib/admin/queries";
 import type { AutomationRuleKey } from "@/lib/admin/types";
 import { relativeTime } from "@/lib/admin/format";
-import { StatCard, Panel, AdminButton, EmptyState, toast } from "@/components/admin/primitives";
+import {
+  StatCard,
+  Panel,
+  AdminButton,
+  EmptyState,
+  Switch,
+  toast,
+} from "@/components/admin/primitives";
 import { cn } from "@/lib/utils";
 
 export const Route = createFileRoute("/admin/automatisations")({
@@ -64,7 +71,7 @@ function AutomationsPage() {
             une règle n'efface pas son historique.
           </p>
         </div>
-        <span className="inline-flex items-center gap-2 border border-line px-3 py-1.5 text-xs text-muted-foreground">
+        <span className="inline-flex items-center gap-2 rounded-md border border-line px-3 py-1.5 text-xs text-muted-foreground">
           <Zap className="size-3.5 text-gold" />
           {rules.filter((r) => r.enabled).length}/{rules.length} règles actives
         </span>
@@ -74,7 +81,7 @@ function AutomationsPage() {
         {rules.map((rule) => (
           <Panel key={rule.key} className="p-5">
             <div className="flex items-start gap-4">
-              <span className="grid size-10 shrink-0 place-items-center border border-line bg-sand text-gold">
+              <span className="grid size-10 shrink-0 place-items-center rounded-md border border-line bg-sand text-gold">
                 <Zap className="size-4" />
               </span>
               <div className="min-w-0 flex-1">
@@ -122,7 +129,7 @@ function AutomationsPage() {
                 <li key={run.id} className="flex items-start gap-3 px-5 py-3.5">
                   <span
                     className={cn(
-                      "mt-0.5 grid size-8 shrink-0 place-items-center border",
+                      "mt-0.5 grid size-8 shrink-0 place-items-center rounded-md border",
                       run.rule === "inactiveLeadRelance"
                         ? "border-negative/40 text-negative"
                         : "border-gold/50 text-gold",
@@ -222,7 +229,7 @@ function AutomationsPage() {
                     })}
                   </p>
                 </div>
-                <span className="border border-gold/50 px-2.5 py-1 text-[0.58rem] tracking-[0.12em] text-gold uppercase">
+                <span className="rounded-md border border-gold/50 px-2.5 py-1 text-[0.58rem] tracking-[0.12em] text-gold uppercase">
                   À confirmer
                 </span>
               </li>
@@ -231,39 +238,5 @@ function AutomationsPage() {
         )}
       </Panel>
     </div>
-  );
-}
-
-/* ------------------------------------------------------------------- switch */
-
-function Switch({
-  checked,
-  onChange,
-  label,
-}: {
-  checked: boolean;
-  onChange: (v: boolean) => void;
-  label: string;
-}) {
-  return (
-    <button
-      type="button"
-      role="switch"
-      aria-checked={checked}
-      aria-label={label}
-      onClick={() => onChange(!checked)}
-      className={cn(
-        "relative h-6 w-11 shrink-0 border transition-colors duration-300",
-        checked ? "border-gold bg-gold" : "border-line bg-sand",
-      )}
-    >
-      <span
-        className={cn(
-          "absolute top-0.5 size-[18px] bg-white shadow-panel transition-transform duration-300",
-          checked ? "translate-x-[calc(100%-2px)]" : "translate-x-0.5",
-        )}
-        style={{ left: 0 }}
-      />
-    </button>
   );
 }

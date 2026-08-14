@@ -163,7 +163,10 @@ function TasksPage() {
       ) : (
         <div className="grid gap-4 lg:grid-cols-3">
           {(["todo", "doing", "done"] as const).map((status) => (
-            <div key={status} className="flex flex-col border border-line bg-admin-surface">
+            <div
+              key={status}
+              className="flex flex-col rounded-md border border-line bg-admin-surface"
+            >
               <div className="flex items-center justify-between border-b border-line px-4 py-3">
                 <h3 className="text-[0.62rem] tracking-[0.16em] text-navy uppercase">
                   {STATUS_LABELS[status]}
@@ -258,7 +261,7 @@ function TaskCard({
     <article
       style={{ ["--i" as string]: index }}
       className={cn(
-        "stagger-in group border border-line bg-admin-surface p-3.5 transition-colors hover:border-gold/60",
+        "stagger-in group rounded-md border border-line bg-admin-surface p-3.5 transition-colors hover:border-gold/60",
         task.status === "done" && "opacity-60",
       )}
     >
@@ -268,7 +271,7 @@ function TaskCard({
           onClick={() => patch({ status: task.status === "done" ? "todo" : "done" })}
           aria-label={task.status === "done" ? "Rouvrir la tâche" : "Marquer terminée"}
           className={cn(
-            "mt-0.5 grid size-5 shrink-0 place-items-center border transition-colors",
+            "mt-0.5 grid size-5 shrink-0 place-items-center rounded-sm border transition-colors",
             task.status === "done"
               ? "border-positive bg-positive text-white"
               : "border-line text-transparent hover:border-gold group-hover:text-muted-foreground/50",
@@ -288,7 +291,7 @@ function TaskCard({
           <div className="mt-1.5 flex flex-wrap items-center gap-x-2 gap-y-1 text-xs text-muted-foreground">
             <PriorityBadge priority={task.priority} />
             {entity ? (
-              <span className="border border-line px-1.5 py-0.5 text-[0.55rem] tracking-[0.12em] uppercase">
+              <span className="rounded-md border border-line px-1.5 py-0.5 text-[0.55rem] tracking-[0.12em] uppercase">
                 {label(ENTITY_LABELS, entity.kind)}
               </span>
             ) : null}
@@ -321,7 +324,7 @@ function TaskCard({
               type="button"
               onClick={() => patch({ status: "doing" })}
               aria-label="Passer en cours"
-              className="grid size-7 place-items-center border border-line text-muted-foreground transition-colors hover:border-gold hover:text-navy"
+              className="grid size-7 place-items-center rounded-md border border-line text-muted-foreground transition-colors hover:border-gold hover:text-navy"
             >
               <ArrowRight className="size-3.5" />
             </button>
@@ -331,7 +334,7 @@ function TaskCard({
               type="button"
               onClick={() => patch({ status: "todo" })}
               aria-label="Revenir à faire"
-              className="grid size-7 place-items-center border border-line text-muted-foreground transition-colors hover:border-gold hover:text-navy"
+              className="grid size-7 place-items-center rounded-md border border-line text-muted-foreground transition-colors hover:border-gold hover:text-navy"
             >
               <ArrowLeft className="size-3.5" />
             </button>
@@ -341,7 +344,7 @@ function TaskCard({
               type="button"
               onClick={() => patch({ status: "doing" })}
               aria-label="Reprendre la tâche"
-              className="grid size-7 place-items-center border border-line text-muted-foreground transition-colors hover:border-gold hover:text-navy"
+              className="grid size-7 place-items-center rounded-md border border-line text-muted-foreground transition-colors hover:border-gold hover:text-navy"
             >
               <ArrowRight className="size-3.5" />
             </button>
@@ -401,7 +404,7 @@ function TaskFormModal({
   };
 
   const fieldCls =
-    "h-11 border border-line bg-admin-bg/40 px-3 text-sm outline-none focus:border-gold";
+    "h-11 rounded-md border border-line bg-admin-bg/40 px-3 text-sm outline-none focus:border-gold";
 
   return (
     <Modal

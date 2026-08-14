@@ -48,7 +48,7 @@ function ChartTooltip({
 }) {
   if (!active || !payload?.length) return null;
   return (
-    <div className="border border-line bg-admin-surface px-3 py-2 shadow-panel">
+    <div className="rounded-md border border-line bg-admin-surface px-3 py-2 shadow-panel">
       {axisLabel ? (
         <p className="text-[0.6rem] tracking-[0.14em] text-muted-foreground uppercase">
           {axisLabel}
@@ -56,7 +56,7 @@ function ChartTooltip({
       ) : null}
       {payload.map((p, i) => (
         <p key={i} className="mt-1 flex items-center gap-2 text-sm">
-          <span className="size-2 shrink-0" style={{ background: p.color }} />
+          <span className="size-2 shrink-0 rounded-sm" style={{ background: p.color }} />
           <span className="text-muted-foreground">{p.name}</span>
           <span className="ml-auto font-medium tabular-nums text-navy">
             {formatter && typeof p.value === "number" ? formatter(p.value) : p.value}
@@ -217,7 +217,13 @@ export function CategoryBarChart({
           cursor={{ fill: "var(--sand)" }}
           content={<ChartTooltip {...(formatter ? { formatter } : {})} />}
         />
-        <Bar dataKey={dataKey} name={name} animationDuration={900} radius={0}>
+        {/* The bar cap carries the same 4px as rounded-md; the seated end stays square. */}
+        <Bar
+          dataKey={dataKey}
+          name={name}
+          animationDuration={900}
+          radius={horizontal ? [0, 4, 4, 0] : [4, 4, 0, 0]}
+        >
           {data.map((_, i) => (
             <Cell key={i} fill={SERIES[i % SERIES.length]} />
           ))}
@@ -266,7 +272,10 @@ export function ChartLegend({ items }: { items: { label: string; value?: string 
     <ul className="flex flex-wrap gap-x-5 gap-y-2">
       {items.map((item, i) => (
         <li key={item.label} className="flex items-center gap-2 text-xs">
-          <span className="size-2 shrink-0" style={{ background: SERIES[i % SERIES.length] }} />
+          <span
+            className="size-2 shrink-0 rounded-sm"
+            style={{ background: SERIES[i % SERIES.length] }}
+          />
           <span className="text-muted-foreground">{item.label}</span>
           {item.value ? (
             <span className="font-medium tabular-nums text-navy">{item.value}</span>

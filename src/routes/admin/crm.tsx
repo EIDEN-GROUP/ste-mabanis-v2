@@ -38,7 +38,7 @@ import {
 } from "@/lib/admin/format";
 import { Pipeline } from "@/components/admin/pipeline";
 import { TemperatureBadge, RoleBadge } from "@/components/admin/status-badge";
-import { Drawer, Modal, AdminButton, EmptyState, toast } from "@/components/admin/primitives";
+import { Modal, AdminButton, EmptyState, toast } from "@/components/admin/primitives";
 import { useAgentScope } from "@/lib/admin/session";
 import { ActivityTimeline } from "./clients";
 import { cn } from "@/lib/utils";
@@ -124,9 +124,9 @@ function CrmPage() {
         ].map(({ icon: Icon, label: l, value }) => (
           <div
             key={l}
-            className="flex items-center gap-3 border border-line bg-admin-surface px-3.5 py-3"
+            className="flex items-center gap-3 rounded-md border border-line bg-admin-surface px-3.5 py-3"
           >
-            <span className="grid size-9 shrink-0 place-items-center border border-line bg-sand text-gold">
+            <span className="grid size-9 shrink-0 place-items-center rounded-md border border-line bg-sand text-gold">
               <Icon className="size-4" />
             </span>
             <div className="min-w-0">
@@ -147,7 +147,7 @@ function CrmPage() {
           onChange={(e) => setSearch(e.target.value)}
           placeholder="Chercher un client ou un bien…"
           aria-label="Rechercher dans le pipeline"
-          className="h-11 w-full border border-line bg-admin-surface pr-3 pl-9 text-sm outline-none placeholder:text-muted-foreground focus:border-gold"
+          className="h-11 w-full rounded-md border border-line bg-admin-surface pr-3 pl-9 text-sm outline-none placeholder:text-muted-foreground focus:border-gold"
         />
       </label>
 
@@ -158,7 +158,7 @@ function CrmPage() {
         onMove={(leadId, stage) => moveLead.mutate({ id: leadId, stage })}
       />
 
-      <LeadDrawer
+      <LeadModal
         lead={selectedLead}
         client={selectedLead ? (clientsById.get(selectedLead.clientId) ?? null) : null}
         property={
@@ -183,9 +183,9 @@ function CrmPage() {
   );
 }
 
-/* --------------------------------------------------------------- lead drawer */
+/* ---------------------------------------------------------------- lead modal */
 
-function LeadDrawer({
+function LeadModal({
   lead,
   client,
   property,
@@ -213,7 +213,7 @@ function LeadDrawer({
     updateLead.mutate({ id: lead.id, patch: { temperature: t } });
 
   return (
-    <Drawer
+    <Modal
       open={Boolean(lead)}
       onClose={onClose}
       title={client ? `${client.firstName} ${client.lastName}` : "Lead"}
@@ -234,12 +234,12 @@ function LeadDrawer({
       ) : (
         <div className="space-y-5">
           <div className="flex items-start gap-4">
-            <span className="display grid size-14 shrink-0 place-items-center border border-line bg-sand text-xl text-navy">
+            <span className="display grid size-14 shrink-0 place-items-center rounded-md border border-line bg-sand text-xl text-navy">
               {client ? `${client.firstName[0]}${client.lastName[0]}` : "?"}
             </span>
             <div className="min-w-0 flex-1">
               <div className="flex flex-wrap items-center gap-2">
-                <span className="border border-line px-2 py-0.5 text-[0.58rem] tracking-[0.12em] text-muted-foreground uppercase">
+                <span className="rounded-md border border-line px-2 py-0.5 text-[0.58rem] tracking-[0.12em] text-muted-foreground uppercase">
                   {label(STAGE_LABELS, lead.stage)}
                 </span>
                 <TemperatureBadge temperature={lead.temperature} score={lead.score} />
@@ -252,7 +252,7 @@ function LeadDrawer({
 
           <dl className="space-y-2.5">
             {property ? (
-              <div className="flex items-center gap-2.5 border border-line bg-admin-bg/50 px-3.5 py-3">
+              <div className="flex items-center gap-2.5 rounded-md border border-line bg-admin-bg/50 px-3.5 py-3">
                 <Building2 className="size-4 shrink-0 text-gold" />
                 <div className="min-w-0 flex-1">
                   <p className="truncate text-sm font-medium text-navy">{property.title}</p>
@@ -263,13 +263,13 @@ function LeadDrawer({
                 </span>
               </div>
             ) : (
-              <div className="flex items-center gap-2.5 border border-line bg-admin-bg/50 px-3.5 py-3 text-sm text-muted-foreground">
+              <div className="flex items-center gap-2.5 rounded-md border border-line bg-admin-bg/50 px-3.5 py-3 text-sm text-muted-foreground">
                 <Building2 className="size-4 shrink-0 text-gold" />
                 Aucun bien associé
               </div>
             )}
 
-            <div className="flex items-center gap-2.5 border border-line bg-admin-bg/50 px-3.5 py-3">
+            <div className="flex items-center gap-2.5 rounded-md border border-line bg-admin-bg/50 px-3.5 py-3">
               <Wallet className="size-4 shrink-0 text-gold" />
               <span className="text-sm text-navy/80">
                 Valeur de l'opportunité :{" "}
@@ -280,7 +280,7 @@ function LeadDrawer({
             </div>
 
             {lead.nextAction ? (
-              <div className="flex items-start gap-2.5 border border-line bg-admin-bg/50 px-3.5 py-3">
+              <div className="flex items-start gap-2.5 rounded-md border border-line bg-admin-bg/50 px-3.5 py-3">
                 <Target className="mt-0.5 size-4 shrink-0 text-gold" />
                 <div className="min-w-0 flex-1">
                   <p className="text-sm font-medium text-navy">{lead.nextAction}</p>
@@ -347,7 +347,7 @@ function LeadDrawer({
           {client ? (
             <section>
               <p className="eyebrow mb-2.5">Client</p>
-              <div className="space-y-1.5 border border-line bg-admin-bg/50 px-3.5 py-3 text-sm text-navy/80">
+              <div className="space-y-1.5 rounded-md border border-line bg-admin-bg/50 px-3.5 py-3 text-sm text-navy/80">
                 <p className="flex items-center gap-2">
                   <UserRound className="size-3.5 shrink-0 text-gold" />
                   {client.email}
@@ -371,7 +371,7 @@ function LeadDrawer({
           </section>
         </div>
       )}
-    </Drawer>
+    </Modal>
   );
 }
 
@@ -422,7 +422,7 @@ function LeadEditForm({
           type="number"
           value={form.score}
           onChange={(e) => setForm((f) => ({ ...f, score: e.target.value }))}
-          className="h-11 border border-line bg-admin-bg/40 px-3 text-sm outline-none focus:border-gold"
+          className="h-11 rounded-md border border-line bg-admin-bg/40 px-3 text-sm outline-none focus:border-gold"
         />
       </label>
 
@@ -435,7 +435,7 @@ function LeadEditForm({
           onChange={(e) =>
             setForm((f) => ({ ...f, temperature: e.target.value as LeadTemperature }))
           }
-          className="h-11 border border-line bg-admin-bg/40 px-3 text-sm outline-none focus:border-gold"
+          className="h-11 rounded-md border border-line bg-admin-bg/40 px-3 text-sm outline-none focus:border-gold"
         >
           {(["cold", "warm", "hot"] as const).map((t) => (
             <option key={t} value={t}>
@@ -452,7 +452,7 @@ function LeadEditForm({
         <select
           value={form.source}
           onChange={(e) => setForm((f) => ({ ...f, source: e.target.value as Lead["source"] }))}
-          className="h-11 border border-line bg-admin-bg/40 px-3 text-sm outline-none focus:border-gold"
+          className="h-11 rounded-md border border-line bg-admin-bg/40 px-3 text-sm outline-none focus:border-gold"
         >
           {LEAD_SOURCES.map((s) => (
             <option key={s} value={s}>
@@ -470,7 +470,7 @@ function LeadEditForm({
           type="number"
           value={form.value}
           onChange={(e) => setForm((f) => ({ ...f, value: e.target.value }))}
-          className="h-11 border border-line bg-admin-bg/40 px-3 text-sm outline-none focus:border-gold"
+          className="h-11 rounded-md border border-line bg-admin-bg/40 px-3 text-sm outline-none focus:border-gold"
         />
       </label>
 
@@ -482,7 +482,7 @@ function LeadEditForm({
           value={form.nextAction}
           onChange={(e) => setForm((f) => ({ ...f, nextAction: e.target.value }))}
           placeholder="Ex. Rappeler pour fixer la visite"
-          className="h-11 border border-line bg-admin-bg/40 px-3 text-sm outline-none focus:border-gold"
+          className="h-11 rounded-md border border-line bg-admin-bg/40 px-3 text-sm outline-none focus:border-gold"
         />
       </label>
 
@@ -493,7 +493,7 @@ function LeadEditForm({
         <select
           value={form.agentId}
           onChange={(e) => setForm((f) => ({ ...f, agentId: e.target.value }))}
-          className="h-11 border border-line bg-admin-bg/40 px-3 text-sm outline-none focus:border-gold"
+          className="h-11 rounded-md border border-line bg-admin-bg/40 px-3 text-sm outline-none focus:border-gold"
         >
           {agents.map((a) => (
             <option key={a.id} value={a.id}>
@@ -635,7 +635,7 @@ function LeadFormModal({
                     type={f.type}
                     value={quick[f.key]}
                     onChange={(e) => setQuick((q) => ({ ...q, [f.key]: e.target.value }))}
-                    className="h-11 border border-line bg-admin-bg/40 px-3 text-sm outline-none focus:border-gold"
+                    className="h-11 rounded-md border border-line bg-admin-bg/40 px-3 text-sm outline-none focus:border-gold"
                   />
                 </label>
               ))}
@@ -644,7 +644,7 @@ function LeadFormModal({
             <select
               value={clientId}
               onChange={(e) => setClientId(e.target.value)}
-              className="h-11 w-full border border-line bg-admin-bg/40 px-3 text-sm outline-none focus:border-gold"
+              className="h-11 w-full rounded-md border border-line bg-admin-bg/40 px-3 text-sm outline-none focus:border-gold"
             >
               {clients.map((c) => (
                 <option key={c.id} value={c.id}>
@@ -662,7 +662,7 @@ function LeadFormModal({
           <select
             value={propertyId}
             onChange={(e) => setPropertyId(e.target.value)}
-            className="h-11 border border-line bg-admin-bg/40 px-3 text-sm outline-none focus:border-gold"
+            className="h-11 rounded-md border border-line bg-admin-bg/40 px-3 text-sm outline-none focus:border-gold"
           >
             <option value="">Sans bien associé</option>
             {properties.map((p) => (
@@ -681,7 +681,7 @@ function LeadFormModal({
             <select
               value={source}
               onChange={(e) => setSource(e.target.value as Lead["source"])}
-              className="h-11 border border-line bg-admin-bg/40 px-3 text-sm outline-none focus:border-gold"
+              className="h-11 rounded-md border border-line bg-admin-bg/40 px-3 text-sm outline-none focus:border-gold"
             >
               {LEAD_SOURCES.map((s) => (
                 <option key={s} value={s}>
@@ -698,7 +698,7 @@ function LeadFormModal({
             <select
               value={temperature}
               onChange={(e) => setTemperature(e.target.value as LeadTemperature)}
-              className="h-11 border border-line bg-admin-bg/40 px-3 text-sm outline-none focus:border-gold"
+              className="h-11 rounded-md border border-line bg-admin-bg/40 px-3 text-sm outline-none focus:border-gold"
             >
               {(["cold", "warm", "hot"] as const).map((t) => (
                 <option key={t} value={t}>
@@ -718,7 +718,7 @@ function LeadFormModal({
               type="number"
               value={score}
               onChange={(e) => setScore(e.target.value)}
-              className="h-11 border border-line bg-admin-bg/40 px-3 text-sm outline-none focus:border-gold"
+              className="h-11 rounded-md border border-line bg-admin-bg/40 px-3 text-sm outline-none focus:border-gold"
             />
           </label>
 
@@ -729,7 +729,7 @@ function LeadFormModal({
             <input
               value={selectedProperty ? String(selectedProperty.price) : "0"}
               disabled
-              className="h-11 border border-line bg-admin-bg/40 px-3 text-sm text-muted-foreground outline-none"
+              className="h-11 rounded-md border border-line bg-admin-bg/40 px-3 text-sm text-muted-foreground outline-none"
             />
           </label>
         </div>
@@ -741,7 +741,7 @@ function LeadFormModal({
           <input
             value={nextAction}
             onChange={(e) => setNextAction(e.target.value)}
-            className="h-11 border border-line bg-admin-bg/40 px-3 text-sm outline-none focus:border-gold"
+            className="h-11 rounded-md border border-line bg-admin-bg/40 px-3 text-sm outline-none focus:border-gold"
           />
         </label>
       </div>
