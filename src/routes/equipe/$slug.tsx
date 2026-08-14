@@ -15,11 +15,11 @@ export const Route = createFileRoute("/equipe/$slug")({
   head: ({ loaderData }) => {
     if (!loaderData) {
       return {
-        meta: [{ title: "Conseiller introuvable — STE MABANIS" }, { name: "robots", content: "noindex" }],
+        meta: [{ title: "Conseiller introuvable   STE MABANIS" }, { name: "robots", content: "noindex" }],
       };
     }
     const a = loaderData.agent;
-    const title = `${a.name} — ${a.role} | STE MABANIS`;
+    const title = `${a.name}   ${a.role} | STE MABANIS`;
     const description = `${a.name}, ${a.years} ans d'expérience à Agadir. Spécialités : ${a.expertise}.`;
     return {
       meta: [

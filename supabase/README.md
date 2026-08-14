@@ -1,7 +1,7 @@
 # Supabase
 
 SQL for the admin backend. **Not yet applied to any project and therefore not
-yet executed** — no Supabase project was provisioned when these were written, so
+yet executed**   no Supabase project was provisioned when these were written, so
 treat them as reviewed-but-untested until they run against a real database.
 
 | File | Contents |
@@ -32,8 +32,8 @@ without recursing into its own RLS.
 ## Selling a property does not delete it
 
 `properties.status` moving to `sold` or `rented` drops the row out of the anon
-policy, so it leaves the public site immediately, while the row — and every
-linked lead, activity, document and transaction — stays for history and
+policy, so it leaves the public site immediately, while the row   and every
+linked lead, activity, document and transaction   stays for history and
 reporting. The `properties_stamp_exit` trigger records `sold_at` on the way out
 and clears it if the property is relisted.
 

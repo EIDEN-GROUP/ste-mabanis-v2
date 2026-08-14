@@ -13,7 +13,7 @@ export function QuartiersShowcase() {
 
   return (
     <>
-      {/* Desktop — expanding panels */}
+      {/* Desktop   expanding panels */}
       <div className="hidden h-[32rem] gap-2 lg:flex xl:h-[36rem]">
         {locations.map((l, i) => {
           const isActive = i === active;
@@ -51,7 +51,7 @@ export function QuartiersShowcase() {
                 )}
               />
 
-              {/* Collapsed state — vertical name */}
+              {/* Collapsed state   vertical name */}
               <span
                 className={cn(
                   "absolute inset-x-0 bottom-0 flex flex-col items-center gap-4 pb-8 transition-opacity duration-500",
@@ -94,7 +94,7 @@ export function QuartiersShowcase() {
         })}
       </div>
 
-      {/* Mobile — snap carousel */}
+      {/* Mobile   snap carousel */}
       <div className="-mx-5 flex snap-x snap-mandatory gap-4 overflow-x-auto px-5 pb-4 sm:-mx-8 sm:px-8 lg:hidden [&::-webkit-scrollbar]:hidden">
         {locations.map((l) => (
           <Link

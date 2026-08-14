@@ -1,3 +1,4 @@
+import type { ReactNode } from "react";
 import { Link } from "@tanstack/react-router";
 import { motion } from "framer-motion";
 import { ArrowRight, Facebook, AtSign, Instagram } from "lucide-react";
@@ -24,7 +25,12 @@ const step = (i: number) => ({
   transition: { duration: 0.9, ease: EASE, delay: 0.15 + i * 0.13 },
 });
 
-export function HomeHero() {
+/**
+ * `children` est le panneau de recherche en version téléphone : il vit à
+ * l'intérieur du hero, sur la vidéo. À partir de lg il disparaît d'ici, la page
+ * d'accueil en posant une seconde copie à cheval sur le bord bas du hero.
+ */
+export function HomeHero({ children }: { children?: ReactNode }) {
   return (
     <section className="relative isolate flex min-h-[100svh] flex-col overflow-hidden bg-navy">
       {/* Fond vidéo */}
@@ -47,10 +53,10 @@ export function HomeHero() {
         <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-black/40" />
       </div>
 
-      {/* Rail signature — desktop */}
+      {/* Rail signature   desktop */}
       <div className="absolute inset-y-0 left-0 z-10 hidden w-12 flex-col items-center justify-between border-r border-white/10 py-32 xl:flex">
         <span className="text-[0.6rem] tracking-[0.3em] text-white/45 [writing-mode:vertical-rl]">
-          AGADIR — MAROC
+          AGADIR   MAROC
         </span>
         <div className="flex flex-col items-center gap-4">
           {socials.map((social) => {
@@ -72,8 +78,10 @@ export function HomeHero() {
         </div>
       </div>
 
-      <div className="relative mx-auto flex w-full max-w-[100rem] flex-1 flex-col px-5 pt-28 pb-14 sm:px-8 sm:pt-32 lg:px-12 lg:pt-36 lg:pb-36 xl:pl-24">
-        <div className="flex flex-1 flex-col justify-center py-6">
+      {/* Le panneau de recherche mange le bas de l'écran sur téléphone : les
+          marges y sont resserrées pour que l'ensemble tienne sur une vue. */}
+      <div className="relative mx-auto flex w-full max-w-[100rem] flex-1 flex-col px-5 pt-20 pb-8 sm:px-8 sm:pt-32 sm:pb-14 lg:px-12 lg:pt-36 lg:pb-36 xl:pl-24">
+        <div className="flex flex-1 flex-col justify-center py-3 sm:py-6">
           <motion.p
             className="flex items-center gap-4 text-[0.7rem] font-medium tracking-[0.3em] text-white/70 uppercase"
             {...step(0)}
@@ -84,7 +92,7 @@ export function HomeHero() {
 
           {/* La règle de titre du site vit maintenant dans l'utilitaire `display`. */}
           <motion.h1
-            className="mt-7 max-w-4xl text-[clamp(2.5rem,6vw,5.4rem)] leading-[0.98] font-bold tracking-[-0.02em] text-white uppercase"
+            className="mt-5 max-w-4xl text-[clamp(2.5rem,6vw,5.4rem)] leading-[0.98] font-bold tracking-[-0.02em] text-white uppercase sm:mt-7"
             {...step(1)}
           >
             L’élégance immobilière
@@ -92,7 +100,7 @@ export function HomeHero() {
           </motion.h1>
 
           <motion.p
-            className="mt-7 max-w-xl text-[0.95rem] leading-relaxed text-white/65 sm:text-base"
+            className="mt-4 max-w-xl text-[0.9rem] leading-relaxed text-white/65 sm:mt-7 sm:text-base"
             {...step(2)}
           >
             Des propriétés d’exception au cœur d’Agadir et du Souss-Massa. Depuis 2024, STE MABANIS
@@ -101,7 +109,7 @@ export function HomeHero() {
           </motion.p>
 
           <motion.div
-            className="mt-9 flex flex-col gap-3 sm:flex-row sm:flex-wrap sm:items-center"
+            className="mt-6 flex flex-col gap-3 sm:mt-9 sm:flex-row sm:flex-wrap sm:items-center"
             {...step(3)}
           >
             <Link
@@ -118,6 +126,8 @@ export function HomeHero() {
               Estimation gratuite
             </Link>
           </motion.div>
+
+          {children ? <div className="mt-6 sm:mt-8 lg:hidden">{children}</div> : null}
         </div>
 
         {/* Chiffres */}

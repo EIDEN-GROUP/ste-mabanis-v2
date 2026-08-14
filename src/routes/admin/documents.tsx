@@ -29,7 +29,7 @@ import { cn } from "@/lib/utils";
 export const Route = createFileRoute("/admin/documents")({
   head: () => ({
     meta: [
-      { title: "Documents — STE MABANIS" },
+      { title: "Documents   STE MABANIS" },
       { name: "description", content: "Centre documentaire de l'agence." },
     ],
   }),
@@ -386,7 +386,7 @@ function UploadModal({
           ) : (
             <>
               <p className="text-sm text-navy">Glissez un fichier ici ou cliquez pour parcourir</p>
-              <p className="text-xs text-muted-foreground">PDF, images, documents — 20 Mo max</p>
+              <p className="text-xs text-muted-foreground">PDF, images, documents   20 Mo max</p>
             </>
           )}
           <input
@@ -420,7 +420,7 @@ function UploadModal({
               onChange={(e) => setPropertyId(e.target.value)}
               className="h-11 rounded-md border border-line bg-admin-bg/40 px-3 text-sm outline-none focus:border-gold"
             >
-              <option value="">—</option>
+              <option value=""> </option>
               {properties.map((p) => (
                 <option key={p.id} value={p.id}>
                   {p.title} ({p.reference})
@@ -435,7 +435,7 @@ function UploadModal({
               onChange={(e) => setClientId(e.target.value)}
               className="h-11 rounded-md border border-line bg-admin-bg/40 px-3 text-sm outline-none focus:border-gold"
             >
-              <option value="">—</option>
+              <option value=""> </option>
               {clients.map((c) => (
                 <option key={c.id} value={c.id}>
                   {c.firstName} {c.lastName}

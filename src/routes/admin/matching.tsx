@@ -18,7 +18,7 @@ import { cn } from "@/lib/utils";
 export const Route = createFileRoute("/admin/matching")({
   head: () => ({
     meta: [
-      { title: "Matching — STE MABANIS" },
+      { title: "Matching   STE MABANIS" },
       { name: "description", content: "Correspondances entre biens et clients." },
     ],
   }),
@@ -239,7 +239,7 @@ function ClientTab({
                       {c.firstName} {c.lastName}
                     </span>
                     <span className="block truncate text-xs text-muted-foreground">
-                      {c.city ?? "—"} · {label(ROLE_LABELS, c.roles[0] ?? "buyer")}
+                      {c.city ?? " "} · {label(ROLE_LABELS, c.roles[0] ?? "buyer")}
                     </span>
                   </span>
                   <Check
@@ -427,7 +427,7 @@ function PropertyTab({
                           {client.firstName} {client.lastName}
                         </h3>
                         <span className="text-xs text-muted-foreground">
-                          {client.city ?? "—"} ·{" "}
+                          {client.city ?? " "} ·{" "}
                           {client.budgetMin !== undefined && client.budgetMax !== undefined
                             ? `${formatMoney(client.budgetMin, true)} – ${formatMoney(client.budgetMax, true)}`
                             : "Budget non renseigné"}

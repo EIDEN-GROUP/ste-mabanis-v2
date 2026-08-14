@@ -39,10 +39,13 @@ function Home() {
 
   return (
     <>
-      <HomeHero />
+      {/* Phones get the search panel inside the hero, over the video */}
+      <HomeHero>
+        <HeroSearch />
+      </HomeHero>
 
-      {/* Search bar straddles the hero edge on desktop, sits below it on mobile */}
-      <div className="relative z-30 mx-auto -mt-px max-w-[100rem] px-5 sm:px-8 lg:-mt-[5.5rem] lg:px-12">
+      {/* From lg the panel straddles the hero's bottom edge instead */}
+      <div className="relative z-30 mx-auto hidden max-w-[100rem] px-5 sm:px-8 lg:-mt-[5.5rem] lg:block lg:px-12">
         <HeroSearch />
       </div>
 

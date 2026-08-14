@@ -7,7 +7,7 @@ import { images } from "@/lib/site-data";
 /**
  * The curtain. It sticks to the top of the viewport for the whole height of the
  * footer, so the dark information block below travels up and closes over it
- * instead of pushing it away — the last scene of the page rather than a banner.
+ * instead of pushing it away   the last scene of the page rather than a banner.
  *
  * Progress is measured over the window between "footer top enters the viewport"
  * and "footer top reaches the viewport top". The element has not pinned yet

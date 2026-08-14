@@ -1,11 +1,12 @@
 import { useEffect, useRef, useState } from "react";
 import { useQuery } from "@tanstack/react-query";
 import { useNavigate, useRouterState } from "@tanstack/react-router";
-import { Bell, Check, ChevronDown, Menu, Search, UserRound } from "lucide-react";
+import { Bell, Check, ChevronDown, LogOut, Menu, Search, UserRound } from "lucide-react";
+import { signOut } from "@/lib/admin/auth";
 import { notificationsQuery } from "@/lib/admin/queries";
 import { allNavItemsFor, pathAllowedFor } from "@/lib/admin/nav";
 import { useAgentsForRole, useSession } from "@/lib/admin/session";
-import { STAFF_ROLES, type StaffRole } from "@/lib/admin/types";
+import { STAFF_ROLES, type RoleInfo, type StaffRole } from "@/lib/admin/types";
 import { toast } from "@/components/admin/primitives";
 import { cn } from "@/lib/utils";
 
@@ -18,6 +19,27 @@ function useCurrentTitle() {
     .sort((a, b) => b.to.length - a.to.length)
     .find((i) => (i.to === "/admin" ? pathname === "/admin" : pathname.startsWith(i.to)));
   return match?.label ?? "Administration";
+}
+
+/** Une ligne d'espace de travail : point, libellé, accroche, coche si actif. */
+function RoleRow({ info, active }: { info: RoleInfo; active: boolean }) {
+  return (
+    <>
+      <span
+        className={cn(
+          "mt-1.5 size-2 shrink-0 rounded-full",
+          active ? "bg-gold" : "bg-muted-foreground/40",
+        )}
+      />
+      <span className="min-w-0 flex-1">
+        <span className="flex items-center gap-2 text-sm font-medium text-navy">
+          {info.label}
+          {active ? <Check className="size-3.5 text-gold" /> : null}
+        </span>
+        <span className="block text-xs text-muted-foreground">{info.tagline}</span>
+      </span>
+    </>
+  );
 }
 
 export function AdminHeader({
@@ -60,7 +82,7 @@ export function AdminHeader({
       const first = allNavItemsFor(next)[0];
       if (first) void navigate({ to: first.to });
     }
-    toast.success("Espace activé", `${STAFF_ROLES[next].label} — ${STAFF_ROLES[next].tagline}.`);
+    toast.success("Espace activé", `${STAFF_ROLES[next].label}   ${STAFF_ROLES[next].tagline}.`);
   };
 
   const pickAgent = (id: string) => {
@@ -133,38 +155,40 @@ export function AdminHeader({
                 Mon espace de travail
               </p>
               <p className="mt-0.5 text-xs text-muted-foreground">
-                Choisissez un rôle pour voir ses accès et ses actions.
+                {role === "directrice"
+                  ? "Choisissez un rôle pour voir ses accès et ses actions."
+                  : "Vous êtes connecté(e) à cet espace."}
               </p>
             </div>
 
             <ul className="scrollbar-gold max-h-72 overflow-y-auto [--scroll-track:var(--admin-surface)]">
-              {ROLE_ORDER.map((r) => {
+              {ROLE_ORDER.filter((r) => r === role || role === "directrice").map((r) => {
                 const info = STAFF_ROLES[r];
                 const active = r === role;
+                const switchable = role === "directrice";
                 return (
                   <li key={r}>
-                    <button
-                      type="button"
-                      onClick={() => pickRole(r)}
-                      className={cn(
-                        "flex w-full items-start gap-3 px-4 py-3 text-left transition-colors",
-                        active ? "bg-sand" : "hover:bg-sand/60",
-                      )}
-                    >
-                      <span
+                    {switchable ? (
+                      <button
+                        type="button"
+                        onClick={() => pickRole(r)}
                         className={cn(
-                          "mt-1.5 size-2 shrink-0 rounded-full",
-                          active ? "bg-gold" : "bg-muted-foreground/40",
+                          "flex w-full items-start gap-3 px-4 py-3 text-left transition-colors",
+                          active ? "bg-sand" : "hover:bg-sand/60",
                         )}
-                      />
-                      <span className="min-w-0 flex-1">
-                        <span className="flex items-center gap-2 text-sm font-medium text-navy">
-                          {info.label}
-                          {active ? <Check className="size-3.5 text-gold" /> : null}
-                        </span>
-                        <span className="block text-xs text-muted-foreground">{info.tagline}</span>
-                      </span>
-                    </button>
+                      >
+                        <RoleRow info={info} active={active} />
+                      </button>
+                    ) : (
+                      <div
+                        className={cn(
+                          "flex w-full items-start gap-3 px-4 py-3 text-left",
+                          active && "bg-sand",
+                        )}
+                      >
+                        <RoleRow info={info} active={active} />
+                      </div>
+                    )}
                   </li>
                 );
               })}
@@ -211,6 +235,21 @@ export function AdminHeader({
                 ))}
               </ul>
             </div>
+
+            <button
+              type="button"
+              onClick={() => {
+                signOut();
+                // Rechargement franc plutôt que navigation interne : le cache
+                // React Query et le contexte de session gardent les données du
+                // rôle qui part, et l'écran de connexion vit hors de ce layout.
+                window.location.assign("/admin/login");
+              }}
+              className="flex w-full items-center gap-2.5 border-t border-line px-4 py-3 text-sm text-navy transition-colors hover:bg-sand"
+            >
+              <LogOut className="size-3.5 text-gold" />
+              Se déconnecter
+            </button>
           </div>
         ) : null}
       </div>

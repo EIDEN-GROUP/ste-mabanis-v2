@@ -4,7 +4,7 @@ import { EASE } from "@/components/motion";
 /**
  * The wordmark as a graphic element: outlined type, no fill, sized in viewport
  * units so it runs nearly edge to edge. It climbs its full height out of a mask
- * on arrival — the trigger sits on the unclipped wrapper, because a child
+ * on arrival   the trigger sits on the unclipped wrapper, because a child
  * translated fully below an overflow-hidden box never intersects the viewport
  * and so could never trigger itself.
  */

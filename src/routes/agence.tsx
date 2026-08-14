@@ -54,10 +54,10 @@ function AboutPage() {
   const hash = useRouterState({ select: (s) => s.location.hash });
 
   // /agence#services and /agence#equipe are the redirect targets of the two old
-  // pages, so arrivals have to land on the right band — clear of the fixed
+  // pages, so arrivals have to land on the right band   clear of the fixed
   // header. Two other scrollers fire first on arrival: the root layout snaps
   // Lenis to the top, and the router jumps the fragment flush to the viewport
-  // top. Hence the second frame — it lands after both, so the offset holds.
+  // top. Hence the second frame   it lands after both, so the offset holds.
   useEffect(() => {
     if (!hash) return;
     let inner = 0;
@@ -97,7 +97,7 @@ function AboutPage() {
         </nav>
       </PageHero>
 
-      {/* 01 — Histoire : le grand portrait à gauche, le texte et le détail à droite. */}
+      {/* 01   Histoire : le grand portrait à gauche, le texte et le détail à droite. */}
       <Section id="histoire" className="scroll-mt-[5.5rem]">
         <div className="grid gap-10 lg:grid-cols-[minmax(0,40fr)_minmax(0,60fr)] lg:gap-16 xl:gap-20">
           <MaskReveal className="zoom-frame rounded-md">
@@ -175,7 +175,7 @@ function AboutPage() {
         </div>
       </Section>
 
-      {/* 02 — Chiffres */}
+      {/* 02   Chiffres */}
       <section className="bg-ink px-5 py-16 text-white sm:px-8 sm:py-20 lg:px-12 lg:py-24">
         <div className="mx-auto max-w-[100rem]">
           <Reveal>
@@ -197,7 +197,7 @@ function AboutPage() {
         </div>
       </section>
 
-      {/* 03 — Valeurs. The band runs edge to edge, so the heading keeps the
+      {/* 03   Valeurs. The band runs edge to edge, so the heading keeps the
           container and the panels sit outside it. */}
       <section id="valeurs" className="scroll-mt-[5.5rem] bg-sand pt-16 sm:pt-24 lg:pt-32 pb-0!">
         <div className="mx-auto max-w-[100rem] px-5 sm:px-8 lg:px-12">
@@ -212,10 +212,10 @@ function AboutPage() {
         </Reveal>
       </section>
 
-      {/* 04 — Services (l'ancienne page /services) */}
+      {/* 04   Services (l'ancienne page /services) */}
       <AgencyServices />
 
-      {/* 05 — Équipe. Le rail déborde à droite, donc le titre garde le conteneur. */}
+      {/* 05   Équipe. Le rail déborde à droite, donc le titre garde le conteneur. */}
       {/* <section id="equipe" className="scroll-mt-[5.5rem] py-16 sm:py-24 lg:py-32">
         <div className="mx-auto max-w-[100rem] px-5 sm:px-8 lg:px-12">
           <SectionHeading

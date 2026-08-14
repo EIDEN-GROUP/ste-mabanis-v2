@@ -362,7 +362,7 @@ export type MarketingCampaign = {
   subject: string;
   channel: CampaignChannel;
   status: CampaignStatus;
-  /** Segment description, e.g. "Acheteurs Marina — budget > 2 M MAD". */
+  /** Segment description, e.g. "Acheteurs Marina   budget > 2 M MAD". */
   audience: string;
   audienceCount: number;
   sentAt?: string | undefined;

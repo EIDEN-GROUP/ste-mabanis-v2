@@ -25,13 +25,13 @@ const mapLink = `https://www.google.com/maps/search/?api=1&query=${encodeURIComp
 export const Route = createFileRoute("/contact")({
   head: () => ({
     meta: [
-      { title: "Contact — STE MABANIS, agence immobilière à Anza, Agadir" },
+      { title: "Contact   STE MABANIS, agence immobilière à Anza, Agadir" },
       {
         name: "description",
         content:
           "Contactez STE MABANIS à Anza, Agadir : adresse, téléphone, WhatsApp, e-mail et formulaire de demande. Un conseiller vous répond sous 24 heures ouvrées.",
       },
-      { property: "og:title", content: "Contact — STE MABANIS Agadir" },
+      { property: "og:title", content: "Contact   STE MABANIS Agadir" },
       {
         property: "og:description",
         content: "Un conseiller vous répond sous 24 heures ouvrées.",

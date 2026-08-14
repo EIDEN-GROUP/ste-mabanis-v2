@@ -6,13 +6,13 @@ import { images, testimonials } from "@/lib/site-data";
 export const Route = createFileRoute("/temoignages")({
   head: () => ({
     meta: [
-      { title: "Témoignages clients — STE MABANIS Agadir" },
+      { title: "Témoignages clients   STE MABANIS Agadir" },
       {
         name: "description",
         content:
           "Acheteurs, vendeurs, investisseurs et propriétaires racontent leur expérience avec l'agence STE MABANIS à Agadir.",
       },
-      { property: "og:title", content: "Témoignages clients — STE MABANIS" },
+      { property: "og:title", content: "Témoignages clients   STE MABANIS" },
       {
         property: "og:description",
         content: "Ce que disent nos clients, y compris quand nous les avons contredits.",

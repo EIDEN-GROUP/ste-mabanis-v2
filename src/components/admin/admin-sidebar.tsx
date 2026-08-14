@@ -76,7 +76,7 @@ function NavRow({
     return (
       <span
         className={cn(className, "cursor-not-allowed opacity-60")}
-        title={`${item.label} — phase ${item.phase}`}
+        title={`${item.label}   phase ${item.phase}`}
         style={{ ["--i" as string]: index }}
       >
         {body}
@@ -126,7 +126,7 @@ export function AdminSidebar({
         <Link to="/admin" className="flex min-w-0 items-center gap-3">
           {/* Sized by width, because width is what the collapsed rail rations:
               the lockup is 1254×717, so the old h-8 drew it 56px wide inside a
-              72px rail whose padding left 40px — hence the clipping. w-10 is
+              72px rail whose padding left 40px   hence the clipping. w-10 is
               40px × 23px collapsed, w-12 is 48px × 27px expanded. */}
           <img
             src={logo}
@@ -178,8 +178,8 @@ export function AdminSidebar({
       </nav>
 
       <div className="shrink-0 border-t border-white/10 p-3">
-        <Link
-          to="/"
+        <a
+          href="/"
           className={cn(
             "group mb-2 flex items-center gap-3 px-1 py-2 text-[0.75rem] text-admin-sidebar-muted transition-colors hover:text-gold",
             collapsed && "justify-center",
@@ -190,7 +190,7 @@ export function AdminSidebar({
           <span className={cn("truncate transition-opacity duration-300", collapsed && "hidden")}>
             Voir le site
           </span>
-        </Link>
+        </a>
         <button
           type="button"
           onClick={onToggle}

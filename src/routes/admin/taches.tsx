@@ -38,7 +38,7 @@ import { cn } from "@/lib/utils";
 export const Route = createFileRoute("/admin/taches")({
   head: () => ({
     meta: [
-      { title: "Tâches — STE MABANIS" },
+      { title: "Tâches   STE MABANIS" },
       { name: "description", content: "Suivi des tâches de l'agence." },
     ],
   }),
@@ -461,7 +461,7 @@ function TaskFormModal({
             onChange={(e) => setAssigneeId(e.target.value)}
             className={fieldCls}
           >
-            <option value="">—</option>
+            <option value=""> </option>
             {agents.map((a) => (
               <option key={a.id} value={a.id}>
                 {a.name}

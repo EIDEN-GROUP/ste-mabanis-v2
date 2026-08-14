@@ -12,7 +12,7 @@ import { cn } from "@/lib/utils";
 export const Route = createFileRoute("/admin/rapports")({
   head: () => ({
     meta: [
-      { title: "Rapports — STE MABANIS" },
+      { title: "Rapports   STE MABANIS" },
       { name: "description", content: "Rapports immobiliers exportables en CSV et PDF." },
     ],
   }),
@@ -152,7 +152,7 @@ function ReportsPage() {
                 <div>
                   <h2 className="display text-xl">{TAB_TITLES[tab]}</h2>
                   <p className="mt-1 text-sm text-muted-foreground">
-                    {formatDate(report.from)} — {formatDate(report.to)}
+                    {formatDate(report.from)}   {formatDate(report.to)}
                   </p>
                 </div>
               </div>
@@ -264,7 +264,7 @@ function printReport(report?: Report) {
   const headers = report.table.columns.map((c) => `<th>${escapeHtml(c)}</th>`).join("");
   const body = [
     `<h1>${escapeHtml(report.title)}</h1>`,
-    `<p class="period">STE MABANIS · ${escapeHtml(formatDate(report.from))} — ${escapeHtml(formatDate(report.to))}</p>`,
+    `<p class="period">STE MABANIS · ${escapeHtml(formatDate(report.from))}   ${escapeHtml(formatDate(report.to))}</p>`,
     `<table><thead><tr>${headers}</tr></thead><tbody>${rows}</tbody></table>`,
     `<p class="foot">Généré le ${escapeHtml(formatDate(new Date().toISOString()))}</p>`,
   ].join("");

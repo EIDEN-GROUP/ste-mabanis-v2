@@ -8,7 +8,7 @@ import { images, locations, propertyTypes } from "@/lib/site-data";
 export const Route = createFileRoute("/vendre")({
   head: () => ({
     meta: [
-      { title: "Vendre son bien à Agadir — Estimation gratuite | STE MABANIS" },
+      { title: "Vendre son bien à Agadir   Estimation gratuite | STE MABANIS" },
       {
         name: "description",
         content:

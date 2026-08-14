@@ -13,14 +13,14 @@ const SHELL = "mx-auto max-w-[100rem] px-5 sm:px-8 lg:px-12";
  * The seven métiers, folded into one cinematic band on the dark ground the
  * homepage uses for its services. One row is open at a time: seven expanded
  * lists of commitments would be a wall of text, and the fold keeps the eye on
- * the titles — the same gesture as the homepage rows, at a scale that survives
+ * the titles   the same gesture as the homepage rows, at a scale that survives
  * seven of them.
  */
 export function AgencyServices() {
   const [open, setOpen] = useState<string | null>(services[0]!.slug);
 
-  // `scroll-mt`: the header is fixed, so every scroller — native fragment jump,
-  // router, Lenis — has to stop short of it.
+  // `scroll-mt`: the header is fixed, so every scroller   native fragment jump,
+  // router, Lenis   has to stop short of it.
   return (
     <section id="services" className="scroll-mt-[5.5rem] bg-ink text-white">
       <div className={cn(SHELL, "pt-20 pb-14 sm:pt-24 sm:pb-16 lg:pt-28 lg:pb-20")}>

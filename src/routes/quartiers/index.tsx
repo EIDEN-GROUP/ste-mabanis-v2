@@ -6,7 +6,7 @@ import { images, locations, propertiesByLocation } from "@/lib/site-data";
 export const Route = createFileRoute("/quartiers/")({
   head: () => ({
     meta: [
-      { title: "Quartiers d'Agadir : où acheter ou louer — STE MABANIS" },
+      { title: "Quartiers d'Agadir : où acheter ou louer   STE MABANIS" },
       {
         name: "description",
         content:

@@ -22,7 +22,7 @@ const legal = [
  * The closing scene: a pinned cinematic CTA, then a dark block that travels up
  * and closes over it like a curtain, ending on the wordmark at full width.
  *
- * The curtain is pure layout — the CTA is `sticky top-0` inside the tall footer,
+ * The curtain is pure layout   the CTA is `sticky top-0` inside the tall footer,
  * and this block sits above it in the stacking order with an opaque background.
  * No fixed positioning, so the footer can be any height and everything inside
  * stays scrollable and clickable.
@@ -80,7 +80,7 @@ function LegalBar() {
         <ul className="grid grid-cols-2 gap-x-4 gap-y-1.5 sm:flex sm:flex-wrap sm:gap-x-7 sm:gap-y-2">
           {legal.map((item) => (
             <li key={item}>
-              {/* These pages do not exist in the router yet — styled as links,
+              {/* These pages do not exist in the router yet   styled as links,
                   not wired as ones, so none of them leads to a 404. */}
               <span className="cursor-pointer transition-colors duration-500 hover:text-white/80">
                 {item}

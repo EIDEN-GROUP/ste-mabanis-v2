@@ -31,13 +31,13 @@ export const Route = createFileRoute("/proprietes/$slug")({
     if (!loaderData) {
       return {
         meta: [
-          { title: "Bien indisponible — STE MABANIS" },
+          { title: "Bien indisponible   STE MABANIS" },
           { name: "robots", content: "noindex" },
         ],
       };
     }
     const p = loaderData.property;
-    const title = `${p.title} — ${formatMAD(p.price)} MAD | STE MABANIS`;
+    const title = `${p.title}   ${formatMAD(p.price)} MAD | STE MABANIS`;
     const description = `${p.type} de ${p.surface} m² à ${p.neighborhood}, ${p.city}. ${p.bedrooms} chambres, ${p.bathrooms} salles de bain. Référence ${p.reference}.`;
     return {
       meta: [
@@ -71,7 +71,7 @@ function PropertyDetail() {
             <img
               key={src + i}
               src={src}
-              alt={`${property.title} — photo ${i + 1}`}
+              alt={`${property.title}   photo ${i + 1}`}
               width={1280}
               height={960}
               className={cn(
@@ -226,7 +226,7 @@ function PropertyDetail() {
               <h2 className="display rule-gold text-3xl">Situation</h2>
               <div className="mt-5 aspect-16/9 w-full overflow-hidden rounded-md border border-line">
                 <iframe
-                  title={`Carte — ${property.neighborhood}`}
+                  title={`Carte   ${property.neighborhood}`}
                   src={`https://www.google.com/maps?q=${encodeURIComponent(property.mapQuery)}&output=embed`}
                   loading="lazy"
                   className="h-full w-full"
@@ -277,7 +277,7 @@ function PropertyDetail() {
               <LeadForm
                 intent={`property:${property.reference}`}
                 submitLabel="Planifier une visite"
-                note={`Réf. ${property.reference} — nous vous proposons deux créneaux sous 24 h.`}
+                note={`Réf. ${property.reference}   nous vous proposons deux créneaux sous 24 h.`}
                 fields={[
                   { name: "nom", label: "Nom et prénom", required: true },
                   { name: "telephone", label: "Téléphone", type: "tel", required: true },
@@ -307,7 +307,7 @@ function PropertyDetail() {
 
             <a
               href={`https://wa.me/${agency.whatsapp}?text=${encodeURIComponent(
-                `Bonjour, je suis intéressé par le bien ${property.reference} — ${property.title}.`,
+                `Bonjour, je suis intéressé par le bien ${property.reference}   ${property.title}.`,
               )}`}
               target="_blank"
               rel="noreferrer noopener"

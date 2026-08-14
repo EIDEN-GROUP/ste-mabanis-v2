@@ -9,7 +9,7 @@ const ways = [
     word: "Acheter",
     to: "/proprietes" as const,
     image: images.property1,
-    text: "Une sélection resserrée de villas, appartements et terrains à Agadir, Founty, la Marina et Taghazout — chaque bien visité et vérifié avant d'être proposé.",
+    text: "Une sélection resserrée de villas, appartements et terrains à Agadir, Founty, la Marina et Taghazout   chaque bien visité et vérifié avant d'être proposé.",
   },
   {
     word: "Vendre",
@@ -28,7 +28,7 @@ const ways = [
 /**
  * One full-bleed row per métier. The row is navy at rest; on hover its photo
  * rises behind the text, the word gets underlined and the arrow slides in.
- * Driven by `group-hover` rather than React state — hover is a CSS concern,
+ * Driven by `group-hover` rather than React state   hover is a CSS concern,
  * and this way it costs no render. Touch devices never hover, so there the
  * photo stays faintly visible instead of never showing at all.
  */

@@ -1,5 +1,5 @@
 /**
- * Repository layer — the ONLY module that knows where admin data lives.
+ * Repository layer   the ONLY module that knows where admin data lives.
  *
  * Today it reads the in-memory seed. To move to Supabase, implement
  * `AdminRepository` against the client and swap `repository` below; no screen,
@@ -681,7 +681,7 @@ export const inMemoryRepository: AdminRepository = {
     pushActivity({
       kind: "note",
       subject: "Bien créé",
-      body: `Fiche ${property.reference} — ${property.title}`,
+      body: `Fiche ${property.reference}   ${property.title}`,
       propertyId: id,
     });
     return property;
@@ -713,7 +713,7 @@ export const inMemoryRepository: AdminRepository = {
     pushActivity({
       kind: "note",
       subject: "Bien mis à jour",
-      body: `${next.reference} — ${next.title}`,
+      body: `${next.reference}   ${next.title}`,
       propertyId: id,
     });
     return next;
@@ -747,7 +747,7 @@ export const inMemoryRepository: AdminRepository = {
       pushNotification({
         kind: "transaction",
         title: status === "sold" ? "Bien vendu" : "Bien loué",
-        body: `${next.reference} — ${next.title} quitte le marché.`,
+        body: `${next.reference}   ${next.title} quitte le marché.`,
         href: "/admin/proprietes",
       });
       // Automation: close any open transaction on this property.
@@ -761,7 +761,7 @@ export const inMemoryRepository: AdminRepository = {
           runAutomation(
             "soldClosesTransaction",
             "Transaction clôturée",
-            `${txn.reference} — ${next.reference} passe à l'étape clôture.`,
+            `${txn.reference}   ${next.reference} passe à l'étape clôture.`,
           );
         }
       }
@@ -878,7 +878,7 @@ export const inMemoryRepository: AdminRepository = {
     pushActivity({
       kind: "note",
       subject: "Client créé",
-      body: `${client.firstName} ${client.lastName} — ${client.email}`,
+      body: `${client.firstName} ${client.lastName}   ${client.email}`,
       clientId: client.id,
     });
     return client;
@@ -945,7 +945,7 @@ export const inMemoryRepository: AdminRepository = {
     pushActivity({
       kind: "note",
       subject: "Lead créé",
-      body: `${client?.firstName ?? "Client"} ${client?.lastName ?? ""} — ${lead.stage}`,
+      body: `${client?.firstName ?? "Client"} ${client?.lastName ?? ""}   ${lead.stage}`,
       clientId: lead.clientId,
       propertyId: lead.propertyId,
       leadId: lead.id,
@@ -963,13 +963,13 @@ export const inMemoryRepository: AdminRepository = {
       pushNotification({
         kind: "lead",
         title: "Nouveau lead",
-        body: `${client?.firstName ?? ""} ${client?.lastName ?? ""} — à contacter sous 24 h.`,
+        body: `${client?.firstName ?? ""} ${client?.lastName ?? ""}   à contacter sous 24 h.`,
         href: "/admin/crm",
       });
       runAutomation(
         "leadFirstContact",
         "Premier contact planifié",
-        `${client?.firstName ?? ""} ${client?.lastName ?? ""} — tâche créée pour ${lead.agentId}.`,
+        `${client?.firstName ?? ""} ${client?.lastName ?? ""}   tâche créée pour ${lead.agentId}.`,
       );
     }
     return lead;
@@ -1015,7 +1015,7 @@ export const inMemoryRepository: AdminRepository = {
       subject: "Demande reçue via le site",
       body: input.message?.trim()
         ? input.message.trim()
-        : `Intent : ${input.intent ?? "contact"}${property ? ` — ${property.reference}` : ""}`,
+        : `Intent : ${input.intent ?? "contact"}${property ? `   ${property.reference}` : ""}`,
       clientId: client.id,
       propertyId: property?.id,
       leadId: lead.id,
@@ -1044,7 +1044,7 @@ export const inMemoryRepository: AdminRepository = {
     pushActivity({
       kind: "note",
       subject: "Lead mis à jour",
-      body: `${client?.firstName ?? ""} ${client?.lastName ?? ""} — score ${next.score}, ${next.temperature}`,
+      body: `${client?.firstName ?? ""} ${client?.lastName ?? ""}   score ${next.score}, ${next.temperature}`,
       clientId: next.clientId,
       propertyId: next.propertyId,
       leadId: id,
@@ -1072,7 +1072,7 @@ export const inMemoryRepository: AdminRepository = {
       pushNotification({
         kind: "lead",
         title: "Lead gagné",
-        body: `${client?.firstName ?? ""} ${client?.lastName ?? ""} — ouvrir une transaction.`,
+        body: `${client?.firstName ?? ""} ${client?.lastName ?? ""}   ouvrir une transaction.`,
         href: "/admin/transactions",
       });
     }
@@ -1120,7 +1120,7 @@ export const inMemoryRepository: AdminRepository = {
     const client = input.clientId ? clients.find((c) => c.id === input.clientId) : undefined;
     pushActivity({
       kind: "viewing",
-      subject: `Rendez-vous planifié — ${appointment.kind}`,
+      subject: `Rendez-vous planifié   ${appointment.kind}`,
       body: `${appointment.title} à ${new Date(appointment.startsAt).toLocaleTimeString("fr-FR", { hour: "2-digit", minute: "2-digit" })}`,
       clientId: appointment.clientId,
       propertyId: appointment.propertyId,
@@ -1128,7 +1128,7 @@ export const inMemoryRepository: AdminRepository = {
     pushNotification({
       kind: "appointment",
       title: "Rendez-vous planifié",
-      body: `${client?.firstName ?? ""} ${client?.lastName ?? ""} — ${appointment.title}`,
+      body: `${client?.firstName ?? ""} ${client?.lastName ?? ""}   ${appointment.title}`,
       href: "/admin/agenda",
     });
     // Automation: a scheduled viewing must be confirmed by the agent.
@@ -1144,7 +1144,7 @@ export const inMemoryRepository: AdminRepository = {
       runAutomation(
         "visitConfirmTask",
         "Visite à confirmer",
-        `${appointment.title} — ${new Date(appointment.startsAt).toLocaleDateString("fr-FR")} ${new Date(appointment.startsAt).toLocaleTimeString("fr-FR", { hour: "2-digit", minute: "2-digit" })}.`,
+        `${appointment.title}   ${new Date(appointment.startsAt).toLocaleDateString("fr-FR")} ${new Date(appointment.startsAt).toLocaleTimeString("fr-FR", { hour: "2-digit", minute: "2-digit" })}.`,
       );
     }
     return appointment;
@@ -1194,7 +1194,7 @@ export const inMemoryRepository: AdminRepository = {
       runAutomation(
         "visitConfirmTask",
         "Débrief demandé",
-        `${current.title} — terminé, compte-rendu à rédiger.`,
+        `${current.title}   terminé, compte-rendu à rédiger.`,
       );
     }
     return appointments[i]!;
@@ -1209,7 +1209,7 @@ export const inMemoryRepository: AdminRepository = {
     pushActivity({
       kind: "viewing",
       subject: "Compte-rendu de visite",
-      body: `Intérêt ${report.interest}/5 — ${report.outcome}`,
+      body: `Intérêt ${report.interest}/5   ${report.outcome}`,
       clientId: current.clientId,
       propertyId: current.propertyId,
     });
@@ -1319,14 +1319,14 @@ export const inMemoryRepository: AdminRepository = {
     pushActivity({
       kind: "offer",
       subject: "Transaction ouverte",
-      body: `${txn.reference} — ${property?.reference ?? ""}`,
+      body: `${txn.reference}   ${property?.reference ?? ""}`,
       clientId: txn.buyerClientId,
       propertyId: txn.propertyId,
     });
     pushNotification({
       kind: "transaction",
       title: "Transaction ouverte",
-      body: `${txn.reference} — ${property?.title ?? ""}`,
+      body: `${txn.reference}   ${property?.title ?? ""}`,
       href: "/admin/transactions",
     });
     return txn;
@@ -1353,7 +1353,7 @@ export const inMemoryRepository: AdminRepository = {
       pushNotification({
         kind: "transaction",
         title: "Transaction clôturée",
-        body: `${current.reference} — bravo, dossier bouclé.`,
+        body: `${current.reference}   bravo, dossier bouclé.`,
         href: "/admin/transactions",
       });
     }
@@ -1375,7 +1375,7 @@ export const inMemoryRepository: AdminRepository = {
     pushActivity({
       kind: "note",
       subject: "Paiement planifié",
-      body: `${payment.label} — ${payment.amount} MAD`,
+      body: `${payment.label}   ${payment.amount} MAD`,
       clientId: current.buyerClientId,
       propertyId: current.propertyId,
     });
@@ -1395,7 +1395,7 @@ export const inMemoryRepository: AdminRepository = {
     pushActivity({
       kind: "note",
       subject: "Paiement encaissé",
-      body: `${payment?.label ?? "Paiement"} — ${payment?.amount ?? 0} MAD`,
+      body: `${payment?.label ?? "Paiement"}   ${payment?.amount ?? 0} MAD`,
       clientId: current.buyerClientId,
       propertyId: current.propertyId,
     });
@@ -1571,7 +1571,7 @@ export const inMemoryRepository: AdminRepository = {
     pushActivity({
       kind: "email",
       subject: "Campagne créée",
-      body: `${campaign.name} — brouillon.`,
+      body: `${campaign.name}   brouillon.`,
     });
     return campaign;
   },
@@ -1595,7 +1595,7 @@ export const inMemoryRepository: AdminRepository = {
     pushActivity({
       kind: "email",
       subject: "Campagne envoyée",
-      body: `${sent.name} — ${sent.audienceCount} destinataires, 3 conversions estimées.`,
+      body: `${sent.name}   ${sent.audienceCount} destinataires, 3 conversions estimées.`,
     });
     return sent;
   },
@@ -1674,7 +1674,7 @@ export const inMemoryRepository: AdminRepository = {
     const refs = propertyIds
       .map((pid) => properties.find((p) => p.id === pid))
       .filter(Boolean)
-      .map((p) => `${p!.reference} — ${p!.title}`);
+      .map((p) => `${p!.reference}   ${p!.title}`);
     pushActivity({
       kind: "email",
       subject: "Suggestions de biens envoyées",
@@ -1684,7 +1684,7 @@ export const inMemoryRepository: AdminRepository = {
     pushNotification({
       kind: "lead",
       title: "Suggestions envoyées",
-      body: `${client.firstName} ${client.lastName} — ${refs.length} biens transmis par e-mail.`,
+      body: `${client.firstName} ${client.lastName}   ${refs.length} biens transmis par e-mail.`,
       href: "/admin/matching",
     });
     return refs.length;
@@ -1732,7 +1732,7 @@ export const inMemoryRepository: AdminRepository = {
     if (!lead) return null;
     const client = clients.find((c) => c.id === lead.clientId);
     const task = pushTask({
-      title: "Relance — lead inactif",
+      title: "Relance   lead inactif",
       status: "todo",
       priority: "high",
       dueAt: new Date(Date.now() + 24 * 3_600_000).toISOString(),
@@ -1742,7 +1742,7 @@ export const inMemoryRepository: AdminRepository = {
     runAutomation(
       "inactiveLeadRelance",
       "Relance planifiée",
-      `${client?.firstName ?? ""} ${client?.lastName ?? ""} — rappel de l'agent sous 24 h.`,
+      `${client?.firstName ?? ""} ${client?.lastName ?? ""}   rappel de l'agent sous 24 h.`,
     );
     return task;
   },

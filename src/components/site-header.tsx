@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { Link, useRouterState } from "@tanstack/react-router";
 import { Phone, Mail, Facebook, AtSign, Instagram, LayoutDashboard } from "lucide-react";
 import logo from "@/assets/mabanis-logo.png";
-import { setScrollLocked } from "@/components/smooth-scroll";
+import { setScrollLocked } from "@/lib/scroll-lock";
 import { agency, images, socials } from "@/lib/site-data";
 import { cn } from "@/lib/utils";
 
@@ -13,7 +13,7 @@ const SOCIAL_ICONS = {
   Facebook,
 } as const;
 
-/** Slim inline nav — the full site map lives in the overlay menu. */
+/** Slim inline nav   the full site map lives in the overlay menu. */
 const nav = [
   { to: "/agence", label: "L'agence" },
   { to: "/proprietes", label: "Propriétés" },
@@ -106,16 +106,14 @@ export function SiteHeader() {
 
   useEffect(() => {
     if (!open) return;
-    const prev = document.body.style.overflow;
-    document.body.style.overflow = "hidden";
-    // Lenis drives the scroll itself, so overflow:hidden alone would not stop it.
+    // Le gel du corps et l'arrêt de l'inertie vivent au même endroit : sur iOS,
+    // `overflow: hidden` seul laisse la page filer sous le panneau.
     setScrollLocked(true);
     const onKey = (e: KeyboardEvent) => {
       if (e.key === "Escape") setOpen(false);
     };
     window.addEventListener("keydown", onKey);
     return () => {
-      document.body.style.overflow = prev;
       setScrollLocked(false);
       window.removeEventListener("keydown", onKey);
     };
@@ -284,7 +282,7 @@ export function SiteHeader() {
         aria-label="Menu principal"
         aria-hidden={!open}
       >
-        {/* Left half — photo, wipes in from the left edge */}
+        {/* Left half   photo, wipes in from the left edge */}
         <div
           className="absolute inset-y-0 left-0 hidden w-1/2 overflow-hidden bg-navy transition-[clip-path] lg:block"
           style={{
@@ -310,7 +308,7 @@ export function SiteHeader() {
           <div className="absolute inset-0 bg-gradient-to-br from-navy/55 via-navy/15 to-transparent" />
         </div>
 
-        {/* Right half — three slices sweeping in after the photo */}
+        {/* Right half   three slices sweeping in after the photo */}
         <div className="absolute inset-y-0 right-0 flex w-full lg:w-1/2">
           {Array.from({ length: SLICES }, (_, i) => (
             <span
@@ -325,7 +323,17 @@ export function SiteHeader() {
         </div>
 
         {/* Menu content */}
-        <div className="absolute inset-y-0 right-0 flex w-full flex-col overflow-y-auto px-6 pt-28 pb-10 sm:px-10 lg:w-1/2 lg:justify-center lg:px-16 lg:pt-16 lg:pb-8 xl:px-24">
+        {/* `data-lenis-prevent` : le défilement inertiel intercepte les gestes
+            au niveau de la fenêtre et, page gelée, les annule. Cet attribut lui
+            dit de ne pas toucher à ce qui se passe dans le panneau   sans lui,
+            le menu est immobile sur téléphone. `h-[100dvh]` (et non `inset-y-0`,
+            qui vaut 100vh) suit la barre d'adresse de Safari : sans lui, sur
+            iPhone, le panneau est plus haut que l'écran visible et le contenu
+            du bas reste hors d'atteinte. */}
+        <div
+          data-lenis-prevent
+          className="absolute top-0 right-0 flex h-[100dvh] w-full flex-col overflow-y-auto overscroll-contain px-6 pt-28 pb-10 sm:px-10 lg:w-1/2 lg:justify-center lg:px-16 lg:pt-16 lg:pb-8 xl:px-24"
+        >
           <div className="grid gap-x-12 gap-y-10 sm:grid-cols-2 lg:gap-y-8">
             {menuGroups.map((group, gi) => (
               <div

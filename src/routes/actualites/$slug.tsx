@@ -13,7 +13,7 @@ export const Route = createFileRoute("/actualites/$slug")({
     if (!loaderData) {
       return {
         meta: [
-          { title: "Article introuvable — STE MABANIS" },
+          { title: "Article introuvable   STE MABANIS" },
           { name: "robots", content: "noindex" },
         ],
       };
@@ -21,7 +21,7 @@ export const Route = createFileRoute("/actualites/$slug")({
     const a = loaderData.article;
     return {
       meta: [
-        { title: `${a.title} — STE MABANIS` },
+        { title: `${a.title}   STE MABANIS` },
         { name: "description", content: a.excerpt },
         { property: "og:title", content: a.title },
         { property: "og:description", content: a.excerpt },

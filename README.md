@@ -11,7 +11,7 @@ TYPOGRAPHY:
 Sarabun Light for navigation, UI, search, buttons and body text
 
 Playfair Display for hero titles, editorial headings and property titles
-(stands in for Safira March, which has no web-font CDN — self-host it and swap
+(stands in for Safira March, which has no web-font CDN   self-host it and swap
 the --font-display stack in src/styles.css to use the real face)
 
 Roboto only inside the back office, scoped by the `font-admin` utility
@@ -305,7 +305,7 @@ Continue developing this project in the [Lovable editor](https://lovable.dev/pro
 
 ## Development
 
-Prefer working locally? You need Node.js and npm — [install with nvm](https://github.com/nvm-sh/nvm#installing-and-updating).
+Prefer working locally? You need Node.js and npm   [install with nvm](https://github.com/nvm-sh/nvm#installing-and-updating).
 
 ```sh
 git clone <this-repository-url>

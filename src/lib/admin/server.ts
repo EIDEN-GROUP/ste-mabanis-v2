@@ -1,5 +1,5 @@
 /**
- * Typed server functions. Screens never touch the repository directly — they go
+ * Typed server functions. Screens never touch the repository directly   they go
  * through these, so authorisation (and later Supabase RLS) has exactly one
  * place to live.
  */

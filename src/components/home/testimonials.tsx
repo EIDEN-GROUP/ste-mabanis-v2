@@ -10,7 +10,7 @@ import { cn } from "@/lib/utils";
 const ROTATE_MS = 7000;
 const VIEWPORT = { once: true, amount: 0.2 } as const;
 
-/** Uncovered left to right — the same gesture as the blog photographs. */
+/** Uncovered left to right   the same gesture as the blog photographs. */
 const WIPE = {
   hidden: { clipPath: "inset(0% 100% 0% 0%)" },
   show: { clipPath: "inset(0% 0% 0% 0%)", transition: { duration: 1.25, ease: EASE } },
@@ -61,7 +61,7 @@ export function TestimonialsSection() {
         onFocusCapture={() => setPaused(true)}
         onBlurCapture={() => setPaused(false)}
       >
-        {/* One fixed photograph for the whole section — it illustrates the band,
+        {/* One fixed photograph for the whole section   it illustrates the band,
             not any single review, so it stays put while the quotes rotate. The
             scroll trigger sits on the wrapper, never on the clipped box: a fully
             clipped element has no visible area, so IntersectionObserver reports a

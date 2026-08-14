@@ -23,7 +23,7 @@ import { cn } from "@/lib/utils";
 export const Route = createFileRoute("/admin/agenda")({
   head: () => ({
     meta: [
-      { title: "Agenda — STE MABANIS" },
+      { title: "Agenda   STE MABANIS" },
       { name: "description", content: "Planning des rendez-vous et visites." },
     ],
   }),
@@ -687,7 +687,7 @@ function AppointmentFormModal({
             onChange={(e) => setClientId(e.target.value)}
             className={fieldCls}
           >
-            <option value="">—</option>
+            <option value=""> </option>
             {clients.map((c) => (
               <option key={c.id} value={c.id}>
                 {c.firstName} {c.lastName}
@@ -702,7 +702,7 @@ function AppointmentFormModal({
             onChange={(e) => setPropertyId(e.target.value)}
             className={fieldCls}
           >
-            <option value="">—</option>
+            <option value=""> </option>
             {properties.map((p) => (
               <option key={p.id} value={p.id}>
                 {p.title}
@@ -713,7 +713,7 @@ function AppointmentFormModal({
         <label className="flex flex-col gap-1.5">
           <span className="text-xs text-muted-foreground uppercase">Agent</span>
           <select value={agentId} onChange={(e) => setAgentId(e.target.value)} className={fieldCls}>
-            <option value="">—</option>
+            <option value=""> </option>
             {agents.map((a) => (
               <option key={a.id} value={a.id}>
                 {a.name}

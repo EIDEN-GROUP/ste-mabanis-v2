@@ -37,7 +37,7 @@ import { cn } from "@/lib/utils";
 export const Route = createFileRoute("/admin/marketing")({
   head: () => ({
     meta: [
-      { title: "Marketing — STE MABANIS" },
+      { title: "Marketing   STE MABANIS" },
       { name: "description", content: "Campagnes, biens à la une et suivi des sources." },
     ],
   }),
@@ -171,7 +171,7 @@ function MarketingPage() {
                         </span>
                       </td>
                       <td className="px-5 py-3 text-muted-foreground tabular-nums">
-                        {isFeatured ? formatDate(until!) : "—"}
+                        {isFeatured ? formatDate(until!) : " "}
                       </td>
                       <td className="px-5 py-3 text-right">
                         <button
@@ -419,7 +419,7 @@ function CampaignModal({ onClose }: { onClose: () => void }) {
           <input
             value={name}
             onChange={(e) => setName(e.target.value)}
-            placeholder="Coup de cœur Marina — Septembre"
+            placeholder="Coup de cœur Marina   Septembre"
             className={fieldCls}
           />
         </label>
@@ -461,7 +461,7 @@ function CampaignModal({ onClose }: { onClose: () => void }) {
           <input
             value={audience}
             onChange={(e) => setAudience(e.target.value)}
-            placeholder="Ex. Acheteurs Marina — budget ≥ 2 M MAD"
+            placeholder="Ex. Acheteurs Marina   budget ≥ 2 M MAD"
             className={fieldCls}
           />
         </label>

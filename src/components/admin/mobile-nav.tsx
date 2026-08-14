@@ -2,6 +2,7 @@ import { useEffect } from "react";
 import { Link, useRouterState } from "@tanstack/react-router";
 import { X, ArrowUpRight } from "lucide-react";
 import logo from "@/assets/mabanis-logo.png";
+import { setScrollLocked } from "@/lib/scroll-lock";
 import { bottomNavItemsFor, navGroupsFor } from "@/lib/admin/nav";
 import { useSession } from "@/lib/admin/session";
 import { cn } from "@/lib/utils";
@@ -18,14 +19,15 @@ export function AdminNavDrawer({ open, onClose }: { open: boolean; onClose: () =
 
   useEffect(() => {
     if (!open) return;
-    const prev = document.body.style.overflow;
-    document.body.style.overflow = "hidden";
+    // Même gel que le menu du site : `overflow: hidden` seul laisse Safari
+    // faire glisser la page sous le tiroir.
+    setScrollLocked(true);
     const onKey = (e: KeyboardEvent) => {
       if (e.key === "Escape") onClose();
     };
     window.addEventListener("keydown", onKey);
     return () => {
-      document.body.style.overflow = prev;
+      setScrollLocked(false);
       window.removeEventListener("keydown", onKey);
     };
   }, [open, onClose]);
@@ -46,7 +48,7 @@ export function AdminNavDrawer({ open, onClose }: { open: boolean; onClose: () =
         aria-label="Menu administration"
         aria-hidden={!open}
         className={cn(
-          "fixed inset-y-0 left-0 z-[90] flex w-[min(20rem,85vw)] flex-col rounded-r-md bg-admin-sidebar text-admin-sidebar-fg transition-transform duration-500 ease-[cubic-bezier(0.76,0,0.24,1)] motion-reduce:transition-none lg:hidden",
+          "fixed top-0 left-0 z-[90] flex h-[100dvh] w-[min(20rem,85vw)] flex-col rounded-r-md bg-admin-sidebar text-admin-sidebar-fg transition-transform duration-500 ease-[cubic-bezier(0.76,0,0.24,1)] motion-reduce:transition-none lg:hidden",
           open ? "translate-x-0" : "-translate-x-full",
         )}
       >
@@ -111,20 +113,20 @@ export function AdminNavDrawer({ open, onClose }: { open: boolean; onClose: () =
           ))}
         </nav>
 
-        <Link
-          to="/"
+        <a
+          href="/"
           onClick={onClose}
           className="flex min-h-12 shrink-0 items-center gap-3 border-t border-white/10 px-5 py-3 text-sm text-admin-sidebar-muted transition-colors hover:text-gold"
         >
           <ArrowUpRight className="size-4" />
           Voir le site public
-        </Link>
+        </a>
       </div>
     </>
   );
 }
 
-/** Bottom bar — the four most-used destinations, thumb height. */
+/** Bottom bar   the four most-used destinations, thumb height. */
 export function AdminBottomNav() {
   const pathname = useRouterState({ select: (s) => s.location.pathname });
   const { role } = useSession();

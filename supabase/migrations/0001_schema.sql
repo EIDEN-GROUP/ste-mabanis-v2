@@ -1,4 +1,4 @@
--- STE MABANIS — admin schema
+-- STE MABANIS   admin schema
 -- Mirrors src/lib/admin/types.ts. Apply before 0002_rls.sql.
 
 create extension if not exists "pgcrypto";

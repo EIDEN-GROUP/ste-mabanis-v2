@@ -4,7 +4,7 @@ import type { PropertyMedia } from "@/lib/admin/types";
 import { cn } from "@/lib/utils";
 
 /**
- * Swipeable gallery. On touch it is a native scroll-snap carousel — no JS drag
+ * Swipeable gallery. On touch it is a native scroll-snap carousel   no JS drag
  * handling, so momentum and rubber-banding stay native. Arrows appear from `sm`
  * where a pointer is likely.
  */

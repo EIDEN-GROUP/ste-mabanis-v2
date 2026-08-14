@@ -32,6 +32,7 @@ import { Route as AdminProprietesRouteImport } from './routes/admin/proprietes'
 import { Route as AdminRapportsRouteImport } from './routes/admin/rapports'
 import { Route as AdminTachesRouteImport } from './routes/admin/taches'
 import { Route as AdminTransactionsRouteImport } from './routes/admin/transactions'
+import { Route as AdminLoginRouteImport } from './routes/admin_.login'
 import { Route as EquipeIndexRouteImport } from './routes/equipe/index'
 import { Route as EquipeSlugRouteImport } from './routes/equipe/$slug'
 import { Route as ProprietesIndexRouteImport } from './routes/proprietes/index'
@@ -154,6 +155,11 @@ const AdminTransactionsRoute = AdminTransactionsRouteImport.update({
   path: '/transactions',
   getParentRoute: () => AdminRoute,
 } as any)
+const AdminLoginRoute = AdminLoginRouteImport.update({
+  id: '/admin_/login',
+  path: '/admin/login',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const EquipeIndexRoute = EquipeIndexRouteImport.update({
   id: '/equipe/',
   path: '/equipe/',
@@ -207,6 +213,7 @@ export interface FileRoutesByFullPath {
   '/admin/rapports': typeof AdminRapportsRoute
   '/admin/taches': typeof AdminTachesRoute
   '/admin/transactions': typeof AdminTransactionsRoute
+  '/admin/login': typeof AdminLoginRoute
   '/equipe/$slug': typeof EquipeSlugRoute
   '/proprietes/$slug': typeof ProprietesSlugRoute
   '/quartiers/$slug': typeof QuartiersSlugRoute
@@ -237,6 +244,7 @@ export interface FileRoutesByTo {
   '/admin/rapports': typeof AdminRapportsRoute
   '/admin/taches': typeof AdminTachesRoute
   '/admin/transactions': typeof AdminTransactionsRoute
+  '/admin/login': typeof AdminLoginRoute
   '/equipe/$slug': typeof EquipeSlugRoute
   '/proprietes/$slug': typeof ProprietesSlugRoute
   '/quartiers/$slug': typeof QuartiersSlugRoute
@@ -269,6 +277,7 @@ export interface FileRoutesById {
   '/admin/rapports': typeof AdminRapportsRoute
   '/admin/taches': typeof AdminTachesRoute
   '/admin/transactions': typeof AdminTransactionsRoute
+  '/admin_/login': typeof AdminLoginRoute
   '/equipe/$slug': typeof EquipeSlugRoute
   '/proprietes/$slug': typeof ProprietesSlugRoute
   '/quartiers/$slug': typeof QuartiersSlugRoute
@@ -302,6 +311,7 @@ export interface FileRouteTypes {
     | '/admin/rapports'
     | '/admin/taches'
     | '/admin/transactions'
+    | '/admin/login'
     | '/equipe/$slug'
     | '/proprietes/$slug'
     | '/quartiers/$slug'
@@ -332,6 +342,7 @@ export interface FileRouteTypes {
     | '/admin/rapports'
     | '/admin/taches'
     | '/admin/transactions'
+    | '/admin/login'
     | '/equipe/$slug'
     | '/proprietes/$slug'
     | '/quartiers/$slug'
@@ -363,6 +374,7 @@ export interface FileRouteTypes {
     | '/admin/rapports'
     | '/admin/taches'
     | '/admin/transactions'
+    | '/admin_/login'
     | '/equipe/$slug'
     | '/proprietes/$slug'
     | '/quartiers/$slug'
@@ -382,6 +394,7 @@ export interface RootRouteChildren {
   TemoignagesRoute: typeof TemoignagesRoute
   VendreRoute: typeof VendreRoute
   ActualitesSlugRoute: typeof ActualitesSlugRoute
+  AdminLoginRoute: typeof AdminLoginRoute
   EquipeSlugRoute: typeof EquipeSlugRoute
   ProprietesSlugRoute: typeof ProprietesSlugRoute
   QuartiersSlugRoute: typeof QuartiersSlugRoute
@@ -554,6 +567,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AdminTransactionsRouteImport
       parentRoute: typeof AdminRoute
     }
+    '/admin_/login': {
+      id: '/admin_/login'
+      path: '/admin/login'
+      fullPath: '/admin/login'
+      preLoaderRoute: typeof AdminLoginRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/equipe/': {
       id: '/equipe/'
       path: '/equipe'
@@ -644,6 +664,7 @@ const rootRouteChildren: RootRouteChildren = {
   TemoignagesRoute: TemoignagesRoute,
   VendreRoute: VendreRoute,
   ActualitesSlugRoute: ActualitesSlugRoute,
+  AdminLoginRoute: AdminLoginRoute,
   EquipeSlugRoute: EquipeSlugRoute,
   ProprietesSlugRoute: ProprietesSlugRoute,
   QuartiersSlugRoute: QuartiersSlugRoute,

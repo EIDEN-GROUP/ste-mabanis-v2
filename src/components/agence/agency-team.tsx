@@ -11,7 +11,7 @@ const DRAG_SLOP = 5;
 /**
  * The conseillers as a horizontal rail you drag through, with a progress bar
  * that tracks the travel. The bar only appears when the rail actually overflows
- * — with four cards on a wide screen there is nothing to scroll, and a full-width
+ *   with four cards on a wide screen there is nothing to scroll, and a full-width
  * bar going nowhere would be a lie.
  *
  * Portraits are optional: until an agent has one, the card carries the monogram

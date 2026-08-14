@@ -53,7 +53,7 @@ import { cn } from "@/lib/utils";
 export const Route = createFileRoute("/admin/clients")({
   head: () => ({
     meta: [
-      { title: "Clients — STE MABANIS" },
+      { title: "Clients   STE MABANIS" },
       { name: "description", content: "Portefeuille clients et CRM." },
     ],
   }),
@@ -91,7 +91,7 @@ function ClientsPage() {
   const { data: leads = [] } = useQuery(leadsQuery());
   const { data: appointments = [] } = useQuery(appointmentsQuery());
 
-  const agentName = (id: string) => agents.find((a) => a.id === id)?.name ?? "—";
+  const agentName = (id: string) => agents.find((a) => a.id === id)?.name ?? " ";
 
   const visibleClients = scope ? clients.filter((c) => c.agentId === scope) : clients;
 
@@ -152,7 +152,7 @@ function ClientsPage() {
             {formatMoney(c.budgetMin, true)} – {formatMoney(c.budgetMax ?? 0, true)}
           </span>
         ) : (
-          <span className="text-sm text-muted-foreground">—</span>
+          <span className="text-sm text-muted-foreground"> </span>
         ),
     },
     {
@@ -373,8 +373,8 @@ function ClientModal({
           <dl className="grid grid-cols-1 gap-2.5 sm:grid-cols-2">
             {[
               { icon: Mail, value: client.email },
-              { icon: Phone, value: client.phone || "—" },
-              { icon: MapPin, value: client.city ?? "—" },
+              { icon: Phone, value: client.phone || " " },
+              { icon: MapPin, value: client.city ?? " " },
               {
                 icon: Wallet,
                 value: client.budgetMin

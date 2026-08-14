@@ -15,13 +15,13 @@ export const Route = createFileRoute("/quartiers/$slug")({
     if (!loaderData) {
       return {
         meta: [
-          { title: "Quartier introuvable — STE MABANIS" },
+          { title: "Quartier introuvable   STE MABANIS" },
           { name: "robots", content: "noindex" },
         ],
       };
     }
     const l = loaderData.location;
-    const title = `Immobilier à ${l.name} (${l.city}) — STE MABANIS`;
+    const title = `Immobilier à ${l.name} (${l.city})   STE MABANIS`;
     return {
       meta: [
         { title },

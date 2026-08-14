@@ -6,7 +6,7 @@ import { articles, images } from "@/lib/site-data";
 export const Route = createFileRoute("/actualites/")({
   head: () => ({
     meta: [
-      { title: "Actualités & guides immobiliers Agadir — STE MABANIS" },
+      { title: "Actualités & guides immobiliers Agadir   STE MABANIS" },
       {
         name: "description",
         content:

@@ -24,7 +24,7 @@ import { cn } from "@/lib/utils";
 export const Route = createFileRoute("/admin/automatisations")({
   head: () => ({
     meta: [
-      { title: "Automatisations — STE MABANIS" },
+      { title: "Automatisations   STE MABANIS" },
       { name: "description", content: "Règles automatiques de l'agence." },
     ],
   }),

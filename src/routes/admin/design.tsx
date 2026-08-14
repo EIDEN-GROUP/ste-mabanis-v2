@@ -43,7 +43,7 @@ import type { AdminProperty } from "@/lib/admin/types";
 export const Route = createFileRoute("/admin/design")({
   head: () => ({
     meta: [
-      { title: "Design system — STE MABANIS" },
+      { title: "Design system   STE MABANIS" },
       { name: "description", content: "Bibliothèque de composants réutilisables de l'admin." },
     ],
   }),
@@ -134,11 +134,11 @@ function DesignSystemPage() {
   return (
     <div className="space-y-6">
       <Panel className="p-5">
-        <p className="eyebrow">Phase 2 — fondations</p>
+        <p className="eyebrow">Phase 2   fondations</p>
         <h2 className="display mt-2 text-3xl">Bibliothèque de composants</h2>
         <p className="mt-3 max-w-2xl text-sm leading-relaxed text-muted-foreground">
           Chaque composant utilise les tokens sémantiques de{" "}
-          <code className="rounded-sm bg-sand px-1.5 py-0.5 text-xs">src/styles.css</code> — aucune
+          <code className="rounded-sm bg-sand px-1.5 py-0.5 text-xs">src/styles.css</code>   aucune
           couleur n'est codée en dur. Tous sont responsives de 375 à 1440 px.
         </p>
       </Panel>
@@ -219,7 +219,7 @@ function DesignSystemPage() {
         <div className="mt-5 flex items-center gap-3 border-t border-line pt-5">
           <Switch checked={switchOn} onChange={setSwitchOn} label="Exemple d'interrupteur" />
           <span className="text-sm text-muted-foreground">
-            Switch — {switchOn ? "activé" : "désactivé"}
+            Switch   {switchOn ? "activé" : "désactivé"}
           </span>
         </div>
       </Block>

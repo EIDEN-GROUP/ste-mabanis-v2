@@ -50,7 +50,7 @@ import { cn } from "@/lib/utils";
 export const Route = createFileRoute("/admin/proprietes")({
   head: () => ({
     meta: [
-      { title: "Propriétés — STE MABANIS" },
+      { title: "Propriétés   STE MABANIS" },
       { name: "description", content: "Gestion du portefeuille immobilier." },
     ],
   }),
@@ -126,7 +126,7 @@ function PropertiesPage() {
   const canEdit = useCan("property.edit");
 
   const agentName = useCallback(
-    (id: string) => agents.find((a) => a.id === id)?.name ?? "—",
+    (id: string) => agents.find((a) => a.id === id)?.name ?? " ",
     [agents],
   );
 
@@ -313,7 +313,7 @@ function PropertyDetailView({
   agents: { id: string; name: string }[];
   onSetStatus: (vars: { id: string; status: PropertyStatus }) => void;
 }) {
-  const agentName = agents.find((a) => a.id === property.agentId)?.name ?? "—";
+  const agentName = agents.find((a) => a.id === property.agentId)?.name ?? " ";
   const publicLive = ACTIVE_PROPERTY_STATUSES.includes(property.status);
 
   return (
@@ -374,7 +374,7 @@ function PropertyDetailView({
           property.status === "under_offer"
             ? "Visible dans les résultats du site public."
             : property.status === "sold" || property.status === "rented"
-              ? "Retiré du site public — l'historique et les rapports sont conservés."
+              ? "Retiré du site public   l'historique et les rapports sont conservés."
               : "Caché du site public."}
         </p>
       </section>
@@ -621,7 +621,7 @@ function MediaManager({ property }: { property: AdminProperty }) {
         </ul>
       ) : (
         <p className="rounded-md border border-dashed border-line px-4 py-6 text-center text-xs text-muted-foreground">
-          Aucun élément — ajoutez des {KINDS[kind].label.toLowerCase()} ci-dessous.
+          Aucun élément   ajoutez des {KINDS[kind].label.toLowerCase()} ci-dessous.
         </p>
       )}
 
@@ -654,7 +654,7 @@ function MediaManager({ property }: { property: AdminProperty }) {
         </p>
         <p className="text-[0.65rem] text-muted-foreground/70">
           {kind === "photo"
-            ? "JPG, PNG, WebP — recadrées à 1600 px"
+            ? "JPG, PNG, WebP   recadrées à 1600 px"
             : kind === "video"
               ? "MP4, WebM"
               : "PDF, PNG, JPG"}
@@ -804,7 +804,7 @@ function PropertyFormModal({
       title={property ? "Modifier le bien" : "Nouveau bien"}
       description={
         property
-          ? `${property.reference} — la fiche s'enregistre en direct.`
+          ? `${property.reference}   la fiche s'enregistre en direct.`
           : "La fiche reste en brouillon tant que vous ne la publiez pas."
       }
       size="lg"

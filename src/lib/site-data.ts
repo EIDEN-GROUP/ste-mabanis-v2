@@ -545,7 +545,7 @@ export type Article = {
   category: string;
   /** Human-readable, French. */
   date: string;
-  /** Same day in YYYY-MM-DD — for <time dateTime> and the editorial blog list. */
+  /** Same day in YYYY-MM-DD   for <time dateTime> and the editorial blog list. */
   iso: string;
   readTime: string;
   excerpt: string;
@@ -600,7 +600,7 @@ export const articles: Article[] = [
       "Un bien mal positionné dès le départ perd en moyenne 9 % de sa valeur finale. Voici comment l'éviter.",
     image: images.property1,
     body: [
-      "Une mise en marché se joue dans les vingt premiers jours. C'est la période où votre bien est vu par les acheteurs déjà en recherche active — ceux qui connaissent les prix et qui décident vite.",
+      "Une mise en marché se joue dans les vingt premiers jours. C'est la période où votre bien est vu par les acheteurs déjà en recherche active   ceux qui connaissent les prix et qui décident vite.",
       "Si le prix d'annonce est trop haut, ces acheteurs-là passent leur chemin. Le bien vieillit, les visites s'espacent, et il faudra baisser deux ou trois fois pour finir sous le prix qu'on aurait obtenu en partant juste.",
       "Notre méthode : une estimation appuyée sur des transactions signées, un reportage photo professionnel, un plan coté, et une mise en ligne simultanée sur l'ensemble de nos canaux le même jour.",
       "Sur les 62 mandats exclusifs signés en 2025, le délai médian de vente a été de 74 jours, avec une décote moyenne de 2,4 % seulement entre prix d'annonce et prix signé.",
@@ -789,7 +789,7 @@ export const services = [
     title: "Accompagnement personnalisé",
     image: locationFounty,
     summary:
-      "Un interlocuteur unique, joignable, du premier appel à la remise des clés — et après.",
+      "Un interlocuteur unique, joignable, du premier appel à la remise des clés   et après.",
     points: [
       "Un conseiller référent par dossier",
       "Coordination notaire, banque et artisans",

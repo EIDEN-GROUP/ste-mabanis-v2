@@ -10,14 +10,14 @@
  * Warm white #F7F5F0 · White #FFFFFF
  *
  * Public site: Playfair Display (display) + Sarabun Light (UI/body).
- * Playfair Display stands in for Safira March, which is not on any web-font CDN —
+ * Playfair Display stands in for Safira March, which is not on any web-font CDN  
  * to use the real thing, self-host it and swap the --font-display stack below.
  * Back office: Roboto only, scoped via the `font-admin` utility.
  */
 
 @theme inline {
-  /* The house corner is barely there. The scale is capped so no component —
-     ours or shadcn's — can round further than 6px; change --radius to move
+  /* The house corner is barely there. The scale is capped so no component  
+     ours or shadcn's   can round further than 6px; change --radius to move
      the whole app at once. */
   --radius-sm: calc(var(--radius) - 2px);
   --radius-md: var(--radius);
@@ -95,9 +95,12 @@
 :root {
   --radius: 0.25rem;
 
+  /* Ground of every scrollbar track; panels repoint it for contrast. */
+  --scroll-track: var(--background);
+
   --navy: oklch(0.204 0.045 253);
   --navy-soft: oklch(0.27 0.055 253);
-  /* Near-black for the cinematic editorial sections — a whisper of navy, not pure black. */
+  /* Near-black for the cinematic editorial sections   a whisper of navy, not pure black. */
   --ink: oklch(0.165 0.02 253);
   --blue: oklch(0.318 0.073 251);
   --gold: oklch(0.735 0.088 79);
@@ -221,7 +224,7 @@ html.lenis body {
   line-height: 1.05;
 }
 
-/* Playfair survives for editorial voice — pulled quotes and ledes, never titles. */
+/* Playfair survives for editorial voice   pulled quotes and ledes, never titles. */
 @utility quote {
   font-family: var(--font-display);
   font-weight: 400;
@@ -292,7 +295,7 @@ html.lenis body {
 
 /**
  * Google's embed has no dark skin, so the tile layer is inverted and its hue
- * rotated back — the standard recipe. Saturation is pulled down so the result
+ * rotated back   the standard recipe. Saturation is pulled down so the result
  * sits in the site's ink range instead of turning neon.
  */
 @utility map-dark {
@@ -376,7 +379,7 @@ html.lenis body {
 
 /* ---------- Home page motion ---------- */
 
-/* Slow drift on the hero slideshow — each slide keeps zooming while it is on screen. */
+/* Slow drift on the hero slideshow   each slide keeps zooming while it is on screen. */
 @keyframes mabanis-hero-drift {
   from {
     transform: scale(1.04);
@@ -435,7 +438,7 @@ html.lenis body {
   animation: mabanis-hero-drift 14s ease-out both;
 }
 
-/* Wrap the text in `.line-mask > span` — the span is what rises. */
+/* Wrap the text in `.line-mask > span`   the span is what rises. */
 @utility animate-line {
   animation: mabanis-line-rise 1.15s cubic-bezier(0.16, 1, 0.3, 1) both;
 }
@@ -546,57 +549,57 @@ html.lenis body {
 }
 
 /* ---------- Scrollbars ----------
-   The native bar in house dress: the track melts into the panel it sits on, the
-   thumb is a gold stroke carrying the same rounded-md corner as everything else.
-   `--scroll-track` is the only knob — light panels repoint it with
-   `[--scroll-track:var(--admin-surface)]` and inherit the rest.
+   The bar in house dress, app-wide: the track melts into the panel it sits on,
+   the thumb is a gold stroke carrying the same rounded-md corner as everything
+   else. `--scroll-track` is the only knob   the default is the page ground;
+   dark panels repoint it with `[--scroll-track:…]` (or the `scrollbar-gold`
+   utility, which sets it to the navy sidebar and inherits the rest).
+   iOS Safari ignores all of this: its scrollbars are invisible overlays. */
 
-   WebKit/Chromium takes the pseudo-elements, where `background-color` (never the
-   `background` shorthand) keeps `background-clip` alive between states. Firefox has
-   no pseudo-elements and gets the standard two-value shorthand instead — fenced
-   behind @supports because Chromium drops every ::-webkit-scrollbar rule the moment
-   `scrollbar-width`/`scrollbar-color` are declared, corner radius included. */
-@utility scrollbar-gold {
-  --scroll-track: var(--admin-sidebar);
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
 
-  @supports not selector(::-webkit-scrollbar) {
+::-webkit-scrollbar-track {
+  background-color: var(--scroll-track);
+}
+
+::-webkit-scrollbar-thumb {
+  /* 2px of track colour down each side leaves the gold reading as a 4px stroke;
+     var(--radius) is the rounded-md step of the scale. */
+  border: 2px solid var(--scroll-track);
+  border-radius: var(--radius);
+  background-color: var(--gold);
+  background-clip: padding-box;
+}
+
+::-webkit-scrollbar-thumb:hover,
+::-webkit-scrollbar-thumb:active {
+  background-color: var(--gold-soft);
+}
+
+/* Windows draws stepper arrows by default; the app wants one clean line. */
+::-webkit-scrollbar-button,
+::-webkit-scrollbar-corner {
+  display: none;
+}
+
+/* Firefox has no pseudo-elements and gets the standard two-value shorthand
+   instead   fenced behind @supports because Chromium drops every
+   ::-webkit-scrollbar rule the moment `scrollbar-width`/`scrollbar-color` are
+   declared, corner radius included. */
+@supports not selector(::-webkit-scrollbar) {
+  * {
     scrollbar-width: thin;
     scrollbar-color: var(--gold) var(--scroll-track);
   }
+}
 
-  &::-webkit-scrollbar {
-    width: 8px;
-    height: 8px;
-  }
-
-  &::-webkit-scrollbar-track {
-    background-color: var(--scroll-track);
-  }
-
-  &::-webkit-scrollbar-thumb {
-    /* 2px of track colour down each side leaves the gold reading as a 4px stroke;
-       var(--radius) is the rounded-md step of the scale. */
-    border: 2px solid var(--scroll-track);
-    border-radius: var(--radius);
-    background-color: var(--gold);
-    background-clip: padding-box;
-  }
-
-  /* WebKit ignores transitions on scrollbar pseudo-elements, so the feedback is a
-     straight state swap — the thumb warms to the soft gold while the panel is hovered. */
-  &:hover::-webkit-scrollbar-thumb {
-    background-color: var(--gold-soft);
-  }
-
-  &::-webkit-scrollbar-thumb:active {
-    background-color: var(--gold-soft);
-  }
-
-  /* Windows draws stepper arrows by default; the rail wants one clean line. */
-  &::-webkit-scrollbar-button,
-  &::-webkit-scrollbar-corner {
-    display: none;
-  }
+/* The dark admin rail keeps its navy track: the utility only repoints the
+   knob, the rules above do the rest. */
+@utility scrollbar-gold {
+  --scroll-track: var(--admin-sidebar);
 }
 
 @media (prefers-reduced-motion: reduce) {

@@ -11,7 +11,7 @@ import { cn } from "@/lib/utils";
  * a person or a place, pass a single `title` instead.
  *
  * The photograph is what the fixed header rides over while it is still
- * transparent, so a hero without one would leave the bar unreadable — hence the
+ * transparent, so a hero without one would leave the bar unreadable   hence the
  * fallback image rather than an optional one.
  */
 export function PageHero({
@@ -26,9 +26,9 @@ export function PageHero({
   eyebrow: string;
   /** Single-line headline. Detail pages use this; index pages use lead/trail. */
   title?: ReactNode;
-  /** First half of a split headline — white. */
+  /** First half of a split headline   white. */
   lead?: string;
-  /** Second half — gold, as on the homepage. */
+  /** Second half   gold, as on the homepage. */
   trail?: string;
   intro?: string;
   image?: string;
@@ -135,7 +135,7 @@ export function Section({
 }: {
   children: ReactNode;
   className?: string;
-  /** Anchor target — used by the in-page navigation of long pages. */
+  /** Anchor target   used by the in-page navigation of long pages. */
   id?: string;
   tone?: "light" | "sand" | "navy";
 }) {

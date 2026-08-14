@@ -31,7 +31,7 @@ export const Route = createFileRoute("/proprietes/")({
   }),
   head: () => ({
     meta: [
-      { title: "Propriétés à vendre et à louer à Agadir — STE MABANIS" },
+      { title: "Propriétés à vendre et à louer à Agadir   STE MABANIS" },
       {
         name: "description",
         content:
@@ -310,9 +310,12 @@ function PropertiesPage() {
           )}
           onClick={() => setFiltersOpen(false)}
         />
+        {/* `data-lenis-prevent` : sans lui, le défilement inertiel capte le
+            geste au-dessus du tiroir et fait bouger la page derrière. */}
         <div
+          data-lenis-prevent
           className={cn(
-            "absolute inset-x-0 bottom-0 max-h-[85svh] overflow-y-auto bg-background p-6 transition-transform duration-500 ease-[cubic-bezier(0.16,1,0.3,1)]",
+            "absolute inset-x-0 bottom-0 max-h-[85svh] overflow-y-auto overscroll-contain bg-background p-6 transition-transform duration-500 ease-[cubic-bezier(0.16,1,0.3,1)]",
             filtersOpen ? "translate-y-0" : "translate-y-full",
           )}
         >

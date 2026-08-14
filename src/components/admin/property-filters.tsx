@@ -7,7 +7,7 @@ import { Modal, AdminButton } from "./primitives";
 import { cn } from "@/lib/utils";
 
 /**
- * Filters live inline on desktop and inside a modal on mobile — the spec's
+ * Filters live inline on desktop and inside a modal on mobile   the spec's
  * "modal-style filters" rule. Both render the same `<Fields>` body.
  */
 export function PropertyFilters({

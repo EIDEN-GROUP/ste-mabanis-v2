@@ -35,7 +35,7 @@ import { cn } from "@/lib/utils";
 export const Route = createFileRoute("/admin/")({
   head: () => ({
     meta: [
-      { title: "Tableau de bord — STE MABANIS" },
+      { title: "Tableau de bord   STE MABANIS" },
       { name: "description", content: "Indicateurs, pipeline et priorités du jour." },
     ],
   }),

@@ -1,4 +1,4 @@
--- STE MABANIS — row level security
+-- STE MABANIS   row level security
 --
 -- Model:
 --   anon           → may read ONLY properties that are live on the public site,

@@ -12,7 +12,7 @@ import {
 } from "framer-motion";
 import { cn } from "@/lib/utils";
 
-/** House easing — the same curve every transition on the site leans on. */
+/** House easing   the same curve every transition on the site leans on. */
 export const EASE = [0.16, 1, 0.3, 1] as const;
 
 const ENTER: Transition = { duration: 0.9, ease: EASE };
@@ -92,7 +92,7 @@ export function TextReveal({
 }
 
 /**
- * Clip-path wipe — the child opens from the bottom edge.
+ * Clip-path wipe   the child opens from the bottom edge.
  *
  * The trigger has to live on an outer wrapper: a fully clipped element has no
  * visible area, so IntersectionObserver reports a ratio of 0 for it and the
@@ -181,7 +181,7 @@ export function Parallax({
   className?: string;
 }) {
   const ref = useRef<HTMLDivElement | null>(null);
-  // The server has no scroll position, so stay at rest until we are mounted —
+  // The server has no scroll position, so stay at rest until we are mounted  
   // otherwise the hydrated transform never matches the server-rendered one.
   const [enabled, setEnabled] = useState(false);
   const { scrollYProgress } = useScroll({
@@ -202,7 +202,7 @@ export function Parallax({
   );
 }
 
-/** Drifts toward the pointer while hovered — for the round CTAs. */
+/** Drifts toward the pointer while hovered   for the round CTAs. */
 export function Magnetic({
   children,
   className,

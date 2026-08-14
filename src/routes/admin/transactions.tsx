@@ -21,7 +21,7 @@ import { cn } from "@/lib/utils";
 export const Route = createFileRoute("/admin/transactions")({
   head: () => ({
     meta: [
-      { title: "Transactions — STE MABANIS" },
+      { title: "Transactions   STE MABANIS" },
       { name: "description", content: "Suivi des transactions immobilières." },
     ],
   }),
@@ -92,7 +92,7 @@ function TransactionsPage() {
         <div>
           <p className="eyebrow">Pipeline des transactions</p>
           <p className="mt-1 text-sm text-muted-foreground">
-            De l'intérêt à la clôture — cliquez sur un dossier pour le détailler.
+            De l'intérêt à la clôture   cliquez sur un dossier pour le détailler.
           </p>
         </div>
         {canManage ? (
@@ -269,15 +269,15 @@ function TransactionModal({
           </div>
           <div className="flex gap-3">
             <dt className="w-24 shrink-0 text-xs text-muted-foreground uppercase">Acheteur</dt>
-            <dd className="text-navy">{buyer ? `${buyer.firstName} ${buyer.lastName}` : "—"}</dd>
+            <dd className="text-navy">{buyer ? `${buyer.firstName} ${buyer.lastName}` : " "}</dd>
           </div>
           <div className="flex gap-3">
             <dt className="w-24 shrink-0 text-xs text-muted-foreground uppercase">Vendeur</dt>
-            <dd className="text-navy">{seller ? `${seller.firstName} ${seller.lastName}` : "—"}</dd>
+            <dd className="text-navy">{seller ? `${seller.firstName} ${seller.lastName}` : " "}</dd>
           </div>
           <div className="flex gap-3">
             <dt className="w-24 shrink-0 text-xs text-muted-foreground uppercase">Agent</dt>
-            <dd className="text-navy">{agent?.name ?? "—"}</dd>
+            <dd className="text-navy">{agent?.name ?? " "}</dd>
           </div>
           <div className="flex gap-3">
             <dt className="w-24 shrink-0 text-xs text-muted-foreground uppercase">Montant</dt>
@@ -506,7 +506,7 @@ function TransactionFormModal({
               onChange={(e) => setSellerClientId(e.target.value)}
               className={fieldCls}
             >
-              <option value="">—</option>
+              <option value=""> </option>
               {clients.map((c) => (
                 <option key={c.id} value={c.id}>
                   {c.firstName} {c.lastName}
@@ -521,7 +521,7 @@ function TransactionFormModal({
               onChange={(e) => setAgentId(e.target.value)}
               className={fieldCls}
             >
-              <option value="">—</option>
+              <option value=""> </option>
               {agents.map((a) => (
                 <option key={a.id} value={a.id}>
                   {a.name}

@@ -3,7 +3,7 @@
  *
  * Properties and agents are derived from the public site content so both sides
  * of the app describe the same agency. Everything else (clients, leads,
- * appointments…) is generated deterministically — no Math.random, so SSR and
+ * appointments…) is generated deterministically   no Math.random, so SSR and
  * client render agree and screenshots stay stable between runs.
  */
 
@@ -366,7 +366,7 @@ export const seedDocuments: StoredDocument[] = Array.from({ length: 14 }, (_, i)
   const category = at(categories, i);
   return {
     id: `doc-${i + 1}`,
-    name: `${category.replace(/_/g, " ")} — ${property.reference}.pdf`,
+    name: `${category.replace(/_/g, " ")}   ${property.reference}.pdf`,
     category,
     mimeType: "application/pdf",
     sizeBytes: 120_000 + Math.floor(rand() * 3_000_000),
@@ -454,11 +454,11 @@ export const seedTransactions: Transaction[] = Array.from({ length: 8 }, (_, i) 
 export const seedCampaigns: MarketingCampaign[] = [
   {
     id: "camp-1",
-    name: "Coup de cœur Marina — Août",
+    name: "Coup de cœur Marina   Août",
     subject: "3 biens d'exception face à la Marina d'Agadir",
     channel: "email",
     status: "sent",
-    audience: "Acheteurs Marina — budget ≥ 2 M MAD",
+    audience: "Acheteurs Marina   budget ≥ 2 M MAD",
     audienceCount: 240,
     sentAt: iso(-8, 9),
     opens: 142,
@@ -468,7 +468,7 @@ export const seedCampaigns: MarketingCampaign[] = [
   },
   {
     id: "camp-2",
-    name: "Relance WhatsApp — visiteurs du salon",
+    name: "Relance WhatsApp   visiteurs du salon",
     subject: "Suite à votre visite sur le salon immobilier…",
     channel: "whatsapp",
     status: "sent",
@@ -482,11 +482,11 @@ export const seedCampaigns: MarketingCampaign[] = [
   },
   {
     id: "camp-3",
-    name: "Investisseurs — Taghazout Bay",
+    name: "Investisseurs   Taghazout Bay",
     subject: "Rentabilité locative : le dossier complet",
     channel: "portail",
     status: "draft",
-    audience: "Investisseurs — budget 1,5–4 M MAD",
+    audience: "Investisseurs   budget 1,5–4 M MAD",
     audienceCount: 132,
     opens: 0,
     clicks: 0,
@@ -506,7 +506,7 @@ export const seedNotifications: AppNotification[] = [
   {
     id: "notif-1",
     kind: "lead",
-    title: "Nouveau lead — Villa Founty",
+    title: "Nouveau lead   Villa Founty",
     body: "Leïla Tazi a demandé une visite depuis le site web.",
     read: false,
     createdAt: iso(0, 8, 40),
@@ -516,7 +516,7 @@ export const seedNotifications: AppNotification[] = [
     id: "notif-2",
     kind: "appointment",
     title: "Visite dans 1 heure",
-    body: "Youssef Bennani — Appartement Marina, 10h00.",
+    body: "Youssef Bennani   Appartement Marina, 10h00.",
     read: false,
     createdAt: iso(0, 8, 10),
     href: "/admin/agenda",

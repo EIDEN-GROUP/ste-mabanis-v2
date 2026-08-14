@@ -5,7 +5,7 @@ import { Panel } from "@/components/admin/primitives";
 export const Route = createFileRoute("/admin/portail-client")({
   head: () => ({
     meta: [
-      { title: "Portail client — STE MABANIS" },
+      { title: "Portail client   STE MABANIS" },
       { name: "description", content: "Architecture du portail client." },
     ],
   }),
@@ -111,7 +111,7 @@ function PortailClientPage() {
         <div className="flex items-center justify-between gap-4 px-5 py-4">
           <p className="text-sm text-muted-foreground">
             L'architecture de données (clients, visites, documents, transactions) est déjà en place
-            — le portail viendra la consommer telle quelle.
+              le portail viendra la consommer telle quelle.
           </p>
           <a
             href="/admin/clients"

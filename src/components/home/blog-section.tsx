@@ -25,7 +25,7 @@ const WIPE = {
 };
 
 /**
- * Editorial blog list: no cards, no shadows — the house section heading, then
+ * Editorial blog list: no cards, no shadows   the house section heading, then
  * full-width rows separated by hairlines, each pairing a dated write-up with a
  * landscape photograph. Content comes from the shared `articles` source, so
  * every row links to a real /actualites/$slug page.

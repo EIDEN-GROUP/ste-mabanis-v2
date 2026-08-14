@@ -12,13 +12,13 @@ const RISE = {
 
 /**
  * Newsletter line and coordinates. The e-mail field is a ruled editorial line
- * rather than a boxed input — the underline is the only chrome it gets.
+ * rather than a boxed input   the underline is the only chrome it gets.
  */
 export function FooterContact() {
   const onSubscribe = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const form = e.currentTarget;
-    // No mailing backend yet — swap this for the real subscribe call when it exists.
+    // No mailing backend yet   swap this for the real subscribe call when it exists.
     toast.success("Merci, votre adresse est bien notée.", {
       description: "Vous recevrez notre sélection de biens d'Agadir une fois par mois.",
     });
@@ -60,7 +60,7 @@ export function FooterContact() {
         </div>
       </motion.form>
 
-      {/* Two rows on a phone, one on tablets up — three stacked blocks would
+      {/* Two rows on a phone, one on tablets up   three stacked blocks would
           cost the screen its last row. */}
       <dl className="mt-8 grid grid-cols-2 gap-x-6 gap-y-6 sm:mt-14 sm:grid-cols-3 sm:gap-8">
         <motion.div className="col-span-2 sm:col-span-1" variants={RISE}>

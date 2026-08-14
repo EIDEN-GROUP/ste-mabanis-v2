@@ -268,7 +268,7 @@ export function Modal({
 
 /* ------------------------------------------------------------------ Drawer */
 
-/** Side sheet on desktop, bottom sheet on phones — used for filters and detail. */
+/** Side sheet on desktop, bottom sheet on phones   used for filters and detail. */
 export function Drawer({
   open,
   onClose,
@@ -316,7 +316,7 @@ export function Drawer({
         className={cn(
           "fixed z-[96] flex flex-col bg-admin-surface shadow-elegant transition-transform duration-500 ease-[cubic-bezier(0.76,0,0.24,1)] motion-reduce:transition-none",
           // Bottom sheet under sm, side sheet from sm up. Only the edges that face
-          // the page are rounded — the ones flush with the viewport stay square.
+          // the page are rounded   the ones flush with the viewport stay square.
           "inset-x-0 bottom-0 max-h-[85vh] rounded-t-md sm:inset-y-0 sm:max-h-none sm:w-full sm:max-w-[24rem] sm:rounded-t-none",
           side === "right"
             ? "sm:right-0 sm:left-auto sm:rounded-l-md"

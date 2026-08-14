@@ -7,8 +7,8 @@ const OPEN = "flex-grow 900ms cubic-bezier(0.16, 1, 0.3, 1)";
 
 /**
  * The four values as a full-bleed band of photographs. At rest every panel is
- * the same width and shows only its title; the hovered — or focused, or
- * tapped — one widens and its sentence unfolds beneath the title. Same gesture
+ * the same width and shows only its title; the hovered   or focused, or
+ * tapped   one widens and its sentence unfolds beneath the title. Same gesture
  * as the quartiers band on the homepage, so the two read as one system.
  *
  * The panels are buttons rather than plain divs: the reveal is a disclosure, and
@@ -20,7 +20,7 @@ export function AgencyValues({ className }: { className?: string }) {
 
   return (
     <div className={className}>
-      {/* Desktop — panels that expand on hover */}
+      {/* Desktop   panels that expand on hover */}
       <div className="hidden h-[32rem] lg:flex xl:h-[36rem]">
         {values.map((value, i) => {
           const isActive = i === active;
@@ -90,7 +90,7 @@ export function AgencyValues({ className }: { className?: string }) {
         })}
       </div>
 
-      {/* Mobile — snap carousel, both lines always readable */}
+      {/* Mobile   snap carousel, both lines always readable */}
       <div className="flex snap-x snap-mandatory gap-4 overflow-x-auto px-5 pb-4 sm:px-8 lg:hidden [&::-webkit-scrollbar]:hidden">
         {values.map((value) => (
           <article

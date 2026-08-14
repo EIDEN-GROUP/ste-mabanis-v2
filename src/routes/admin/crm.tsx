@@ -46,7 +46,7 @@ import { cn } from "@/lib/utils";
 export const Route = createFileRoute("/admin/crm")({
   head: () => ({
     meta: [
-      { title: "Pipeline CRM — STE MABANIS" },
+      { title: "Pipeline CRM   STE MABANIS" },
       { name: "description", content: "Pipeline des leads et opportunités." },
     ],
   }),
@@ -207,7 +207,7 @@ function LeadModal({
 
   if (!lead) return null;
 
-  const agentName = agents.find((a) => a.id === lead.agentId)?.name ?? "—";
+  const agentName = agents.find((a) => a.id === lead.agentId)?.name ?? " ";
 
   const setTemperature = (t: LeadTemperature) =>
     updateLead.mutate({ id: lead.id, patch: { temperature: t } });
@@ -648,7 +648,7 @@ function LeadFormModal({
             >
               {clients.map((c) => (
                 <option key={c.id} value={c.id}>
-                  {c.firstName} {c.lastName} — {c.email}
+                  {c.firstName} {c.lastName}   {c.email}
                 </option>
               ))}
             </select>
@@ -667,7 +667,7 @@ function LeadFormModal({
             <option value="">Sans bien associé</option>
             {properties.map((p) => (
               <option key={p.id} value={p.id}>
-                {p.reference} — {p.title}
+                {p.reference}   {p.title}
               </option>
             ))}
           </select>
